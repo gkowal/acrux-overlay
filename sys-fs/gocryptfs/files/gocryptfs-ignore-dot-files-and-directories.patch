@@ -1,0 +1,14 @@
+diff -uNr gocryptfs-1.2/src/github.com/rfjakob/gocryptfs/internal/fusefrontend/fs_dir.go gocryptfs-1.2-r1/src/github.com/rfjakob/gocryptfs/internal/fusefrontend/fs_dir.go
+--- gocryptfs-1.2/src/github.com/rfjakob/gocryptfs/internal/fusefrontend/fs_dir.go	2016-12-04 17:38:48.000000000 -0200
++++ gocryptfs-1.2-r1/src/github.com/rfjakob/gocryptfs/internal/fusefrontend/fs_dir.go	2017-01-08 15:00:39.090398674 -0200
+@@ -269,6 +269,10 @@
+ 	// Filter and decrypt filenames
+ 	for i := range cipherEntries {
+ 		cName := cipherEntries[i].Name
++		if cName[0] == '.' {
++			// silently ignore dot files and directories
++			continue
++		}
+ 		if dirName == "" && cName == configfile.ConfDefaultName {
+ 			// silently ignore "gocryptfs.conf" in the top level dir
+ 			continue

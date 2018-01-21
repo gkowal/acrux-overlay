@@ -1,0 +1,47 @@
+diff -uNr btrfs-progs-v4.9.1/cmds-scrub.c btrfs-progs-v4.9.1-r1/cmds-scrub.c
+--- btrfs-progs-v4.9.1/cmds-scrub.c	2017-01-27 12:15:59.000000000 -0200
++++ btrfs-progs-v4.9.1-r1/cmds-scrub.c	2017-01-28 10:43:20.497833031 -0200
+@@ -133,10 +133,12 @@
+ 		printf(" %s=%llu", desc, test);	\
+ } while (0)
+ 
+-static void print_scrub_summary(struct btrfs_scrub_progress *p)
++static void print_scrub_summary(struct btrfs_scrub_progress *p, struct scrub_stats *ss)
+ {
+ 	u64 err_cnt;
+ 	u64 err_cnt2;
++	u64 totalb = p->data_bytes_scrubbed + p->tree_bytes_scrubbed;
++	u64 speed = (ss->duration > 0) ? (totalb / ss->duration) : 0;
+ 
+ 	err_cnt = p->read_errors +
+ 			p->csum_errors +
+@@ -149,8 +151,9 @@
+ 		printf("*** WARNING: memory allocation failed while scrubbing. "
+ 		       "results may be inaccurate\n");
+ 
+-	printf("\ttotal bytes scrubbed: %s with %llu errors\n",
+-		pretty_size(p->data_bytes_scrubbed + p->tree_bytes_scrubbed),
++	printf("\ttotal %s scrubbed at %s/s with %llu errors\n",
++		pretty_size(totalb),
++		pretty_size(speed),
+ 		max(err_cnt, err_cnt2));
+ 
+ 	if (err_cnt || err_cnt2) {
+@@ -273,7 +276,7 @@
+ 		if (raw)
+ 			print_scrub_full(p);
+ 		else
+-			print_scrub_summary(p);
++			print_scrub_summary(p, ss);
+ 	}
+ }
+ 
+@@ -284,7 +287,7 @@
+ 	if (raw)
+ 		print_scrub_full(&fs_stat->p);
+ 	else
+-		print_scrub_summary(&fs_stat->p);
++		print_scrub_summary(&fs_stat->p, &fs_stat->s);
+ }
+ 
+ static void free_history(struct scrub_file_record **last_scrubs)

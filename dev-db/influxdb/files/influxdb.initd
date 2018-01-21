@@ -1,0 +1,34 @@
+#!/sbin/openrc-run
+# Copyright (c) 2016 Grzegorz Kowal <grzegorz@gkowal.info>
+
+: ${INFLUXD_CFGFILE:='/etc/influxdb/influxdb.conf'}
+: ${INFLUXD_PIDFILE:='/run/influxdb/influxd.pid'}
+: ${INFLUXD_LOGFILE:='/var/log/influxdb/influxd.log'}
+
+depend() {
+	need localmount
+	before collectd
+}
+
+description="Starts the InfluxDB server."
+
+start() {
+	PIDDIR=`dirname "${INFLUXD_PIDFILE}"`
+	[ -d "${PIDDIR}" ] || mkdir "${PIDDIR}" && chown influxdb:influxdb "${PIDDIR}"
+
+	ebegin "Starting InfluxDB"
+	start-stop-daemon --start --background --quiet \
+		--user "influxdb:influxdb" \
+		--exec /usr/sbin/influxd \
+		--stdout /dev/null --stderr "${INFLUXD_LOGFILE}" \
+		-- run -config "${INFLUXD_CFGFILE}" -pidfile "${INFLUXD_PIDFILE}"
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping InfluxDB"
+	start-stop-daemon --stop \
+		--pidfile "${INFLUXD_PIDFILE}" \
+		--retry=TERM/20/KILL/5
+	eend $?
+}

@@ -1,0 +1,41 @@
+#!/sbin/openrc-run
+# Copyright (c) 2015 Grzegorz Kowal <grzegorz@gkowal.info>
+
+: ${GRAFANA_USER:='grafana'}
+: ${GRAFANA_GROUP:='grafana'}
+: ${GRAFANA_CFGFILE:='/etc/grafana/grafana.ini'}
+: ${GRAFANA_PIDFILE:='/run/grafana/grafana.pid'}
+: ${GRAFANA_HOMEDIR:='/usr/share/grafana'}
+
+depend() {
+	need localmount
+}
+
+description="Starts the Grafana server."
+
+start() {
+	ebegin "Starting Grafana"
+
+	checkpath -d -o "${GRAFANA_USER}:${GRAFANA_GROUP}" -m750 "/var/lib/grafana/dashboards"
+	checkpath -d -o "${GRAFANA_USER}:${GRAFANA_GROUP}" -m750 "/var/lib/grafana/plugins"
+	checkpath -d -o "${GRAFANA_USER}:${GRAFANA_GROUP}" -m750 "/var/lib/grafana/sessions"
+
+	start-stop-daemon --start --background --quiet \
+		--chdir "${GRAFANA_HOMEDIR}" \
+		--pidfile "${GRAFANA_PIDFILE}" \
+		--exec /usr/sbin/grafana-server \
+		-- -config "${GRAFANA_CFGFILE}" \
+			-homepath "${GRAFANA_HOMEDIR}" \
+			-pidfile="${GRAFANA_PIDFILE}" \
+			cfg:default.paths.data=/var/lib/grafana \
+			cfg:default.paths.logs=/var/log/grafana
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping Grafana."
+	start-stop-daemon --stop \
+		--pidfile "${GRAFANA_PIDFILE}" \
+		--retry=TERM/20/KILL/5
+	eend $?
+}

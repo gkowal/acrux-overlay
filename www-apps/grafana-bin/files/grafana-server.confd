@@ -1,0 +1,22 @@
+# Copyright (c) 2015 Grzegorz Kowal <grzegorz@gkowal.info>
+# Distributed under the terms of the GNU General Public License v2
+
+# The user to run your application as.
+#
+#GRAFANA_USER=grafana
+
+# The group to run your application as.
+#
+#GRAFANA_GROUP=grafana
+
+# Location of configuration file. Modify if you don't like the standard one.
+#
+#GRAFANA_CFGFILE='/etc/grafana/grafana.ini'
+
+# File used to store the PID file. Usually you won't need to touch it.
+#
+#GRAFANA_PIDFILE='/run/grafana/influxd.pid'
+
+# Home directory for Grafana files.
+#
+#GRAFANA_HOMEDIR='/usr/share/grafana'

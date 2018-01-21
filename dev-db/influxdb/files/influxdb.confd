@@ -1,0 +1,14 @@
+# Copyright (c) 2016 Grzegorz Kowal <grzegorz@gkowal.info>
+# Distributed under the terms of the GNU General Public License v2
+
+# Location of configuration file. Modify if you don't like the standard one.
+#
+#INFLUXD_CFGFILE='/etc/influxdb/influxdb.conf'
+
+# File used to store the PID file. Usually you won't need to touch it.
+#
+#INFLUXD_PIDFILE='/run/influxdb/influxd.pid'
+
+# Location of the log file.
+#
+#INFLUXD_LOGFILE='/var/log/influxdb/influxd.log'
