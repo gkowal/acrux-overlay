@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/ckb-next/ckb-next"
 SRC_URI="https://github.com/ckb-next/ckb-next/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="systemd"
 
 DEPEND=">=dev-libs/quazip-0.7.2[qt5]
