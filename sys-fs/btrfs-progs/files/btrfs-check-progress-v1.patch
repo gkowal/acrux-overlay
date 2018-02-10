@@ -1,0 +1,502 @@
+diff -uNr btrfs-progs-v4.15/cmds-check.c btrfs-progs-v4.15-progress/cmds-check.c
+--- btrfs-progs-v4.15/cmds-check.c	2018-02-02 12:51:18.000000000 -0200
++++ btrfs-progs-v4.15-progress/cmds-check.c	2018-02-10 15:13:58.227021187 -0200
+@@ -25,6 +25,7 @@
+ #include <unistd.h>
+ #include <getopt.h>
+ #include <uuid/uuid.h>
++#include <time.h>
+ #include "ctree.h"
+ #include "volumes.h"
+ #include "repair.h"
+@@ -45,15 +46,21 @@
+ #include "help.h"
+ 
+ enum task_position {
++	TASK_ROOT_ITEMS,
+ 	TASK_EXTENTS,
+ 	TASK_FREE_SPACE,
+ 	TASK_FS_ROOTS,
++	TASK_CSUMS,
++	TASK_ROOT_REFS,
++	TASK_QGROUPS,
+ 	TASK_NOTHING, /* have to be the last element */
+ };
+ 
+ struct task_ctx {
+ 	int progress_enabled;
+ 	enum task_position tp;
++	time_t start_time;
++	u64 item_count;
+ 
+ 	struct task_info *info;
+ };
+@@ -69,6 +76,7 @@
+ static LIST_HEAD(duplicate_extents);
+ static LIST_HEAD(delete_items);
+ static int no_holes = 0;
++static int is_free_space_tree = 0;
+ static int init_extent_tree = 0;
+ static int check_data_csum = 0;
+ static struct btrfs_fs_info *global_info;
+@@ -477,27 +485,46 @@
+ #define ACCOUNTING_MISMATCH	(1 << 7) /* Used space accounting error */
+ #define CHUNK_TYPE_MISMATCH	(1 << 8)
+ 
+-static void *print_status_check(void *p)
++static void print_status_check_line(void *p)
+ {
+ 	struct task_ctx *priv = p;
+-	const char work_indicator[] = { '.', 'o', 'O', 'o' };
+-	uint32_t count = 0;
+-	static char *task_position_string[] = {
+-		"checking extents",
+-		"checking free space cache",
+-		"checking fs roots",
++	char *task_position_string[] = {
++		"[1/7] checking root items       ",
++		"[2/7] checking extents          ",
++		is_free_space_tree ?
++		"[3/7] checking free space tree  ":
++		"[3/7] checking free space cache ",
++		"[4/7] checking fs roots         ",
++		"[5/7] checking csums            ",
++		"[6/7] checking root refs        ",
++		"[7/7] checking quota groups     ",
+ 	};
+ 
+-	task_period_start(priv->info, 1000 /* 1s */);
++	time_t elapsed = time(NULL) - priv->start_time;
++	int hours   = elapsed / 3600;
++	elapsed    -= hours   * 3600;
++	int minutes = elapsed / 60;
++	elapsed    -= minutes * 60;
++	int seconds = elapsed;
++	printf("%s (%d:%02d:%02d elapsed", task_position_string[priv->tp], hours, minutes, seconds);
++	if (priv->item_count > 0)
++		printf(", %llu items checked)\r", priv->item_count);
++	else
++		printf(")\r");
++	fflush(stdout);
++}
++
++static void *print_status_check(void *p)
++{
++	struct task_ctx *priv = p;
++
++	task_period_start(priv->info, 50);
+ 
+ 	if (priv->tp == TASK_NOTHING)
+ 		return NULL;
+ 
+ 	while (1) {
+-		printf("%s [%c]\r", task_position_string[priv->tp],
+-				work_indicator[count % 4]);
+-		count++;
+-		fflush(stdout);
++		print_status_check_line(p);
+ 		task_period_wait(priv->info);
+ 	}
+ 	return NULL;
+@@ -505,6 +532,7 @@
+ 
+ static int print_status_return(void *p)
+ {
++	print_status_check_line(p);
+ 	printf("\n");
+ 	fflush(stdout);
+ 
+@@ -4222,6 +4250,7 @@
+ 
+ 	cache = search_cache_extent(root_cache, 0);
+ 	while (1) {
++		ctx.item_count++;
+ 		if (!cache)
+ 			break;
+ 		rec = container_of(cache, struct root_record, cache);
+@@ -4515,6 +4544,7 @@
+ 	}
+ 
+ 	while (1) {
++		ctx.item_count++;
+ 		wret = walk_down_tree(root, &path, wc, &level, &nrefs);
+ 		if (wret < 0)
+ 			ret = wret;
+@@ -4600,11 +4630,6 @@
+ 	int ret;
+ 	int err = 0;
+ 
+-	if (ctx.progress_enabled) {
+-		ctx.tp = TASK_FS_ROOTS;
+-		task_start(ctx.info);
+-	}
+-
+ 	/*
+ 	 * Just in case we made any changes to the extent tree that weren't
+ 	 * reflected into the free space cache yet.
+@@ -4681,8 +4706,6 @@
+ 	if (!cache_tree_empty(&wc.shared))
+ 		fprintf(stderr, "warning line %d\n", __LINE__);
+ 
+-	task_stop(ctx.info);
+-
+ 	return err;
+ }
+ 
+@@ -6605,6 +6628,7 @@
+ 	}
+ 
+ 	while (1) {
++		ctx.item_count++;
+ 		ret = walk_down_tree_v2(trans, root, &path, &level, &nrefs,
+ 					ext_ref, check_all);
+ 
+@@ -6824,8 +6848,6 @@
+ {
+ 	int ret;
+ 
+-	if (!ctx.progress_enabled)
+-		fprintf(stderr, "checking fs roots\n");
+ 	if (check_mode == CHECK_MODE_LOWMEM)
+ 		ret = check_fs_roots_v2(fs_info);
+ 	else
+@@ -8659,12 +8681,8 @@
+ 		return 0;
+ 	}
+ 
+-	if (ctx.progress_enabled) {
+-		ctx.tp = TASK_FREE_SPACE;
+-		task_start(ctx.info);
+-	}
+-
+ 	while (1) {
++		ctx.item_count++;
+ 		cache = btrfs_lookup_first_block_group(root->fs_info, start);
+ 		if (!cache)
+ 			break;
+@@ -8711,8 +8729,6 @@
+ 		}
+ 	}
+ 
+-	task_stop(ctx.info);
+-
+ 	return error ? -EINVAL : 0;
+ }
+ 
+@@ -8958,6 +8974,7 @@
+ 	ret = 0;
+ 
+ 	while (1) {
++		ctx.item_count++;
+ 		if (path.slots[0] >= btrfs_header_nritems(path.nodes[0])) {
+ 			ret = btrfs_next_leaf(root, &path);
+ 			if (ret < 0) {
+@@ -11414,6 +11431,7 @@
+ 		 * can maximize readahead.
+ 		 */
+ 		while (1) {
++			ctx.item_count++;
+ 			ret = run_next_block(root, bits, bits_nr, &last,
+ 					     pending, seen, reada, nodes,
+ 					     extent_cache, chunk_cache,
+@@ -11501,11 +11519,6 @@
+ 		exit(1);
+ 	}
+ 
+-	if (ctx.progress_enabled) {
+-		ctx.tp = TASK_EXTENTS;
+-		task_start(ctx.info);
+-	}
+-
+ again:
+ 	root1 = fs_info->tree_root;
+ 	level = btrfs_header_level(root1->node);
+@@ -11615,7 +11628,6 @@
+ 		ret = err;
+ 
+ out:
+-	task_stop(ctx.info);
+ 	if (repair) {
+ 		free_corrupt_blocks_tree(fs_info->corrupt_blocks);
+ 		extent_io_tree_cleanup(&excluded_extents);
+@@ -13458,8 +13470,6 @@
+ {
+ 	int ret;
+ 
+-	if (!ctx.progress_enabled)
+-		fprintf(stderr, "checking extents\n");
+ 	if (check_mode == CHECK_MODE_LOWMEM)
+ 		ret = check_chunks_and_extents_v2(fs_info);
+ 	else
+@@ -14263,6 +14273,7 @@
+ 		struct cache_extent *entry;
+ 		struct root_item_info *rii;
+ 
++		ctx.item_count++;
+ 		if (slot >= btrfs_header_nritems(leaf)) {
+ 			ret = btrfs_next_leaf(info->extent_root, &path);
+ 			if (ret < 0) {
+@@ -14790,6 +14801,8 @@
+ 	if (repair && check_mode == CHECK_MODE_LOWMEM)
+ 		warning("low-memory mode repair support is only partial");
+ 
++	printf("Opening filesystem to check...\n");
++
+ 	radix_tree_init();
+ 	cache_tree_init(&root_cache);
+ 
+@@ -14962,7 +14975,14 @@
+ 	}
+ 
+ 	if (!init_extent_tree) {
++		if (!ctx.progress_enabled)
++			fprintf(stderr, "[1/7] checking root items\n");
++		else {
++			ctx.tp = TASK_ROOT_ITEMS;
++			task_start(ctx.info, &ctx.start_time, &ctx.item_count);
++		}
+ 		ret = repair_root_items(info);
++		task_stop(ctx.info);
+ 		if (ret < 0) {
+ 			err = !!ret;
+ 			error("failed to repair root items: %s", strerror(-ret));
+@@ -14982,8 +15002,18 @@
+ 			goto close_out;
+ 		}
+ 	}
++	else {
++		fprintf(stderr, "[1/7] checking root items... skipped\n");
++	}
+ 
++	if (!ctx.progress_enabled)
++		fprintf(stderr, "[2/7] checking extents\n");
++	else {
++		ctx.tp = TASK_EXTENTS;
++		task_start(ctx.info, &ctx.start_time, &ctx.item_count);
++	}
+ 	ret = do_check_chunks_and_extents(info);
++	task_stop(ctx.info);
+ 	err |= !!ret;
+ 	if (ret)
+ 		error(
+@@ -14992,16 +15022,24 @@
+ 	/* Only re-check super size after we checked and repaired the fs */
+ 	err |= !is_super_size_valid(info);
+ 
++	is_free_space_tree = btrfs_fs_compat_ro(info, FREE_SPACE_TREE);
++
+ 	if (!ctx.progress_enabled) {
+-		if (btrfs_fs_compat_ro(info, FREE_SPACE_TREE))
+-			fprintf(stderr, "checking free space tree\n");
++		if (is_free_space_tree)
++			fprintf(stderr, "[3/7] checking free space tree\n");
+ 		else
+-			fprintf(stderr, "checking free space cache\n");
++			fprintf(stderr, "[3/7] checking free space cache\n");
++	}
++	else {
++		ctx.tp = TASK_FREE_SPACE;
++		task_start(ctx.info, &ctx.start_time, &ctx.item_count);
+ 	}
++
+ 	ret = check_space_cache(root);
++	task_stop(ctx.info);
+ 	err |= !!ret;
+ 	if (ret) {
+-		if (btrfs_fs_compat_ro(info, FREE_SPACE_TREE))
++		if (is_free_space_tree)
+ 			error("errors found in free space tree");
+ 		else
+ 			error("errors found in free space cache");
+@@ -15015,31 +15053,56 @@
+ 	 * ignore it when this happens.
+ 	 */
+ 	no_holes = btrfs_fs_incompat(root->fs_info, NO_HOLES);
++	if (!ctx.progress_enabled)
++		fprintf(stderr, "[4/7] checking fs roots\n");
++	else {
++		ctx.tp = TASK_FS_ROOTS;
++		task_start(ctx.info, &ctx.start_time, &ctx.item_count);
++	}
++
+ 	ret = do_check_fs_roots(info, &root_cache);
++	task_stop(ctx.info);
+ 	err |= !!ret;
+ 	if (ret) {
+ 		error("errors found in fs roots");
+ 		goto out;
+ 	}
+ 
+-	fprintf(stderr, "checking csums\n");
++	if (!ctx.progress_enabled)
++		fprintf(stderr, "[5/7] checking csums\n");
++	else {
++		ctx.tp = TASK_CSUMS;
++		task_start(ctx.info, &ctx.start_time, &ctx.item_count);
++	}
++
+ 	ret = check_csums(root);
++	task_stop(ctx.info);
+ 	err |= !!ret;
+ 	if (ret) {
+ 		error("errors found in csum tree");
+ 		goto out;
+ 	}
+ 
+-	fprintf(stderr, "checking root refs\n");
+ 	/* For low memory mode, check_fs_roots_v2 handles root refs */
+ 	if (check_mode != CHECK_MODE_LOWMEM) {
++		if (!ctx.progress_enabled)
++			fprintf(stderr, "[6/7] checking root refs\n");
++		else {
++			ctx.tp = TASK_ROOT_REFS;
++			task_start(ctx.info, &ctx.start_time, &ctx.item_count);
++		}
++
+ 		ret = check_root_refs(root, &root_cache);
++		task_stop(ctx.info);
+ 		err |= !!ret;
+ 		if (ret) {
+ 			error("errors found in root refs");
+ 			goto out;
+ 		}
+ 	}
++	else {
++		fprintf(stderr, "[6/7] checking root refs done with fs roots in lowmem mode, skipping\n");
++	}
+ 
+ 	while (repair && !list_empty(&root->fs_info->recow_ebs)) {
+ 		struct extent_buffer *eb;
+@@ -15068,8 +15131,15 @@
+ 	}
+ 
+ 	if (info->quota_enabled) {
+-		fprintf(stderr, "checking quota groups\n");
++		if (!ctx.progress_enabled)
++			fprintf(stderr, "[7/7] checking quota groups\n");
++		else {
++			ctx.tp = TASK_QGROUPS;
++			task_start(ctx.info, &ctx.start_time, &ctx.item_count);
++			qgroup_set_item_count_ptr(&ctx.item_count);
++		}
+ 		ret = qgroup_verify_all(info);
++		task_stop(ctx.info);
+ 		err |= !!ret;
+ 		if (ret) {
+ 			error("failed to check quota groups");
+@@ -15084,6 +15154,8 @@
+ 		}
+ 		ret = 0;
+ 	}
++	else
++		fprintf(stderr, "[7/7] checking quota groups skipped (not enabled on this FS)\n");
+ 
+ 	if (!list_empty(&root->fs_info->recow_ebs)) {
+ 		error("transid errors in file system");
+diff -uNr btrfs-progs-v4.15/convert/main.c btrfs-progs-v4.15-progress/convert/main.c
+--- btrfs-progs-v4.15/convert/main.c	2018-02-02 12:51:18.000000000 -0200
++++ btrfs-progs-v4.15-progress/convert/main.c	2018-02-10 15:13:58.228021210 -0200
+@@ -1182,7 +1182,7 @@
+ 	if (progress) {
+ 		ctx.info = task_init(print_copied_inodes, after_copied_inodes,
+ 				     &ctx);
+-		task_start(ctx.info);
++		task_start(ctx.info, NULL, NULL);
+ 	}
+ 	ret = copy_inodes(&cctx, root, convert_flags, &ctx);
+ 	if (ret) {
+diff -uNr btrfs-progs-v4.15/qgroup-verify.c btrfs-progs-v4.15-progress/qgroup-verify.c
+--- btrfs-progs-v4.15/qgroup-verify.c	2018-02-02 12:51:18.000000000 -0200
++++ btrfs-progs-v4.15-progress/qgroup-verify.c	2018-02-10 15:13:58.228021210 -0200
+@@ -34,6 +34,12 @@
+ 
+ #include "qgroup-verify.h"
+ 
++u64 *qgroup_item_count;
++void qgroup_set_item_count_ptr(u64 *item_count_ptr)
++{
++	qgroup_item_count = item_count_ptr;
++}
++
+ /*#define QGROUP_VERIFY_DEBUG*/
+ static unsigned long tot_extents_scanned = 0;
+ 
+@@ -735,6 +741,7 @@
+ 	 */
+ 	nr = btrfs_header_nritems(eb);
+ 	for (i = 0; i < nr; i++) {
++		(*qgroup_item_count)++;
+ 		new_bytenr = btrfs_node_blockptr(eb, i);
+ 		new_num_bytes = info->nodesize;
+ 
+diff -uNr btrfs-progs-v4.15/qgroup-verify.h btrfs-progs-v4.15-progress/qgroup-verify.h
+--- btrfs-progs-v4.15/qgroup-verify.h	2018-02-02 12:51:18.000000000 -0200
++++ btrfs-progs-v4.15-progress/qgroup-verify.h	2018-02-10 15:13:58.228021210 -0200
+@@ -30,4 +30,6 @@
+ 
+ void free_qgroup_counts(void);
+ 
++void qgroup_set_item_count_ptr(u64 *item_count_ptr);
++
+ #endif
+diff -uNr btrfs-progs-v4.15/task-utils.c btrfs-progs-v4.15-progress/task-utils.c
+--- btrfs-progs-v4.15/task-utils.c	2018-02-02 12:51:18.000000000 -0200
++++ btrfs-progs-v4.15-progress/task-utils.c	2018-02-10 15:13:58.228021210 -0200
+@@ -19,6 +19,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <unistd.h>
++#include <time.h>
+ 
+ #include "task-utils.h"
+ 
+@@ -37,7 +38,7 @@
+ 	return info;
+ }
+ 
+-int task_start(struct task_info *info)
++int task_start(struct task_info *info, time_t *start_time, u64 *item_count)
+ {
+ 	int ret;
+ 
+@@ -47,6 +48,11 @@
+ 	if (!info->threadfn)
+ 		return -1;
+ 
++	if (start_time)
++		*start_time = time(NULL);
++	if (item_count)
++		*item_count = 0;
++
+ 	ret = pthread_create(&info->id, NULL, info->threadfn,
+ 			     info->private_data);
+ 
+@@ -102,7 +108,7 @@
+ 	info->periodic.wakeups_missed = 0;
+ 
+ 	sec = period_ms / 1000;
+-	ns = (period_ms - (sec * 1000)) * 1000;
++	ns = (period_ms - (sec * 1000)) * 1000 * 1000;
+ 	itval.it_interval.tv_sec = sec;
+ 	itval.it_interval.tv_nsec = ns;
+ 	itval.it_value.tv_sec = sec;
+diff -uNr btrfs-progs-v4.15/task-utils.h btrfs-progs-v4.15-progress/task-utils.h
+--- btrfs-progs-v4.15/task-utils.h	2018-02-02 12:51:18.000000000 -0200
++++ btrfs-progs-v4.15-progress/task-utils.h	2018-02-10 15:13:58.228021210 -0200
+@@ -18,6 +18,7 @@
+ #define __TASK_UTILS_H__
+ 
+ #include <pthread.h>
++#include "kerncompat.h"
+ 
+ struct periodic_info {
+ 	int timer_fd;
+@@ -35,7 +36,7 @@
+ /* task life cycle */
+ struct task_info *task_init(void *(*threadfn)(void *), int (*postfn)(void *),
+ 			    void *thread_private);
+-int task_start(struct task_info *info);
++int task_start(struct task_info *info, time_t *start_time, u64 *item_count);
+ void task_stop(struct task_info *info);
+ void task_deinit(struct task_info *info);
+ 
