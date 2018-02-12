@@ -29,7 +29,7 @@ HOMEPAGE="https://www.schedmd.com"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="debug lua multiple-slurmd +munge mysql pam perl ssl static-libs torque"
+IUSE="debug +lua multiple-slurmd +munge mysql pam perl ssl static-libs torque"
 
 DEPEND="
 	!sys-cluster/torque
