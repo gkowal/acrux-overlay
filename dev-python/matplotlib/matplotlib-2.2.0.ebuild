@@ -40,6 +40,7 @@ PY2_DEPEND="
 	$(python_gen_cond_dep 'dev-python/backports-functools-lru-cache[${PYTHON_USEDEP}]' python2_7)"
 COMMON_DEPEND="
 	dev-python/cycler[${PYTHON_USEDEP}]
+	>=dev-python/kiwisolver-1.0.0[${PYTHON_USEDEP}]
 	>=dev-python/numpy-1.7.1[${PYTHON_USEDEP}]
 	dev-python/python-dateutil:0[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
