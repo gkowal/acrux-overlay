@@ -3,26 +3,14 @@
 
 EAPI=6
 
-if [[ ${PV} == *9999* ]]; then
-	EGIT_REPO_URI="https://github.com/SchedMD/slurm.git"
-	INHERIT_GIT="git-r3"
-	SRC_URI=""
-	KEYWORDS=""
-else
-	inherit versionator
-	if [[ ${PV} == *pre* || ${PV} == *rc* ]]; then
-		MY_PV=$(replace_version_separator 3 '-0.') # pre-releases or release-candidate
-	else
-		MY_PV=$(replace_version_separator 3 '-') # stable releases
-	fi
-	MY_P="${PN}-${MY_PV}"
-	INHERIT_GIT=""
-	SRC_URI="https://download.schedmd.com/slurm/${MY_P}.tar.bz2"
-	KEYWORDS="~amd64 ~x86"
-	S="${WORKDIR}/${MY_P}"
-fi
+inherit autotools eutils pam perl-module prefix systemd user versionator
 
-inherit autotools eutils pam perl-module prefix user ${INHERIT_GIT}
+MY_PV=$(replace_version_separator 3 '-') # stable releases
+MY_P="${PN}-${MY_PV}"
+SRC_URI="https://download.schedmd.com/slurm/${MY_P}.tar.bz2"
+KEYWORDS="~amd64 ~x86"
+S="${WORKDIR}/${MY_P}"
+
 
 DESCRIPTION="A Highly Scalable Resource Manager"
 HOMEPAGE="https://www.schedmd.com"
@@ -41,6 +29,7 @@ DEPEND="
 	ssl? ( dev-libs/openssl:0= )
 	lua? ( dev-lang/lua:0= )
 	!lua? ( !dev-lang/lua )
+	systemd? ( sys-apps/systemd )
 	>=sys-apps/hwloc-1.1.1-r1"
 RDEPEND="${DEPEND}
 	dev-libs/libcgroup"
@@ -56,14 +45,6 @@ PATCHES=(
 	"${FILESDIR}"/${P}-disable-sview.patch
 	"${FILESDIR}"/${P}-buffer.patch
 )
-
-src_unpack() {
-	if [[ ${PV} == *9999* ]]; then
-		git-2_src_unpack
-	else
-		default
-	fi
-}
 
 pkg_setup() {
 	enewgroup slurm 500
