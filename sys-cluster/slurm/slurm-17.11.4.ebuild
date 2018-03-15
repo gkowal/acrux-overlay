@@ -29,7 +29,7 @@ HOMEPAGE="https://www.schedmd.com"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="debug +lua multiple-slurmd +munge mysql pam perl ssl static-libs torque"
+IUSE="debug +lua multiple-slurmd +munge mysql pam perl ssl static-libs systemd torque"
 
 DEPEND="
 	!sys-cluster/torque
@@ -184,6 +184,13 @@ src_install() {
 	bashcomp_alias \
 		sreport sacctmgr scontrol squeue scancel sshare sbcast sinfo \
 		sprio sacct salloc sbatch srun sattach sdiag sstat
+
+	# Install the systemd unit file.
+	if use systemd; then
+		systemd_dounit "${FILESDIR}/${PN}d.service"
+		systemd_dounit "${FILESDIR}/${PN}ctld.service"
+		systemd_dounit "${FILESDIR}/${PN}dbd.service"
+	fi
 }
 
 pkg_preinst() {
@@ -238,4 +245,8 @@ pkg_postinst() {
 	for folder_path in ${paths[@]}; do
 		ewarn "    ${folder_path}"
 	done
+
+	if use systemd; then
+		systemctl daemon-reload
+	fi
 }
