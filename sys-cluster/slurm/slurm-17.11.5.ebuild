@@ -43,7 +43,6 @@ RESTRICT="primaryuri test"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-17.11-disable-sview.patch
-	"${FILESDIR}"/${PN}-17.11-buffer.patch
 )
 
 pkg_setup() {
