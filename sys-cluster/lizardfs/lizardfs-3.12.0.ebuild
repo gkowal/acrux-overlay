@@ -19,7 +19,6 @@ CDEPEND="
 	dev-libs/judy
 	sys-devel/libtool
 	sys-fs/fuse
-	sys-libs/db
 	sys-libs/pam
 	sys-libs/zlib
 "
