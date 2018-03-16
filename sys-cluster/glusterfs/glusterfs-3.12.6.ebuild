@@ -14,7 +14,7 @@ SRC_URI="https://download.gluster.org/pub/gluster/${PN}/$(get_version_component_
 LICENSE="|| ( GPL-2 LGPL-3+ )"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~arm64 ppc ppc64 x86"
-IUSE="bd-xlator crypt-xlator debug emacs +fuse georeplication glupy infiniband libtirpc qemu-block rsyslog static-libs +syslog systemd systemtap test tiering vim-syntax +xml"
+IUSE="bd-xlator crypt-xlator debug emacs +fuse georeplication glupy infiniband libtirpc qemu-block rsyslog static-libs +syslog systemd systemtap test +tiering vim-syntax +xml"
 
 REQUIRED_USE="georeplication? ( ${PYTHON_REQUIRED_USE} )
 	glupy? ( ${PYTHON_REQUIRED_USE} )"
