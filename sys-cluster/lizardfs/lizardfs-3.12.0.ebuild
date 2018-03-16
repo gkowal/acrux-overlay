@@ -11,17 +11,30 @@ SRC_URI="https://github.com/lizardfs/lizardfs/archive/v${PV}.tar.gz -> ${P}.tar.
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+fuse judy"
+IUSE=""
 
 CDEPEND="
 	app-text/asciidoc
 	dev-libs/boost
+	dev-libs/judy
 	sys-devel/libtool
+	sys-fs/fuse
+	sys-libs/db
+	sys-libs/pam
 	sys-libs/zlib
-	fuse? ( sys-fs/fuse )
-	judy? ( dev-libs/judy )
 "
 
 RDEPEND="${CDEPEND}"
 DEPEND="${CDEPEND}"
 
+src_configure() {
+	local mycmakeargs=(
+		-DCMAKE_INSTALL_PREFIX=/
+		-DDEFAULT_USER=nobody
+		-DDEFAULT_GROUP=nobody
+		-DENABLE_POLONAISE=OFF
+		-DENABLE_DEBIAN_PATHS=ON
+	)
+
+	cmake-utils_src_configure
+}
