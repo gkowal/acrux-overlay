@@ -124,7 +124,7 @@ use_setup() {
 }
 
 python_prepare_all() {
-	local PATCHES=( "${FILESDIR}"/${PN}-2.0.0-doc-make.patch )
+	local PATCHES=( "${FILESDIR}"/${P}-doc-make.patch )
 
 	sed \
 		-e 's/matplotlib.pyparsing_py[23]/pyparsing/g' \

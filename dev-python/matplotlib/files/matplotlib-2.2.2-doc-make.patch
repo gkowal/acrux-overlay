@@ -1,0 +1,12 @@
+diff -uNr matplotlib-2.2.2/doc/conf.py matplotlib-2.2.2-r1/doc/conf.py
+--- matplotlib-2.2.2/doc/conf.py	2018-03-16 23:56:24.000000000 -0300
++++ matplotlib-2.2.2-r1/doc/conf.py	2018-03-17 06:44:24.648077489 -0300
+@@ -137,7 +137,7 @@
+     'min_reported_time': 1,
+ }
+ 
+-plot_gallery = 'True'
++plot_gallery = True
+ 
+ # Add any paths that contain templates here, relative to this directory.
+ templates_path = ['_templates']
