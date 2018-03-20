@@ -29,8 +29,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-#PATCHES=( ${FILESDIR}/beegfs-external-premake.patch )
-
 src_compile() {
 	# build shared libraries
 	emake ${MAKEOPTS} ARCH= -C beegfs_thirdparty/build
@@ -39,22 +37,22 @@ src_compile() {
 	else
 		emake ${MAKEOPTS} BEEGFS_DEBUG=0 BEEGFS_OPENTK_IBVERBS=0 -C beegfs_opentk_lib/build
 	fi
-	emake ${MAKEOPTS} -C beegfs_common/build
+	emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_common/build
 
 	# build helper server
 	emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_helperd/build
 
 	# build meta server
-	make ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_meta/build
+	emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_meta/build
 
 	# build management server
-	make ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_mgmtd/build
+	emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_mgmtd/build
 
 	# build storage server
-	make ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_storage/build
+	emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_storage/build
 
 	# build utilities
-	make ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_utils/build
+	emake ${MAKEOPTS} BEEGFS_DEBUG=0 JAVA_HOME=${JAVA_HOME} -C beegfs_utils/build
 }
 
 src_install() {
