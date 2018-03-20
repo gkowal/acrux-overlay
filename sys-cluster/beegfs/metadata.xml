@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>grzegorz@gkowal.info</email>
+		<name>Grzegorz Kowal</name>
+	</maintainer>
+	<longdescription lang="en">
+		BeeGFS (formerly FhGFS) is the leading parallel cluster file system,
+		developed with a strong focus on performance and designed for very
+		easy installation and management. If I/O intensive workloads are
+		your problem, BeeGFS is the solution.
+	</longdescription>
+	<use>
+		<flag name="infiniband">Add support for Infiniband ibverbs transport.</flag>
+		<flag name="java">Build the Java interface.</flag>
+		<flag name="rdma">Enable infiniband support via <pkg>sys-fabric/librdmacm</pkg></flag>
+		<flag name="systemd">Enable the systemd support.</flag>
+	</use>
+</pkgmetadata>
