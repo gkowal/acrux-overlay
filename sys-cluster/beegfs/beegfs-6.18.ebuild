@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit systemd
+inherit eutils systemd
 
 DESCRIPTION="BeeGFS (formerly FhGFS) is the leading parallel cluster file system."
 HOMEPAGE="https://beegfs.io/"
@@ -27,46 +27,82 @@ DEPEND="
 	rdma? ( sys-fabric/librdmacm )
 	java? ( virtual/jdk )
 "
+RDEPEND="${DEPEND}"
+
+#PATCHES=( ${FILESDIR}/beegfs-external-premake.patch )
 
 src_compile() {
 	# build shared libraries
-	make ${MAKEOPTS} -C beegfs_thirdparty/build
-	make ${MAKEOPTS} -C beegfs_opentk_lib/build
-	make ${MAKEOPTS} -C beegfs_common/build
+	emake ${MAKEOPTS} ARCH= -C beegfs_thirdparty/build
+	if use infiniband; then
+		emake ${MAKEOPTS} BEEGFS_DEBUG=0 BEEGFS_OPENTK_IBVERBS=1 -C beegfs_opentk_lib/build
+	else
+		emake ${MAKEOPTS} BEEGFS_DEBUG=0 BEEGFS_OPENTK_IBVERBS=0 -C beegfs_opentk_lib/build
+	fi
+	emake ${MAKEOPTS} -C beegfs_common/build
 
 	# build helper server
-	make ${MAKEOPTS} -C beegfs_helperd/build
+	emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_helperd/build
 
 	# build meta server
-	make ${MAKEOPTS} -C beegfs_meta/build
+	make ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_meta/build
 
 	# build management server
-	make ${MAKEOPTS} -C beegfs_mgmtd/build
+	make ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_mgmtd/build
 
 	# build storage server
-	make ${MAKEOPTS} -C beegfs_storage/build
+	make ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_storage/build
 
 	# build utilities
-	make ${MAKEOPTS} -C beegfs_utils/build
+	make ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_utils/build
 }
 
 src_install() {
-	# build shared libraries
-#	make ${MAKEOPTS} -C beegfs_opentk_lib/build install
-#	make ${MAKEOPTS} -C beegfs_common/build
+	# install shared libraries
+	insinto "/etc/${PN}"
+	newins "beegfs_opentk_lib/build/dist/etc/beegfs/beegfs-libopentk.conf" "beegfs-libopentk.conf"
+	insinto "/usr/lib64/"
+	newins "beegfs_opentk_lib/build/libbeegfs-opentk.so" "libbeegfs-opentk.so"
 
-	# build helper server
-#	make ${MAKEOPTS} -C beegfs_helperd/build
+	# install helper server
+	dosbin "beegfs_helperd/build/beegfs-helperd"
+	insinto "/etc/${PN}"
+	newins "beegfs_helperd/build/dist/etc/beegfs-helperd.conf" "beegfs-helperd.conf"
+	if use systemd; then
+		systemd_dounit "beegfs_helperd/build/dist/usr/lib/systemd/system/beegfs-helperd.service"
+	fi
 
-	# build meta server
-#	make ${MAKEOPTS} -C beegfs_meta/build
+	# install meta server
+	dosbin "beegfs_meta/build/beegfs-meta"
+	dosbin "beegfs_meta/build/dist/sbin/beegfs-setup-meta"
+	insinto "/etc/${PN}"
+	newins "beegfs_meta/build/dist/etc/beegfs-meta.conf" "beegfs-meta.conf"
+	if use systemd; then
+		systemd_dounit "beegfs_meta/build/dist/usr/lib/systemd/system/beegfs-meta.service"
+	fi
 
-	# build management server
-#	make ${MAKEOPTS} -C beegfs_mgmtd/build
+	# install management server
+	dosbin "beegfs_mgmtd/build/beegfs-mgmtd"
+	dosbin "beegfs_mgmtd/build/dist/sbin/beegfs-setup-mgmtd"
+	insinto "/etc/${PN}"
+	newins "beegfs_mgmtd/build/dist/etc/beegfs-mgmtd.conf" "beegfs-mgmtd.conf"
+	if use systemd; then
+		systemd_dounit "beegfs_mgmtd/build/dist/usr/lib/systemd/system/beegfs-mgmtd.service"
+	fi
 
-	# build storage server
-#	make ${MAKEOPTS} -C beegfs_storage/build
+	# install storage server
+	dosbin "beegfs_storage/build/beegfs-storage"
+	dosbin "beegfs_storage/build/dist/sbin/beegfs-setup-storage"
+	insinto "/etc/${PN}"
+	newins "beegfs_storage/build/dist/etc/beegfs-storage.conf" "beegfs-storage.conf"
+	if use systemd; then
+		systemd_dounit "beegfs_storage/build/dist/usr/lib/systemd/system/beegfs-storage.service"
+	fi
 
-	# build utilities
-#	make ${MAKEOPTS} -C beegfs_utils/build
+	# install utilities
+	dosbin "beegfs_utils/build/beegfs-ctl"
+	dosbin "beegfs_utils/build/beegfs-fsck"
+	dosbin "beegfs_utils/scripts/beegfs-check-servers"
+	dosbin "beegfs_utils/scripts/beegfs-df"
+	dosbin "beegfs_utils/scripts/beegfs-net"
 }
