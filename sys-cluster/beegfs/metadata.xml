@@ -12,9 +12,14 @@
 		your problem, BeeGFS is the solution.
 	</longdescription>
 	<use>
+		<flag name="client">Build the client services and kernel module for BeeGFS filesystem.</flag>
+		<flag name="helper">Build the helper daemon for BeeGFS filesystem.</flag>
 		<flag name="infiniband">Add support for Infiniband ibverbs transport.</flag>
 		<flag name="java">Build the Java interface.</flag>
+		<flag name="meta">Build the metadata service for BeeGFS filesystem.</flag>
+		<flag name="management">Build the management service for BeeGFS filesystem.</flag>
 		<flag name="rdma">Enable infiniband support via <pkg>sys-fabric/librdmacm</pkg></flag>
 		<flag name="systemd">Enable the systemd support.</flag>
+		<flag name="utils">Build utilities for the BeeGFS filesystem.</flag>
 	</use>
 </pkgmetadata>
