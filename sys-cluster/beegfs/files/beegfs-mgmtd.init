@@ -1,0 +1,30 @@
+#!/sbin/openrc-run
+# Copyright (c) 2018 Grzegorz Kowal <grzegorz@gkowal.info>
+
+: ${BEEGFSMGMT_CFGFILE:='/etc/beegfs/beegfs-mgmtd.conf'}
+: ${BEEGFSMGMT_PIDFILE:='/run/beegfs-mgmtd.pid'}
+: ${BEEGFSMGMT_LOGFILE:='/var/log/beegfs/beegfs-mgmtd.log'}
+
+depend() {
+        need localmount
+}
+
+description="Starts the BeeGFS management daemon."
+
+start() {
+        ebegin "Starting BeeGFS management service"
+        start-stop-daemon --start --background --quiet \
+                --exec /usr/sbin/beegfs-mgmtd \
+                --pidfile "${BEEGFSMGMT_PIDFILE}" \
+                --stdout /dev/null --stderr "${BEEGFSMGMT_LOGFILE}" \
+                -- cfgFile=${BEEGFSMGMT_CFGFILE} pidFile=${BEEGFSMGMT_PIDFILE}
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping BeeGFS management service"
+        start-stop-daemon --stop \
+                --pidfile "${BEEGFSMGMT_PIDFILE}" \
+                --retry=TERM/20/KILL/5
+        eend $?
+}

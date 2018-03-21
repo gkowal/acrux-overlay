@@ -1,0 +1,13 @@
+[Unit]
+Description=Start BeeGFS Storage Server
+Documentation=https://www.beegfs.io/content/documentation/
+After=network.target beegfs-mgmtd.service
+
+[Service]
+Type=forking
+Environment=BEEGFSDATA_CFGFILE=/etc/beegfs/beegfs-storage.conf
+Environment=BEEGFSDATA_PIDFILE=/run/beegfs-storage.pid
+ExecStart=/usr/sbin/beegfs-storage cfgFile=${BEEGFSDATA_CFGFILE} pidFile=${BEEGFSDATA_PIDFILE}
+
+[Install]
+WantedBy=multi-user.target

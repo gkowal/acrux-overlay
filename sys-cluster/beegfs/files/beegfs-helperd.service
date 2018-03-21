@@ -1,0 +1,13 @@
+[Unit]
+Description=Start BeeGFS Helper Daemon
+Documentation=https://www.beegfs.io/content/documentation/
+After=network.target
+
+[Service]
+Type=forking
+Environment=BEEGFSHELP_CFGFILE=/etc/beegfs/beegfs-helperd.conf
+Environment=BEEGFSHELP_PIDFILE=/run/beegfs-helperd.pid
+ExecStart=/usr/sbin/beegfs-helperd cfgFile=${BEEGFSHELP_CFGFILE} pidFile=${BEEGFSHELP_PIDFILE}
+
+[Install]
+WantedBy=multi-user.target
