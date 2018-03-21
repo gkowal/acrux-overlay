@@ -78,7 +78,7 @@ src_install() {
 	newlib.so "beegfs_opentk_lib/build/libbeegfs-opentk.so" "libbeegfs-opentk.so.${PV}"
 	ln -s "libbeegfs-opentk.so.${PV}" ${D}/usr/lib64/"libbeegfs-opentk.so.6"
 	ln -s "libbeegfs-opentk.so.6" ${D}/usr/lib64/"libbeegfs-opentk.so"
-	keepdir "/var/{lib,log}/${PN}"
+	keepdir /var/{lib,log}/${PN}
 
 	if use management; then
 		# install management server
