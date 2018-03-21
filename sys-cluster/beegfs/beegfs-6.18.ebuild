@@ -58,7 +58,11 @@ src_compile() {
 
 	if use utils; then
 		# build utilities
-		emake ${MAKEOPTS} BEEGFS_DEBUG=0 JAVA_HOME=${JAVA_HOME} -C beegfs_utils/build beegfs_ctl beegfs_fsck
+		if use java; then
+			emake ${MAKEOPTS} BEEGFS_DEBUG=0 JAVA_HOME=${JAVA_HOME} -C beegfs_utils/build
+		else
+			emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_utils/build beegfs_ctl beegfs_fsck
+		fi
 	fi
 
 	if use client; then
