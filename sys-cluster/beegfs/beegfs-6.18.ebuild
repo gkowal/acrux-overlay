@@ -35,39 +35,39 @@ src_compile() {
 	# build shared libraries
 	emake ${MAKEOPTS} ARCH= -C beegfs_thirdparty/build
 	if use infiniband; then
-		emake ${MAKEOPTS} BEEGFS_DEBUG=0 BEEGFS_OPENTK_IBVERBS=1 -C beegfs_opentk_lib/build
+		emake ${MAKEOPTS} BEEGFS_OPENTK_IBVERBS=1 -C beegfs_opentk_lib/build
 	else
-		emake ${MAKEOPTS} BEEGFS_DEBUG=0 BEEGFS_OPENTK_IBVERBS=0 -C beegfs_opentk_lib/build
+		emake ${MAKEOPTS} BEEGFS_OPENTK_IBVERBS=0 -C beegfs_opentk_lib/build
 	fi
-	emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_common/build
+	emake ${MAKEOPTS} -C beegfs_common/build
 
 	if use management; then
 		# build management server
-		emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_mgmtd/build
+		emake ${MAKEOPTS} -C beegfs_mgmtd/build
 	fi
 
 	if use storage; then
 		# build storage server
-		emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_storage/build
+		emake ${MAKEOPTS} -C beegfs_storage/build
 	fi
 
 	if use meta; then
 		# build meta server
-		emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_meta/build
+		emake ${MAKEOPTS} -C beegfs_meta/build
 	fi
 
 	if use utils; then
 		# build utilities
 		if use java; then
-			emake ${MAKEOPTS} BEEGFS_DEBUG=0 JAVA_HOME=${JAVA_HOME} -C beegfs_utils/build
+			emake ${MAKEOPTS} JAVA_HOME=${JAVA_HOME} -C beegfs_utils/build
 		else
-			emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_utils/build beegfs_ctl beegfs_fsck
+			emake ${MAKEOPTS} -C beegfs_utils/build beegfs_ctl beegfs_fsck
 		fi
 	fi
 
 	if use client; then
 		# build helper server
-		emake ${MAKEOPTS} BEEGFS_DEBUG=0 -C beegfs_helperd/build
+		emake ${MAKEOPTS} -C beegfs_helperd/build
 
 		# build client services and kernel module
 		cd "${S}/beegfs_client_module/source"
