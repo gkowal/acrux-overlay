@@ -15,7 +15,17 @@ IUSE=""
 MY_P="v6-${PV}-aee03250ea19502952d2f187e73134996abaec5b"
 S="${WORKDIR}/${MY_P}"
 
+DEPEND="virtual/linux-sources"
+RDEPEND="virtual/modutils"
+
 MODULE_NAMES="beegfs(misc:${S}/beegfs_client_module/build)"
+
+pkg_setup() {
+	linux-info_pkg_setup
+	linux-mod_pkg_setup
+	ARCH="$(tc-arch-kernel)"
+	ABI="${KERNEL_ABI}"
+}
 
 src_compile() {
 	# build kernel module
@@ -27,8 +37,4 @@ src_install() {
 	# install kernel module
 	cd "${S}/beegfs_client_module/source"
 	linux-mod_src_install || die "failed to install driver"
-}
-
-pkg_postinst() {
-	depmod -a
 }
