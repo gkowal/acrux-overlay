@@ -34,9 +34,9 @@ src_compile() {
 	# build shared libraries
 	emake ${MAKEOPTS} ARCH= -C beegfs_thirdparty/build
 	if use infiniband; then
-		emake ${MAKEOPTS} BEEGFS_OPENTK_IBVERBS=1 -C beegfs_opentk_lib/build
+		emake ${MAKEOPTS} USER_LDFLAGS="-fPIC -Wl,-soname,libbeegfs-opentk.so.6" BEEGFS_OPENTK_IBVERBS=1 -C beegfs_opentk_lib/build
 	else
-		emake ${MAKEOPTS} BEEGFS_OPENTK_IBVERBS=0 -C beegfs_opentk_lib/build
+		emake ${MAKEOPTS} USER_LDFLAGS="-fPIC -Wl,-soname,libbeegfs-opentk.so.6" BEEGFS_OPENTK_IBVERBS=0 -C beegfs_opentk_lib/build
 	fi
 	emake ${MAKEOPTS} -C beegfs_common/build
 
