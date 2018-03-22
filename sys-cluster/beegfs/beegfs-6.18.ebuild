@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit eutils linux-mod systemd
+inherit eutils systemd
 
 DESCRIPTION="BeeGFS (formerly FhGFS) is the leading parallel cluster file system."
 HOMEPAGE="https://beegfs.io/"
@@ -11,7 +11,7 @@ SRC_URI="https://git.beegfs.io/pub/v6/repository/${PV}/archive.tar.bz2 -> ${P}.t
 LICENSE="BeeGFS"
 SLOT="0"
 KEYWORDS="amd64 x86"
-IUSE="client infiniband java management meta rdma storage systemd utils"
+IUSE="client infiniband java +modules management meta rdma storage systemd utils"
 MY_P="v6-${PV}-aee03250ea19502952d2f187e73134996abaec5b"
 S="${WORKDIR}/${MY_P}"
 
@@ -24,12 +24,11 @@ DEPEND="
 	sys-fs/xfsprogs
 	sys-libs/zlib
 	infiniband? ( sys-fabric/libibverbs )
+	modules? ( =sys-cluster/${PN}-kmod-${PV} )
 	rdma? ( sys-fabric/librdmacm )
 	java? ( virtual/jdk )
 "
 RDEPEND="${DEPEND}"
-
-MODULE_NAMES="beegfs(misc:${S}/beegfs_client_module/build)"
 
 src_compile() {
 	# build shared libraries
@@ -68,10 +67,6 @@ src_compile() {
 	if use client; then
 		# build helper server
 		emake ${MAKEOPTS} -C beegfs_helperd/build
-
-		# build client services and kernel module
-		cd "${S}/beegfs_client_module/source"
-		linux-mod_src_compile || die "failed to build driver"
 	fi
 }
 
@@ -156,8 +151,6 @@ src_install() {
 		insinto "/etc/${PN}"
 		newins "beegfs_client_module/build/dist/etc/beegfs-client.conf" "beegfs-client.conf"
 		sed -i "s/\/var\/log/\/var\/log\/beegfs/g" "${D}/etc/${PN}/${PN}-client.conf"
-		cd "${S}/beegfs_client_module/source"
-		linux-mod_src_install || die "failed to install driver"
 	fi
 }
 
