@@ -54,6 +54,9 @@ EGO_VENDOR=(
 
 inherit golang-build golang-vcs-snapshot systemd user
 
+GITHUB_BRANCH="1.5"
+GITHUB_COMMIT="cdae4ccd"
+
 DESCRIPTION="Scalable datastore for metrics, events, and real-time analytics"
 HOMEPAGE="https://www.influxdata.com"
 SRC_URI="https://${EGO_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
@@ -74,7 +77,8 @@ pkg_setup() {
 
 src_compile() {
 	pushd "src/${EGO_PN}" > /dev/null || die
-	set -- env GOPATH="${S}" go build -v -work -x ./...
+	date=`date -u --iso-8601=seconds`
+	set -- env GOPATH="${S}" go build -v -work -x -ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${date}" ./...
 	echo "$@"
 	"$@" || die "compile failed"
 	cd man
@@ -84,7 +88,8 @@ src_compile() {
 
 src_install() {
 	pushd "src/${EGO_PN}" > /dev/null || die
-	set -- env GOPATH="${S}" go install -v -work -x ./...
+	date=`date -u --iso-8601=seconds`
+	set -- env GOPATH="${S}" go install -v -work -x -ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${date}" ./...
 	echo "$@"
 	"$@" || die
 	dobin "${S}"/bin/influx
