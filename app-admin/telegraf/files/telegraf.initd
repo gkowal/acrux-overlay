@@ -16,6 +16,7 @@ description="Starts the Telegraf agent."
 start() {
 	ebegin "Starting Telegraf"
 	start-stop-daemon --start --background --quiet \
+		--user "telegraf:telegraf" \
 		--exec /usr/sbin/telegraf \
 		--pidfile "${TELEGRAF_PIDFILE}" \
 		--stdout /dev/null --stderr "${TELEGRAF_LOGFILE}" \

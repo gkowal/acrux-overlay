@@ -7,6 +7,8 @@ After=network.target
 Environment=TELEGRAF_CFGFILE=/etc/telegraf/telegraf.conf
 Environment=TELEGRAF_CFGDIR=/etc/telegraf/telegraf.d
 EnvironmentFile=-/etc/default/telegraf
+User=telegraf
+Group=telegraf
 ExecStart=/usr/sbin/telegraf --config ${TELEGRAF_CFGFILE} --config-directory ${TELEGRAF_CFGDIR} ${TELEGRAF_OPTS}
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
