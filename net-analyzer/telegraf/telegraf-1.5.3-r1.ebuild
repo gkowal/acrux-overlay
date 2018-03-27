@@ -101,6 +101,9 @@ EGO_VENDOR=(
 
 inherit golang-build golang-vcs-snapshot systemd user
 
+GITHUB_BRANCH="release-1.5"
+GITHUB_COMMIT="1e519698"
+
 DESCRIPTION="The plugin-driven server agent for collecting & reporting metrics."
 HOMEPAGE="https://github.com/influxdata/telegraf"
 SRC_URI="https://${EGO_PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
@@ -120,7 +123,8 @@ src_compile() {
 	pushd "src/${EGO_PN}" || die
 	pwd
 	find -iname telegraf.go
-	set -- env GOPATH="${S}" go build -i -v -work -x -o telegraf \
+	date=`date -u --iso-8601=seconds`
+	set -- env GOPATH="${S}" go build -i -v -work -x -ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${date}" -o telegraf \
 		cmd/telegraf/telegraf.go
 	echo "$@"
 	"$@" || die
