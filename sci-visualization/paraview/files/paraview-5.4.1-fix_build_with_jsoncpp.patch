@@ -1,0 +1,15 @@
+diff -uNr ParaView-v5.4.1-orig/ParaViewCore/ServerManager/Core/vtkSMSettings.cxx ParaView-v5.4.1/ParaViewCore/ServerManager/Core/vtkSMSettings.cxx
+--- ParaView-v5.4.1-orig/ParaViewCore/ServerManager/Core/vtkSMSettings.cxx	2017-08-18 10:39:19.000000000 -0300
++++ ParaView-v5.4.1/ParaViewCore/ServerManager/Core/vtkSMSettings.cxx	2018-04-02 16:29:25.143568581 -0300
+@@ -788,7 +788,10 @@
+           this->GetSettingBelowPriority(propertySettingCString, highestPriority);
+         if (lowerPriorityValue.isNull())
+         {
+-          if (!proxyValue.removeMember(property->GetXMLName()).isNull())
++          // Allocated as done in Json::Value removeMember(const char* key).
++          Json::Value removedValue;
++          if (proxyValue.removeMember(property->GetXMLName(), &removedValue) &&
++            !removedValue.isNull())
+           {
+             this->Modified();
+           }

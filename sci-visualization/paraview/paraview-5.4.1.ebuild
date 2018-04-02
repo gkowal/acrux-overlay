@@ -114,6 +114,7 @@ pkg_setup() {
 src_prepare() {
 	# see patch headers for description
 	epatch "${FILESDIR}"/${PN}-5.4.0-xdmf-cstring.patch
+	epatch "${FILESDIR}"/${PN}-5.4.1-fix_build_with_jsoncpp.patch
 
 	# lib64 fixes
 	sed -i \
