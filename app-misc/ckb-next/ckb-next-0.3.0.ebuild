@@ -25,9 +25,7 @@ DOCS=( README.md CHANGELOG.md )
 src_install() {
 	cmake-utils_src_install
 	if use systemd; then
-		mv ${ED}/usr/lib/systemd ${ED}/lib/
-	else
-		rm -r ${ED}/usr/lib/systemd
+		systemd_dounit ${ED}/usr/lib/systemd/system/ckb-next-daemon.service
 	fi
 	rm -r ${ED}/usr/lib
 	newinitd "${FILESDIR}"/ckb-next.initd ckb-next-daemon
