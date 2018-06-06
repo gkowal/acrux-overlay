@@ -1,0 +1,18 @@
+[Unit]
+Description=Gitea (Git with a cup of tea)
+Documentation=https://docs.gitea.io
+After=network.target
+
+[Service]
+Type=simple
+User=gitea
+Group=gitea
+WorkingDirectory=/var/lib/gitea/
+ExecStart=/usr/sbin/gitea web --port=3333              \
+    --config /etc/gitea/gitea.ini                      \
+    --pid /run/gitea/gitea.pid
+Restart=always
+Environment=USER=gitea HOME=/var/lib/gitea GITEA_WORK_DIR=/var/lib/gitea
+
+[Install]
+WantedBy=multi-user.target
