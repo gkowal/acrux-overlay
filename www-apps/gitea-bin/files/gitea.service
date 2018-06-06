@@ -8,6 +8,8 @@ Type=simple
 User=gitea
 Group=gitea
 WorkingDirectory=/var/lib/gitea/
+RuntimeDirectory=gitea
+RuntimeDirectoryMode=0750
 ExecStart=/usr/sbin/gitea web --port=3333              \
     --config /etc/gitea/gitea.ini                      \
     --pid /run/gitea/gitea.pid
