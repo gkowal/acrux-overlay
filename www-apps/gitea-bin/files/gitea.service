@@ -10,8 +10,8 @@ Group=gitea
 WorkingDirectory=/var/lib/gitea/
 RuntimeDirectory=gitea
 RuntimeDirectoryMode=0750
-ExecStart=/usr/sbin/gitea web --port=3333              \
-    --config /etc/gitea/gitea.ini                      \
+ExecStart=/usr/sbin/gitea web --port=3333 \
+    --config /etc/gitea/app.ini           \
     --pid /run/gitea/gitea.pid
 Restart=always
 Environment=USER=gitea HOME=/var/lib/gitea GITEA_WORK_DIR=/var/lib/gitea

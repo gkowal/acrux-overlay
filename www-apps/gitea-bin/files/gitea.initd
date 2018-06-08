@@ -3,7 +3,7 @@
 
 : ${GITEA_USER:='gitea'}
 : ${GITEA_GROUP:='gitea'}
-: ${GITEA_CFGFILE:='/etc/gitea/gitea.ini'}
+: ${GITEA_CFGFILE:='/etc/gitea/app.ini'}
 : ${GITEA_PIDFILE:='/run/gitea/gitea.pid'}
 : ${GITEA_HOMEDIR:='/var/lib/gitea'}
 : ${GITEA_PORT:=3333}
@@ -20,7 +20,9 @@ start() {
 	checkpath -d -o "${GITEA_USER}:${GITEA_GROUP}" -m 750 "${GITEA_HOMEDIR}"
 
 	start-stop-daemon --start --background --quiet \
+		--user ${GITEA_USER} --group ${GITEA_GROUP} \
 		--chdir "${GITEA_HOMEDIR}" \
+		-e GITEA_WORK_DIR="${GITEA_HOMEDIR}" \
 		--pidfile "${GITEA_PIDFILE}" \
 		--exec /usr/sbin/gitea \
 		-- web --port ${GITEA_PORT} \
