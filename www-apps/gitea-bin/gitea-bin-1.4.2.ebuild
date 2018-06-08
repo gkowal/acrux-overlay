@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}"
 
 pkg_setup() {
 	enewgroup gitea
-	enewuser gitea -1 -1 /var/lib/gitea gitea
+	enewuser gitea -1 /bin/bash /var/lib/gitea gitea
 }
 
 src_unpack() {
