@@ -5,10 +5,10 @@ EAPI=6
 
 inherit linux-mod
 
-DESCRIPTION="Kernel module for BeeGFS (formerly FhGFS), the leading parallel cluster file system."
+DESCRIPTION="Kernel module for BeeGFS parallel cluster filesystem."
 HOMEPAGE="https://beegfs.io/"
 SRC_URI="https://git.beegfs.io/pub/v6/repository/${PV}/archive.tar.bz2 -> beegfs-${PV}.tar.bz2"
-LICENSE="BeeGFS"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
