@@ -8,7 +8,7 @@ inherit eutils systemd
 DESCRIPTION="BeeGFS (formerly FhGFS) is the leading parallel cluster file system."
 HOMEPAGE="https://beegfs.io/"
 SRC_URI="https://git.beegfs.io/pub/v6/repository/${PV}/archive.tar.bz2 -> ${P}.tar.bz2"
-LICENSE="BeeGFS"
+LICENSE="BeeGFS-EULA"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="client infiniband java +modules management meta rdma storage systemd utils"
@@ -17,7 +17,7 @@ S="${WORKDIR}/${MY_P}"
 
 DEPEND="
 	>=dev-db/sqlite-3.0
-	dev-libs/openssl
+	dev-libs/openssl:0
 	dev-util/cppunit
 	sys-apps/attr
 	sys-devel/libtool
@@ -26,7 +26,7 @@ DEPEND="
 	infiniband? ( sys-fabric/libibverbs )
 	modules? ( =sys-cluster/${PN}-kmod-${PV} )
 	rdma? ( sys-fabric/librdmacm )
-	java? ( virtual/jdk )
+	java? ( virtual/jdk:1.8 )
 "
 RDEPEND="${DEPEND}"
 
