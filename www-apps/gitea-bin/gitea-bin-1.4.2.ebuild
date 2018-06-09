@@ -8,7 +8,7 @@ inherit user systemd
 MY_PN=${PN/-bin/}
 S=${WORKDIR}/${MY_PN}-${PV}
 
-DESCRIPTION="Gitea is a community managed fork of Gogs, lightweight code hosting solution written in Go and published."
+DESCRIPTION="Gitea is a community managed lightweight code hosting solution written in Go"
 HOMEPAGE="http://gitea.io"
 SRC_URI="https://dl.gitea.io/gitea/${PV}/${MY_PN}-${PV}-linux-amd64"
 
@@ -26,7 +26,7 @@ pkg_setup() {
 }
 
 src_unpack() {
-	mkdir ${WORKDIR}/${MY_PN}-${PV}
+	mkdir "${WORKDIR}/${MY_PN}-${PV}"
 }
 
 src_install() {
