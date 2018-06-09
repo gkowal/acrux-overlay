@@ -1,4 +1,4 @@
-# Copyright 2016-2017 Grzegorz Kowal <grzegorz@gkowal.info>
+# Copyright 2016-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -45,7 +45,7 @@ src_compile() {
 
 src_install() {
 	dobin bin/${PN}
-	doman ${FILESDIR}/${PN}.1
+	doman "${FILESDIR}/${PN}".1
 	cd "${WORKDIR}/${GITHUB_PATH}"
 	dodoc README.md ./Documentation/MANPAGE.md
 }
