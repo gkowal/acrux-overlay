@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -18,7 +18,7 @@ RESTRICT="mirror"
 LICENSE="paraview GPL-2"
 KEYWORDS="amd64 x86"
 SLOT="0"
-IUSE="boost cg coprocessing development doc examples ffmpeg gl2 mpi mysql nvcontrol openmp plugins python qt4 +qt5 sqlite tcl test tk"
+IUSE="boost cg coprocessing development doc examples ffmpeg gl2 mpi mysql nvcontrol openmp plugins python +qt5 sqlite tcl test tk"
 RESTRICT="test"
 
 REQUIRED_USE="python? ( mpi ${PYTHON_REQUIRED_USE} )
@@ -45,10 +45,6 @@ RDEPEND="
 	x11-libs/libXt
 	coprocessing? (
 		plugins? (
-			qt4? (
-				dev-python/PyQt4
-				dev-qt/qtgui:4
-			)
 			qt5? (
 				dev-python/PyQt5
 				dev-qt/qtgui:5
@@ -66,16 +62,7 @@ RDEPEND="
 		dev-python/twisted-core
 		dev-python/zope-interface[${PYTHON_USEDEP}]
 		mpi? ( dev-python/mpi4py )
-		qt4? ( dev-python/PyQt4[opengl,webkit,${PYTHON_USEDEP}] )
 		qt5? ( dev-python/PyQt5[opengl,webkit,${PYTHON_USEDEP}] )
-	)
-	qt4? (
-		dev-qt/designer:4
-		dev-qt/qtgui:4
-		dev-qt/qtopengl:4
-		dev-qt/qthelp:4[compat]
-		dev-qt/qtsql:4
-		dev-qt/qtwebkit:4
 	)
 	qt5? (
 		dev-qt/designer:5
@@ -140,9 +127,6 @@ src_prepare() {
 }
 
 src_configure() {
-	if use qt4; then
-		export QT_SELECT=qt4
-	fi
 	if use qt5; then
 		export QT_SELECT=qt5
 	fi
@@ -163,7 +147,6 @@ src_configure() {
 		-DPARAVIEW_USE_SYSTEM_MPI4PY=ON
 		-DPROTOC_LOCATION=$(type -P protoc)
 		-DVTK_Group_StandAlone=ON
-		-DVTK_RENDERING_BACKEND=OpenGL2
 		-DVTK_USE_FFMPEG_ENCODER=OFF
 		-DVTK_USE_OFFSCREEN=TRUE
 		-DVTK_USE_SYSTEM_EXPAT=ON
@@ -189,57 +172,6 @@ src_configure() {
 
 	# TODO: XDMF_USE_MYSQL?
 	# VTK_WRAP_JAVA
-	if use qt4 ; then
-		mycmakeargs+=(
-			$(cmake-utils_use development PARAVIEW_INSTALL_DEVELOPMENT_FILES)
-			$(cmake-utils_use qt4 PARAVIEW_BUILD_QT_GUI)
-			$(usex qt4 "-DPARAVIEW_QT_VERSION=4" "")
-			$(cmake-utils_use qt4 Module_vtkGUISupportQtOpenGL)
-			$(cmake-utils_use qt4 Module_vtkGUISupportQtSQL)
-			$(cmake-utils_use qt4 Module_vtkGUISupportQtWebkit)
-			$(cmake-utils_use qt4 Module_vtkRenderingQt)
-			$(cmake-utils_use qt4 Module_vtkViewsQt)
-			$(cmake-utils_use qt4 VTK_Group_ParaViewQt)
-			$(cmake-utils_use qt4 VTK_Group_Qt)
-			$(cmake-utils_use !qt4 PQWIDGETS_DISABLE_QTWEBKIT)
-			$(cmake-utils_use boost Module_vtkInfovisBoost)
-			$(cmake-utils_use boost Module_vtkInfovisBoostGraphAlg)
-			$(cmake-utils_use mpi PARAVIEW_USE_MPI)
-			$(cmake-utils_use mpi PARAVIEW_USE_MPI_SSEND)
-			$(cmake-utils_use mpi PARAVIEW_USE_ICE_T)
-			$(cmake-utils_use mpi VTK_Group_MPI)
-			$(cmake-utils_use mpi VTK_XDMF_USE_MPI)
-			$(cmake-utils_use mpi XDMF_BUILD_MPI)
-			$(cmake-utils_use python PARAVIEW_ENABLE_PYTHON)
-			$(cmake-utils_use python VTK_Group_ParaViewPython)
-			$(cmake-utils_use python XDMF_WRAP_PYTHON)
-			$(cmake-utils_use python Module_vtkPython)
-			$(cmake-utils_use python Module_pqPython)
-			$(cmake-utils_use python Module_vtkWrappingPythonCore)
-			$(cmake-utils_use python Module_vtkPVPythonSupport)
-			$(cmake-utils_use python Module_AutobahnPython)
-			$(cmake-utils_use python Module_Twisted)
-			$(cmake-utils_use python Module_ZopeInterface)
-			$(cmake-utils_use python Module_vtkmpi4py)
-			$(usex qt4 "$(cmake-utils_use python Module_pqPython)" "-DModule_pqPython=OFF")
-			$(cmake-utils_use doc BUILD_DOCUMENTATION)
-			$(cmake-utils_use doc PARAVIEW_BUILD_WEB_DOCUMENTATION)
-			$(cmake-utils_use examples BUILD_EXAMPLES)
-			$(cmake-utils_use cg VTK_USE_CG_SHADERS)
-			$(cmake-utils_use mysql Module_vtkIOMySQL)
-			$(cmake-utils_use sqlite Module_vtksqlite)
-			$(cmake-utils_use coprocessing PARAVIEW_ENABLE_CATALYST)
-			$(cmake-utils_use ffmpeg PARAVIEW_ENABLE_FFMPEG)
-			$(cmake-utils_use ffmpeg VTK_USE_FFMPEG_ENCODER)
-			$(cmake-utils_use ffmpeg Module_vtkIOFFMPEG)
-			$(cmake-utils_use tk VTK_Group_Tk)
-			$(cmake-utils_use tk VTK_USE_TK)
-			$(cmake-utils_use tk Module_vtkRenderingTk)
-			$(cmake-utils_use tcl Module_vtkTclTk)
-			$(cmake-utils_use tcl Module_vtkWrappingTcl)
-			$(cmake-utils_use test BUILD_TESTING)
-			)
-	fi
 	if use qt5 ; then
 		mycmakeargs+=(
 			$(cmake-utils_use development PARAVIEW_INSTALL_DEVELOPMENT_FILES)
@@ -298,14 +230,6 @@ src_configure() {
 
 	if use openmp; then
 		mycmakeargs+=( -DVTK_SMP_IMPLEMENTATION_TYPE=OpenMP )
-	fi
-
-	if use qt4 ; then
-		mycmakeargs+=( -DVTK_INSTALL_QT_DIR=/${PVLIBDIR}/plugins/designer )
-		if use python ; then
-			# paraview cannot guess sip directory properly
-			mycmakeargs+=( -DSIP_INCLUDE_DIR="${EPREFIX}$(python_get_includedir)" )
-		fi
 	fi
 
 	if use qt5 ; then
