@@ -1,5 +1,4 @@
 # Copyright 1999-2018 Gentoo Foundation
-# Copyright 2016-2017 Grzegorz Kowal <grzegorz@gkowal.info>
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
