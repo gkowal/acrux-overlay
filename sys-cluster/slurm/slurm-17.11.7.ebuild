@@ -11,7 +11,6 @@ SRC_URI="https://download.schedmd.com/slurm/${MY_P}.tar.bz2"
 KEYWORDS="amd64 x86"
 S="${WORKDIR}/${MY_P}"
 
-
 DESCRIPTION="A Highly Scalable Resource Manager"
 HOMEPAGE="https://www.schedmd.com"
 
