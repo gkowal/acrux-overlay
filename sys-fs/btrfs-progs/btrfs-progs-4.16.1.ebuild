@@ -19,7 +19,7 @@ HOMEPAGE="https://btrfs.wiki.kernel.org"
 
 LICENSE="GPL-2"
 SLOT="0/${libbtrfs_soname}"
-IUSE="+convert python reiserfs static static-libs +zstd"
+IUSE="+convert python static static-libs +zstd"
 
 RESTRICT=test # tries to mount repared filesystems
 
@@ -30,9 +30,6 @@ RDEPEND="
 	convert? (
 		sys-fs/e2fsprogs:0=
 		sys-libs/e2fsprogs-libs:0=
-		reiserfs? (
-			>=sys-fs/reiserfsprogs-3.6.27
-		)
 	)
 	python? ( ${PYTHON_DEPS} )
 	zstd? ( app-arch/zstd:0= )
@@ -50,9 +47,6 @@ DEPEND="${RDEPEND}
 		convert? (
 			sys-fs/e2fsprogs:0[static-libs(+)]
 			sys-libs/e2fsprogs-libs:0[static-libs(+)]
-			reiserfs? (
-				>=sys-fs/reiserfsprogs-3.6.27[static-libs(+)]
-			)
 		)
 		zstd? ( app-arch/zstd:0[static-libs(+)] )
 	)
@@ -82,7 +76,7 @@ src_configure() {
 		$(use_enable elibc_glibc backtrace)
 		$(use_enable python)
 		$(use_enable zstd)
-		--with-convert=ext2$(usex reiserfs ',reiserfs' '')
+		--with-convert=ext2
 	)
 	econf "${myeconfargs[@]}"
 }
