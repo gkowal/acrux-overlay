@@ -1,4 +1,4 @@
-# Copyright 2009-2017 Grzegorz Kowal
+# Copyright 2009-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
@@ -13,17 +13,13 @@ UNIPATCH_STRICTORDER="yes"
 UNIPATCH_LIST="${DISTDIR}/${PVR}.tar.gz"
 
 DESCRIPTION="Vanilla sources patched by Custos Mentis for acrux laptop."
+HOMEPAGE="https://github.com/gkowal/acrux-patchset"
 SRC_URI="${KERNEL_URI} https://github.com/gkowal/acrux-patchset/archive/${PVR}.tar.gz"
 
-src_install() {
-	kernel-2_src_install
-
-	host=`hostname -s`
-
-	if [[ $host == 'callisto' ]]; then
-		insinto /usr/src/linux-${PVR}-acrux/include
-		newins "${FILESDIR}"/dsdt-callisto.hex dsdt.hex
-	fi
+pkg_postinst() {
+	kernel-2_pkg_postinst
+	einfo "For more info on this patchset, and how to report problems, see:"
+	einfo "${HOMEPAGE}"
 }
 
 pkg_postrm() {
