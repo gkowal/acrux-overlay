@@ -21,7 +21,6 @@
 	<flag name='memtrace'>Use mtrace for memory debugging (must set MALLOC_TRACE to output file)</flag>
 	<flag name='open-mx'>Add support for Myrinet Express over Ethernet</flag>
 	<flag name='reset-file-pos'>Resets file position pointer in kernel interface upon error. See ChangeLog for 2.8.6 for more details</flag>
-	<flag name='secure'>Enable connections only from trusted hosts/ports</flag>
 	<flag name='security-cert'>Enable certificate-based security</flag>
 	<flag name='security-key'>Enable key-based security</flag>
 	<flag name='sendfile'>Enable kernel sendfile support (recommended for serving of large files only)</flag>
