@@ -1,8 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-MAKEOPTS="${MAKEOPTS} -j1"
 
 inherit eutils flag-o-matic autotools toolchain-funcs
 
@@ -21,6 +20,6 @@ DEPEND="${RDEPEND}
 src_install () {
 	default
 
-	rm -r ${D}/usr/share/doc/fgsl
-	rm -r ${D}/usr/share/examples
+	rm -r "${D}"/usr/share/doc/fgsl
+	rm -r "${D}"/usr/share/examples
 }
