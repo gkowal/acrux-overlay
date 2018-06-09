@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="systemd"
 
-DEPEND=">=dev-libs/quazip-0.7.2[qt5]
+DEPEND=">=dev-libs/quazip-0.7.2
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtnetwork:5
@@ -25,11 +25,11 @@ DOCS=( README.md CHANGELOG.md )
 src_install() {
 	cmake-utils_src_install
 	if use systemd; then
-		systemd_dounit ${ED}/usr/lib/systemd/system/ckb-next-daemon.service
+		systemd_dounit "${ED}"/usr/lib/systemd/system/ckb-next-daemon.service
 	fi
-	rm -r ${ED}/usr/lib
+	rm -r "${ED}"/usr/lib
 	newinitd "${FILESDIR}"/ckb-next.initd ckb-next-daemon
 	insinto /lib/udev/rules.d
-	doins ${ED}/etc/udev/rules.d/99-ckb-daemon.rules
-	rm -r ${ED}/etc/udev
+	doins "${ED}"/etc/udev/rules.d/99-ckb-daemon.rules
+	rm -r "${ED}"/etc/udev
 }
