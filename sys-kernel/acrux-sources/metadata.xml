@@ -2,10 +2,11 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 <maintainer type="project">
-  <email>grzegorz@gkowal.info</email>
   <name>Grzegorz Kowal</name>
+  <email>grzegorz@gkowal.info</email>
 </maintainer>
 <upstream>
   <remote-id type="cpe">cpe:/o:linux:linux_kernel</remote-id>
+  <remote-id type="github">gkowal/acrux-patchset</remote-id>
 </upstream>
 </pkgmetadata>
