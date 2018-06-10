@@ -7,7 +7,7 @@ inherit flag-o-matic
 DESCRIPTION="Utility to find btrfs compression ratio"
 HOMEPAGE="https://github.com/kilobyte/compsize"
 SRC_URI="https://github.com/kilobyte/compsize/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 LICENSE="GPL-2+"
 SLOT=0
