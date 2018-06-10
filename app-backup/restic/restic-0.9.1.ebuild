@@ -12,7 +12,7 @@ EGO_PN="github.com/restic/restic"
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 arm x86"
 IUSE="test"
 
 DOCS=(
