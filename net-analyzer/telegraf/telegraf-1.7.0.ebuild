@@ -5,7 +5,7 @@ EAPI=6
 
 EGO_PN="github.com/influxdata/telegraf"
 EGO_VENDOR=(
-	"code.cloudfoundry.org/clock e9dc86bbf0e5bbe6bf7ff5a6f71e048959b61f71"
+	"code.cloudfoundry.org/clock e9dc86bbf0e5bbe6bf7ff5a6f71e048959b61f71 github.com/cloudfoundry/clock"
 	"collectd.org 2ce144541b8903101fb8f1483cc0497a68798122 github.com/collectd/go-collectd"
 	"github.com/aerospike/aerospike-client-go 95e1ad7791bdbca44707fedbb29be42024900d9c"
 	"github.com/amir/raidman c74861fe6a7bb8ede0a010ce4485bdbb4fc4c985"
@@ -99,7 +99,6 @@ EGO_VENDOR=(
 	"google.golang.org/grpc de2209a968d48e8970546c8a710189f7461370f7 github.com/grpc/grpc"
 	"gopkg.in/asn1-ber.v1 4e86f4367175e39f69d9358a5f17b4dda270378d github.com/go-asn1-ber/asn1-ber"
 	"gopkg.in/fatih/pool.v2 6e328e67893eb46323ad06f0e92cb9536babbabc github.com/fatih/pool"
-	"gopkg.in/fsnotify.v1 a8a77c9133d2d6fd8334f3260d06f60e8d80a5fb github.com/fsnotify/fsnotify"
 	"gopkg.in/gorethink/gorethink.v3 7ab832f7b65573104a555d84a27992ae9ea1f659 github.com/gorethink/gorethink"
 	"gopkg.in/ldap.v2 8168ee085ee43257585e50c6441aadf54ecb2c9f github.com/go-ldap/ldap"
 	"gopkg.in/mgo.v2 3f83fa5005286a7fe593b055f0d7771a7dce4655 github.com/go-mgo/mgo"
