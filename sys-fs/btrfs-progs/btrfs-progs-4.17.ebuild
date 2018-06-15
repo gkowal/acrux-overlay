@@ -61,6 +61,12 @@ DEPEND="${RDEPEND}
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
+PATCHES=(
+	"${FILESDIR}/btrfs-scrub-show-speed-v1.patch"
+	"${FILESDIR}/btrfs-filesystem-usage-raid56-v6.patch"
+	"${FILESDIR}/btrfs-filesystem-usage-device-sizes-v1.patch"
+)
+
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
