@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 inherit eutils flag-o-matic autotools toolchain-funcs
 
@@ -16,6 +16,10 @@ KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~mips ~ppc ppc64 ~s390 ~sh ~sparc x86 ~x
 RDEPEND=""
 DEPEND="${RDEPEND}
 	>=sci-libs/gsl-1.16"
+
+src_compile() {
+	emake -j1
+}
 
 src_install () {
 	default
