@@ -17,11 +17,20 @@ RDEPEND=""
 DEPEND="${RDEPEND}
 	>=sci-libs/gsl-1.16"
 
-src_compile() {
-	emake -j1
+PATCHES=(
+	"${FILESDIR}/${P}-fix-make.patch"
+)
+
+src_prepare(){
+	default
+
+	eaclocal
+	eautoconf -i
+	eautoconf
+	eautomake
 }
 
-src_install () {
+src_install() {
 	default
 
 	rm -r "${D}"/usr/share/doc/fgsl
