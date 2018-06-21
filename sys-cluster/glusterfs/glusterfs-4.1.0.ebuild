@@ -58,6 +58,7 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}/${PN}-3.12-poisoned-sysmacros.patch"
+	"${FILESDIR}/${PN}-4.1-silent_rules.patch"
 )
 
 SITEFILE="50${PN}-mode-gentoo.el"
