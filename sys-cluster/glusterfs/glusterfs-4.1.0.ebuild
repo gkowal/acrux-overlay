@@ -56,6 +56,10 @@ DEPEND="${RDEPEND}
 		sys-fs/xfsprogs
 		sys-apps/attr )"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-3.12-poisoned-sysmacros.patch"
+)
+
 SITEFILE="50${PN}-mode-gentoo.el"
 
 DOCS=( AUTHORS ChangeLog NEWS README.md THANKS )
@@ -108,7 +112,7 @@ src_configure() {
 		$(use_enable tiering) \
 		$(use_enable xml xml-output) \
 		$(use_with ipv6 ipv6-default) \
-		$(use_with libtirpc) \
+		$(use_with libtirpc tirpc) \
 		--with-tmpfilesdir="${EPREFIX}"/etc/tmpfiles.d \
 		--docdir="${EPREFIX}"/usr/share/doc/${PF} \
 		--localstatedir="${EPREFIX}"/var
