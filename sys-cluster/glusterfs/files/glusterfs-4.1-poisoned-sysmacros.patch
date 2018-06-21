@@ -1,0 +1,11 @@
+diff -uNr glusterfs-4.1.0-orig/libglusterfs/src/compat.h glusterfs-4.1.0/libglusterfs/src/compat.h
+--- glusterfs-4.1.0-orig/libglusterfs/src/compat.h	2018-06-12 12:05:27.095189743 -0300
++++ glusterfs-4.1.0/libglusterfs/src/compat.h	2018-06-21 14:20:12.058816160 -0300
+@@ -498,6 +498,7 @@
+ /* Use run API, see run.h */
+ #include <stdlib.h> /* system(), mkostemp() */
+ #include <stdio.h> /* popen() */
++#include <sys/sysmacros.h>
+ #pragma GCC poison system mkostemp popen
+ #endif
+ 

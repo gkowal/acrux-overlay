@@ -57,7 +57,7 @@ DEPEND="${RDEPEND}
 		sys-apps/attr )"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-3.12-poisoned-sysmacros.patch"
+	"${FILESDIR}/${PN}-4.1-poisoned-sysmacros.patch"
 	"${FILESDIR}/${PN}-4.1-silent_rules.patch"
 	"${FILESDIR}/${PN}-4.1-without-ipv6-default.patch"
 )
