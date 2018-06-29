@@ -18,6 +18,7 @@
 		<flag name="management">Build the management service for BeeGFS filesystem.</flag>
 		<flag name="meta">Build the metadata service for BeeGFS filesystem.</flag>
 		<flag name="modules">Build the BeeGFS filesystem kernel module.</flag>
+		<flag name="monitoring">Build the monitoring service for BeeGFS filesystem.</flag>
 		<flag name="rdma">Enable infiniband support via <pkg>sys-fabric/librdmacm</pkg></flag>
 		<flag name="storage">Build the storage service for BeeGFS filesystem.</flag>
 		<flag name="systemd">Enable the systemd support.</flag>
