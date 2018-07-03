@@ -28,7 +28,7 @@ SRC_URI+=" mirror://kernel/linux/kernel/v${LINUX_V}/${LINUX_SOURCES}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~ppc x86"
+KEYWORDS="amd64 ~arm ~ppc ~x86"
 IUSE="audit debug +demangle +doc gtk numa perl python slang unwind"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -41,7 +41,7 @@ RDEPEND="audit? ( sys-process/audit )
 	unwind? ( sys-libs/libunwind )
 	dev-libs/elfutils"
 DEPEND="${RDEPEND}
-	>=sys-kernel/linux-headers-4.16
+	>=sys-kernel/linux-headers-4.17
 	${LINUX_PATCH+dev-util/patchutils}
 	sys-devel/bison
 	sys-devel/flex
