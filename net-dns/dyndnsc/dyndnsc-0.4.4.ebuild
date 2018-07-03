@@ -13,3 +13,7 @@ KEYWORDS="amd64"
 
 LICENSE="MIT"
 SLOT="0"
+
+DEPEND=">=dev-python/netifaces-0.10.5
+	>=dev-python/requests-2.0.1"
+RDEPEND="${DEPEND}"
