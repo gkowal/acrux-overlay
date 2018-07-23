@@ -8,7 +8,7 @@ inherit autotools eutils pam perl-module prefix systemd user versionator
 MY_PV=$(replace_version_separator 3 '-') # stable releases
 MY_P="${PN}-${MY_PV}"
 SRC_URI="https://download.schedmd.com/slurm/${MY_P}.tar.bz2"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 S="${WORKDIR}/${MY_P}"
 
 DESCRIPTION="A Highly Scalable Resource Manager"
