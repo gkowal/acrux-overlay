@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit autotools eutils pam perl-module prefix systemd user versionator
+inherit autotools bash-completion-r1 eutils pam perl-module prefix systemd toolchain-funcs user versionator
 
 MY_PV=$(replace_version_separator 3 '-') # stable releases
 MY_P="${PN}-${MY_PV}"
@@ -16,12 +16,13 @@ HOMEPAGE="https://www.schedmd.com"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="debug +lua multiple-slurmd +munge mysql pam perl ssl static-libs systemd torque"
+IUSE="debug +lua multiple-slurmd +munge mysql pam perl ssl static-libs systemd torque X"
 
 DEPEND="
 	!sys-cluster/torque
 	!net-analyzer/slurm
 	!net-analyzer/sinfo
+	sys-cluster/pmix[-pmi]
 	mysql? ( virtual/mysql )
 	munge? ( sys-auth/munge )
 	pam? ( virtual/pam )
@@ -29,6 +30,7 @@ DEPEND="
 	lua? ( dev-lang/lua:0= )
 	!lua? ( !dev-lang/lua )
 	systemd? ( sys-apps/systemd )
+	X? ( net-libs/libssh2 )
 	>=sys-apps/hwloc-1.1.1-r1"
 RDEPEND="${DEPEND}
 	dev-libs/libcgroup"
@@ -50,6 +52,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	tc-ld-disable-gold
 	default
 
 	# pids should go to /var/run/slurm
@@ -83,6 +86,7 @@ src_configure() {
 	use mysql || myconf+=( --without-mysql_config )
 	econf "${myconf[@]}" \
 		$(use_enable pam) \
+		$(use_enable X x11) \
 		$(use_with ssl) \
 		$(use_with munge) \
 		$(use_enable static-libs static) \
@@ -159,9 +163,9 @@ src_install() {
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}/logrotate" slurm
 
-	newbashcomp contribs/slurm_completion_help/slurm_completion.sh ${PN}
-	bashcomp_alias \
-		sreport sacctmgr scontrol squeue scancel sshare sbcast sinfo \
+	newbashcomp contribs/slurm_completion_help/slurm_completion.sh scontrol
+	bashcomp_alias scontrol \
+		sreport sacctmgr squeue scancel sshare sbcast sinfo \
 		sprio sacct salloc sbatch srun sattach sdiag sstat
 
 	# Install the systemd unit file.
