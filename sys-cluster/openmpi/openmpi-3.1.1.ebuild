@@ -26,7 +26,7 @@ HOMEPAGE="http://www.open-mpi.org"
 SRC_URI="http://www.open-mpi.org/software/ompi/v$(get_version_component_range 1-2)/downloads/${MY_P}.tar.bz2"
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="cma cuda cxx elibc_FreeBSD fortran heterogeneous ipv6 java numa pbs +romio slurm
 	${IUSE_OPENMPI_FABRICS} ${IUSE_OPENMPI_OFED_FEATURES}"
 
