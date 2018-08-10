@@ -9,7 +9,7 @@ SRC_URI="https://github.com/pmix/pmix/releases/download/v${PV}/${P}.tar.bz2"
 
 SLOT="0"
 LICENSE="BSD"
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="amd64 ~x86 ~amd64-linux ~x86-linux"
 IUSE="debug +munge pmi"
 
 RDEPEND="
