@@ -15,10 +15,6 @@ IUSE_OPENMPI_FABRICS="
 	openmpi_fabrics_knem
 	openmpi_fabrics_psm"
 
-IUSE_OPENMPI_RM="
-	openmpi_rm_pbs
-	openmpi_rm_slurm"
-
 IUSE_OPENMPI_OFED_FEATURES="
 	openmpi_ofed_features_control-hdr-padding
 	openmpi_ofed_features_udcm
@@ -30,12 +26,12 @@ HOMEPAGE="http://www.open-mpi.org"
 SRC_URI="http://www.open-mpi.org/software/ompi/v$(get_version_component_range 1-2)/downloads/${MY_P}.tar.bz2"
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux"
-IUSE="cma cuda cxx elibc_FreeBSD fortran heterogeneous ipv6 java numa romio
-	${IUSE_OPENMPI_FABRICS} ${IUSE_OPENMPI_RM} ${IUSE_OPENMPI_OFED_FEATURES}"
+KEYWORDS="~amd64 ~x86"
+IUSE="cma cuda cxx elibc_FreeBSD fortran heterogeneous ipv6 java numa pbs +romio slurm
+	${IUSE_OPENMPI_FABRICS} ${IUSE_OPENMPI_OFED_FEATURES}"
 
-REQUIRED_USE="openmpi_rm_slurm? ( !openmpi_rm_pbs )
-	openmpi_rm_pbs? ( !openmpi_rm_slurm )
+REQUIRED_USE="slurm? ( !pbs )
+	pbs? ( !slurm )
 	openmpi_fabrics_psm? ( openmpi_fabrics_ofed )
 	openmpi_ofed_features_control-hdr-padding? ( openmpi_fabrics_ofed )
 	openmpi_ofed_features_udcm? ( openmpi_fabrics_ofed )
@@ -58,8 +54,8 @@ CDEPEND="
 	openmpi_fabrics_ofed? ( sys-fabric/ofed:* )
 	openmpi_fabrics_knem? ( sys-cluster/knem )
 	openmpi_fabrics_psm? ( sys-fabric/infinipath-psm:* )
-	openmpi_rm_pbs? ( sys-cluster/torque )
-	openmpi_rm_slurm? ( sys-cluster/slurm )
+	pbs? ( sys-cluster/torque )
+	slurm? ( sys-cluster/slurm )
 	openmpi_ofed_features_rdmacm? ( sys-fabric/librdmacm:* )"
 
 RDEPEND="${CDEPEND}
@@ -124,8 +120,8 @@ multilib_src_configure() {
 		$(multilib_native_use_enable openmpi_ofed_features_rdmacm openib-rdmacm) \
 		$(multilib_native_use_enable openmpi_ofed_features_udcm openib-udcm) \
 		$(multilib_native_use_enable openmpi_ofed_features_dynamic-sl openib-dynamic-sl) \
-		$(multilib_native_use_with openmpi_rm_pbs tm) \
-		$(multilib_native_use_with openmpi_rm_slurm slurm)
+		$(multilib_native_use_with pbs tm) \
+		$(multilib_native_use_with slurm slurm)
 }
 
 multilib_src_test() {
