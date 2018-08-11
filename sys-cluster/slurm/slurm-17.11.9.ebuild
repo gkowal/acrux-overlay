@@ -22,7 +22,6 @@ DEPEND="
 	!sys-cluster/torque
 	!net-analyzer/slurm
 	!net-analyzer/sinfo
-	sys-cluster/pmix[-pmi]
 	mysql? ( virtual/mysql )
 	munge? ( sys-auth/munge )
 	pam? ( virtual/pam )
@@ -43,6 +42,7 @@ LIBSLURMDB_PERL_S="${WORKDIR}/${P}/contribs/perlapi/libslurmdb/perl"
 RESTRICT="primaryuri test"
 
 PATCHES=(
+	"${FILESDIR}"/${P}-r2.patch
 	"${FILESDIR}"/${PN}-17.11-disable-sview.patch
 )
 
