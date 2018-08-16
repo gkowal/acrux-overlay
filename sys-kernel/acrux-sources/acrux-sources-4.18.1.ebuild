@@ -1,14 +1,14 @@
 # Copyright 2009-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="6"
 ETYPE="sources"
 
 inherit kernel-2
 detect_version
 detect_arch
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 UNIPATCH_STRICTORDER="yes"
 UNIPATCH_LIST="${DISTDIR}/${PVR}.tar.gz"
 
