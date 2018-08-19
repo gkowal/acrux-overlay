@@ -1,0 +1,17 @@
+diff -uNr client_module-orig/source/common/Common.h client_module/source/common/Common.h
+--- client_module-orig/source/common/Common.h	2018-05-29 13:11:30.000000000 -0300
++++ client_module/source/common/Common.h	2018-08-19 15:46:23.891773206 -0300
+@@ -161,10 +161,10 @@
+ #endif
+ 
+ #if !defined(KERNEL_HAS_CURRENT_FS_TIME)
+-static inline struct timespec current_fs_time(struct super_block *sb)
++static inline struct timespec64 current_fs_time(struct super_block *sb)
+ {
+-   struct timespec now = current_kernel_time();
+-   return timespec_trunc(now, sb->s_time_gran);
++   struct timespec64 now = current_kernel_time64();
++   return timespec64_trunc(now, sb->s_time_gran);
+ }
+ #endif
+ 
