@@ -27,6 +27,13 @@ pkg_setup() {
 	ABI="${KERNEL_ABI}"
 }
 
+src_prepare() {
+	default
+	if kernel_is ge 4 18; then
+		eapply "${FILESDIR}/current_fs_time-timespec64.patch"
+	fi
+}
+
 src_compile() {
 	# build kernel module
 	cd "${S}/source"
