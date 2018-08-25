@@ -19,6 +19,8 @@ DEPEND="virtual/linux-sources"
 RDEPEND="virtual/modutils"
 
 MODULE_NAMES="beegfs(misc:${S}/build)"
+BUILD_TARGETS="all"
+BUILD_PARAMS="KDIR=${KERNEL_DIR}"
 
 pkg_setup() {
 	linux-info_pkg_setup
