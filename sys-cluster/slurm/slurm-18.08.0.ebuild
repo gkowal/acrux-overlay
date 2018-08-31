@@ -42,8 +42,7 @@ LIBSLURMDB_PERL_S="${WORKDIR}/${P}/contribs/perlapi/libslurmdb/perl"
 RESTRICT="primaryuri test"
 
 PATCHES=(
-	"${FILESDIR}"/${P}-r2.patch
-	"${FILESDIR}"/${PN}-17.11-disable-sview.patch
+	"${FILESDIR}"/${PN}-18.08-disable-sview.patch
 )
 
 pkg_setup() {
