@@ -149,8 +149,6 @@ src_install() {
 		etc/slurm.conf.example \
 		etc/slurmdbd.conf.example
 	exeinto /etc/slurm
-	doexe \
-		etc/slurm.epilog.clean
 	# install init.d files
 	newinitd "$(prefixify_ro ${FILESDIR}/slurmd.initd)" slurmd
 	newinitd "$(prefixify_ro ${FILESDIR}/slurmctld.initd)" slurmctld
