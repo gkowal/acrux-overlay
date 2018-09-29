@@ -5,6 +5,7 @@ EAPI=6
 
 EGO_PN="github.com/influxdata/telegraf"
 EGO_VENDOR=(
+	"cloud.google.com/go 97efc2c9ffd9fe8ef47f7f3203dc60bbca547374 github.com/GoogleCloudPlatform/google-cloud-go"
 	"code.cloudfoundry.org/clock 02e53af36e6c978af692887ed449b74026d76fec github.com/cloudfoundry/clock"
 	"collectd.org 2ce144541b8903101fb8f1483cc0497a68798122 github.com/collectd/go-collectd"
 	"github.com/Azure/go-autorest 9bc4033dd347c7f416fca46b2f42a043dc1fbdf6"
