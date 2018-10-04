@@ -73,10 +73,6 @@ src_compile() {
 src_install() {
 	# install shared libraries
 	insinto "/etc/${PN}"
-	newins "opentk_lib/build/dist/etc/beegfs/beegfs-libopentk.conf" "beegfs-libopentk.conf"
-	newlib.so "opentk_lib/build/libbeegfs-opentk.so" "libbeegfs-opentk.so.${PV}"
-	ln -s "libbeegfs-opentk.so.${PV}" ${D}/usr/lib64/"libbeegfs-opentk.so.7"
-	ln -s "libbeegfs-opentk.so.7" ${D}/usr/lib64/"libbeegfs-opentk.so"
 	keepdir /var/{lib,log}/${PN}
 
 	if use management; then
