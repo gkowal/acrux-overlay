@@ -11,7 +11,7 @@ SRC_URI="https://git.beegfs.io/pub/v7/-/archive/${PV}/v7-${PV}.tar.bz2 -> ${P}.t
 LICENSE="BeeGFS-EULA"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="client infiniband java +modules management meta monitoring rdma storage systemd utils"
+IUSE="client java +modules management meta monitoring storage systemd utils"
 MY_P="v7-${PV}"
 S="${WORKDIR}/${MY_P}"
 
@@ -21,11 +21,11 @@ DEPEND="
 	dev-util/cppunit
 	sys-apps/attr
 	sys-devel/libtool
+	sys-fabric/libibverbs
+	sys-fabric/librdmacm
 	sys-fs/xfsprogs
 	sys-libs/zlib
-	infiniband? ( sys-fabric/libibverbs )
 	modules? ( ~sys-cluster/${PN}-kmod-${PV} )
-	rdma? ( sys-fabric/librdmacm )
 	java? ( virtual/jdk:1.8 )
 "
 RDEPEND="${DEPEND}"
@@ -33,11 +33,6 @@ RDEPEND="${DEPEND}"
 src_compile() {
 	# build shared libraries
 	emake ${MAKEOPTS} ARCH= -C thirdparty/build
-	if use infiniband; then
-		emake ${MAKEOPTS} USER_LDFLAGS="-fPIC -Wl,-soname,libbeegfs-opentk.so.7" BEEGFS_OPENTK_IBVERBS=1 BEEGFS_VERSION="${PV}" -C opentk_lib/build
-	else
-		emake ${MAKEOPTS} USER_LDFLAGS="-fPIC -Wl,-soname,libbeegfs-opentk.so.7" BEEGFS_OPENTK_IBVERBS=0 BEEGFS_VERSION="${PV}" -C opentk_lib/build
-	fi
 	emake ${MAKEOPTS} BEEGFS_VERSION="${PV}" -C common/build
 
 	if use management; then
