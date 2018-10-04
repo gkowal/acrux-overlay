@@ -24,7 +24,7 @@ DEPEND="
 	sys-fs/xfsprogs
 	sys-libs/zlib
 	infiniband? ( sys-fabric/libibverbs )
-	modules? ( =sys-cluster/${PN}-kmod-${PV} )
+	modules? ( ~sys-cluster/${PN}-kmod-${PV} )
 	rdma? ( sys-fabric/librdmacm )
 	java? ( virtual/jdk:1.8 )
 "
