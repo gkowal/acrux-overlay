@@ -11,7 +11,7 @@ SRC_URI="https://git.beegfs.io/pub/v7/-/archive/${PV}/v7-${PV}.tar.bz2 -> ${P}.t
 LICENSE="BeeGFS-EULA"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
-IUSE="client java +modules management meta monitoring storage systemd utils"
+IUSE="client infiniband java +modules management meta monitoring storage systemd utils"
 MY_P="v7-${PV}"
 S="${WORKDIR}/${MY_P}"
 
@@ -73,7 +73,9 @@ src_compile() {
 src_install() {
 	# install shared libraries
 	insinto "/etc/${PN}"
-	newlib.so "common/build/libbeegfs_ib.so" "libbeegfs_ib.so"
+	if use infiniband; then
+		newlib.so "common/build/libbeegfs_ib.so" "libbeegfs_ib.so"
+	fi
 	keepdir /var/{lib,log}/${PN}
 
 	if use management; then
