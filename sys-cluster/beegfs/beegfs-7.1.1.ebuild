@@ -73,6 +73,7 @@ src_compile() {
 src_install() {
 	# install shared libraries
 	insinto "/etc/${PN}"
+	newlib.so "common/build/libbeegfs_ib.so" "libbeegfs_ib.so"
 	keepdir /var/{lib,log}/${PN}
 
 	if use management; then
