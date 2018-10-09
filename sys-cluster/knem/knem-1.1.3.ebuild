@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=4
+EAPI=6
 
 inherit autotools linux-mod linux-info toolchain-funcs udev multilib
 
@@ -11,7 +11,7 @@ SRC_URI="http://gforge.inria.fr/frs/download.php/37186/${P}.tar.gz"
 
 LICENSE="GPL-2 LGPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="amd64 ~x86"
 IUSE="debug modules"
 
 DEPEND="
@@ -25,8 +25,12 @@ MODULE_NAMES="knem(misc:${S}/driver/linux)"
 BUILD_TARGETS="all"
 BUILD_PARAMS="KDIR=${KERNEL_DIR}"
 
+PATCHES=( "${FILESDIR}/${P}-setup_timer.patch" )
+
 pkg_setup() {
 	linux-info_pkg_setup
+	CONFIG_CHECK="DMA_ENGINE"
+	check_extra_config
 	linux-mod_pkg_setup
 	ARCH="$(tc-arch-kernel)"
 	ABI="${KERNEL_ABI}"
@@ -35,6 +39,7 @@ pkg_setup() {
 src_prepare() {
 	sed 's:driver/linux::g' -i Makefile.am
 	eautoreconf
+	default
 }
 
 src_configure() {
