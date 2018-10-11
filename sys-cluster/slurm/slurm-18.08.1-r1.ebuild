@@ -16,7 +16,7 @@ HOMEPAGE="https://www.schedmd.com"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="debug hdf5 html ipmi json lua multiple-slurmd +munge mysql netloc numa ofed pam perl ssl static-libs systemd torque X"
+IUSE="debug hdf5 html ipmi json +lua multiple-slurmd +munge mysql netloc numa ofed pam perl ssl static-libs systemd torque X"
 
 CDEPEND="
 	!sys-cluster/torque
