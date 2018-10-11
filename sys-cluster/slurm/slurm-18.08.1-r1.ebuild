@@ -8,7 +8,7 @@ inherit autotools bash-completion-r1 eutils pam perl-module prefix systemd toolc
 MY_PV=$(ver_rs 3 '-') # stable releases
 MY_P="${PN}-${MY_PV}"
 SRC_URI="https://download.schedmd.com/slurm/${MY_P}.tar.bz2"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 S="${WORKDIR}/${MY_P}"
 
 DESCRIPTION="A Highly Scalable Resource Manager"
@@ -66,11 +66,11 @@ src_prepare() {
 	default
 
 	# pids should go to /var/run/slurm
-	sed -e "s:/var/run/slurmctld.pid:${EPREFIX}/run/slurm/slurmctld.pid:g" \
-		-e "s:/var/run/slurmd.pid:${EPREFIX}/run/slurm/slurmd.pid:g" \
+	sed -e "s:/var/run/slurmctld.pid:${EPREFIX}/run/slurmctld.pid:g" \
+		-e "s:/var/run/slurmd.pid:${EPREFIX}/run/slurmd.pid:g" \
 		-i "${S}/etc/slurm.conf.example" \
 			|| die "Can't sed for /var/run/slurmctld.pid"
-	sed -i "s:/var/run/slurmdbd.pid:${EPREFIX}/run/slurm/slurmdbd.pid:g" \
+	sed -i "s:/var/run/slurmdbd.pid:${EPREFIX}/run/slurmdbd.pid:g" \
 		-i "${S}/etc/slurmdbd.conf.example" \
 			|| die "Can't sed for /var/run/slurmdbd.pid"
 	# also state dirs are in /var/spool/slurm
@@ -193,7 +193,7 @@ src_install() {
 	# install systemd files
 	if use systemd; then
 		systemd_newtmpfilesd "${FILESDIR}/slurm.tmpfiles" slurm.conf
-		systemd_dounit etc/slurmd.service etc/slurmctld.service etc/slurmdbd.service
+		systemd_dounit "${FILESDIR}/${PN}d.service" "${FILESDIR}/${PN}ctld.service" "${FILESDIR}/${PN}dbd.service"
 	fi
 }
 
