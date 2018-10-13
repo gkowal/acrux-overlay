@@ -9,7 +9,7 @@ DESCRIPTION="GUI for personalization of Yubico's YubiKey"
 SRC_URI="https://github.com/Yubico/yubikey-personalization-gui/archive/${P}.tar.gz"
 HOMEPAGE="https://github.com/Yubico/yubikey-personalization-gui"
 
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 SLOT="0"
 LICENSE="BSD-2"
 IUSE="debug test"
