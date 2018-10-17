@@ -59,7 +59,7 @@ EGO_VENDOR=(
 inherit golang-build golang-vcs-snapshot systemd user
 
 GITHUB_BRANCH="1.6"
-GITHUB_COMMIT="389de31c"
+GITHUB_COMMIT="c75cdfdf"
 
 DESCRIPTION="Scalable datastore for metrics, events, and real-time analytics"
 HOMEPAGE="https://www.influxdata.com"
