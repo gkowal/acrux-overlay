@@ -31,8 +31,12 @@ pkg_setup() {
 
 src_prepare() {
 	default
+	eapply "${FILESDIR}/add-makefile.patch"
 	if kernel_is ge 4 18; then
 		eapply "${FILESDIR}/current_fs_time-timespec64.patch"
+	fi
+	if kernel_is ge 4 19; then
+		eapply "${FILESDIR}/kernel-4.19-fs-changes.patch"
 	fi
 }
 

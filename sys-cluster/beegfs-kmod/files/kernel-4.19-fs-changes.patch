@@ -1,0 +1,21 @@
+diff -uNr client_module-orig/source/filesystem/FhgfsOpsInode.c client_module/source/filesystem/FhgfsOpsInode.c
+--- client_module-orig/source/filesystem/FhgfsOpsInode.c	2018-10-04 11:08:21.000000000 -0300
++++ client_module/source/filesystem/FhgfsOpsInode.c	2018-11-05 12:43:13.189160092 -0200
+@@ -1305,7 +1305,7 @@
+    {
+       if (lookupOutInfo.createRes == FhgfsOpsErr_SUCCESS) // implies isCreate == true
+       {
+-         *outOpenedFlags |= FILE_CREATED;
++         *outOpenedFlags |= FMODE_CREATED;
+ 
+          if (lookupOutInfo.lookupRes != FhgfsOpsErr_SUCCESS)
+          {  // only update directory time stamps if the file did not exist yet
+@@ -1360,7 +1360,7 @@
+    // stripePattern is assigned to FhgfsInode now, make sure it does not get free'ed
+    LookupIntentInfoOut_setStripePattern(&lookupOutInfo, NULL);
+ 
+-   retVal = finish_open(file, dentry, generic_file_open, outOpenedFlags);
++   retVal = finish_open(file, dentry, generic_file_open);
+    if (unlikely(retVal) )
+    {  // finish open failed
+       int releaseRes;
