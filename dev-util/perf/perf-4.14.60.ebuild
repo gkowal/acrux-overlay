@@ -4,7 +4,7 @@
 EAPI="5"
 
 PYTHON_COMPAT=( python2_7 )
-inherit bash-completion-r1 versionator eutils toolchain-funcs python-single-r1 linux-info
+inherit bash-completion-r1 eapi7-ver eutils toolchain-funcs python-single-r1 linux-info
 
 MY_PV="${PV/_/-}"
 
@@ -12,16 +12,10 @@ DESCRIPTION="Userland tools for Linux Performance Counters"
 HOMEPAGE="https://perf.wiki.kernel.org/"
 
 LINUX_V="${PV:0:1}.x"
-VER_COUNT=$(get_version_component_count)
-if [[ ${VER_COUNT} -gt 2 ]] ; then
-	# stable-release series
-	LINUX_VER=$(get_version_component_range 1-2)
-	LINUX_PATCH=patch-${PV}.xz
-	SRC_URI="mirror://kernel/linux/kernel/v${LINUX_V}/${LINUX_PATCH}"
-else
-	LINUX_VER=${PV}
-	SRC_URI=""
-fi
+# stable-release series
+LINUX_VER=$(ver_cut 1-2)
+LINUX_PATCH=patch-${PV}.xz
+SRC_URI="mirror://kernel/linux/kernel/v${LINUX_V}/${LINUX_PATCH}"
 
 LINUX_SOURCES="linux-${LINUX_VER}.tar.xz"
 SRC_URI+=" mirror://kernel/linux/kernel/v${LINUX_V}/${LINUX_SOURCES}"
