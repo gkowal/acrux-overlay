@@ -35,7 +35,7 @@ RDEPEND="audit? ( sys-process/audit )
 	unwind? ( sys-libs/libunwind )
 	dev-libs/elfutils"
 DEPEND="${RDEPEND}
-	>=sys-kernel/linux-headers-4.17
+	>=sys-kernel/linux-headers-4.19
 	${LINUX_PATCH+dev-util/patchutils}
 	sys-devel/bison
 	sys-devel/flex
