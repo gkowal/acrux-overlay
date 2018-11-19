@@ -9,7 +9,7 @@ SRC_URI="https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-${PV}-linux-
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE=""
 RESTRICT="preserve-libs strip"
 
