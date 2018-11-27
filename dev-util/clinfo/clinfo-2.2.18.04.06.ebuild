@@ -3,14 +3,8 @@
 
 EAPI=6
 
-if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://github.com/Oblomov/clinfo.git"
-	inherit git-r3
-	SRC_URI=""
-else
-	SRC_URI="https://github.com/Oblomov/clinfo/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64"
-fi
+SRC_URI="https://github.com/Oblomov/clinfo/archive/${PV}.tar.gz -> ${P}.tar.gz"
+KEYWORDS="amd64"
 
 DESCRIPTION="A tool to display info about the system's OpenCL capabilities"
 HOMEPAGE="https://github.com/Oblomov/clinfo"
