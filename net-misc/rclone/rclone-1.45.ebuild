@@ -5,7 +5,7 @@ EAPI=6
 inherit golang-build bash-completion-r1
 EGO_PN="github.com/ncw/${PN}"
 
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm ~x86"
 EGIT_COMMIT="v${PV}"
 SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 inherit golang-vcs-snapshot
