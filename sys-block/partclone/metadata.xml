@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>Grzegorz Kowal</name>
+		<email>grzegorz@gkowal.info</email>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">Thomas-Tsai/partclone</remote-id>
+	</upstream>
+	<use>
+		<flag name="btrfs">Enables support for btrfs filesystem</flag>
+		<flag name="exfat">Enables support for exfat filesystem</flag>
+		<flag name="f2fs">Enables support for f2fs filesystem</flag>
+		<flag name="fat">Enables support for FAT filesystem</flag>
+		<flag name="hfs">Enables support for HFS filesystem</flag>
+		<flag name="jfs">Enables support for JFS filesystem</flag>
+		<flag name="ncurses">Enables text user interface</flag>
+		<flag name="ntfs">Enables support for NTFS filesystem</flag>
+		<flag name="reiser4">Enables support for reiser4 filesystem</flag>
+		<flag name="reiserfs">Enables support for reiserfs filesystem</flag>
+		<flag name="xfs">Enables support for XFS filesystem</flag>
+		<flag name="vmfs">Enables support for vmfs filesystem</flag>
+		<flag name="static">Build statically linked binaries</flag>
+	</use>
+</pkgmetadata>
