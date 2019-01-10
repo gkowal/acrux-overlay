@@ -12,6 +12,6 @@
 		<flag name="sftp">Enable sftp transfer support via <pkg>net-libs/libssh</pkg></flag>
 	</use>
 	<upstream>
-		<remote-id type="github">nextcloud/client_theming</remote-id>
+		<remote-id type="github">nextcloud/desktop</remote-id>
 	</upstream>
 </pkgmetadata>
