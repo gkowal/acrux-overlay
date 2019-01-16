@@ -12,7 +12,7 @@ SRC_URI="mirror://kernel/linux/kernel/v${PV%%.*}.x/linux-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0/0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="cpufreq_bench debug nls systemd"
 
 # File collision w/ headers of the deprecated cpufrequtils
