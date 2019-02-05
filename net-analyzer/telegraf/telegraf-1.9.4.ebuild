@@ -146,7 +146,7 @@ SRC_URI="https://${EGO_PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="systemd"
 
 pkg_setup() {
