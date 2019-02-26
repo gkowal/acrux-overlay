@@ -18,7 +18,7 @@ SLOT="0"
 # matplotlib/backends/qt4_editor: MIT
 # Fonts: BitstreamVera, OFL-1.1
 LICENSE="BitstreamVera BSD matplotlib MIT OFL-1.1"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
+KEYWORDS="amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
 IUSE="cairo doc excel examples gtk2 gtk3 latex qt5 test tk wxwidgets"
 
 PY2_FLAGS="|| ( $(python_gen_useflags python2_7) )"
@@ -56,9 +56,6 @@ COMMON_DEPEND="
 		x11-libs/gtk+:2
 		dev-python/pygtk[${PY2_USEDEP}] )
 	wxwidgets? ( >=dev-python/wxpython-2.8:*[${PY2_USEDEP}] )"
-
-# internal copy of pycxx highly patched
-#	dev-python/pycxx
 
 DEPEND="${COMMON_DEPEND}
 	${PY2_DEPEND}
@@ -124,19 +121,6 @@ use_setup() {
 }
 
 python_prepare_all() {
-# Generates test failures, but fedora does it
-#	local PATCHES=(
-#		"${FILESDIR}"/${P}-unbundle-pycxx.patch
-#		"${FILESDIR}"/${P}-unbundle-agg.patch
-#	)
-#	rm -r agg24 CXX || die
-#	rm -r agg24 || die
-
-#	cat > lib/${PN}/externals/six.py <<-EOF
-#	from __future__ import absolute_import
-#	from six import *
-#	EOF
-
 	local PATCHES=( "${FILESDIR}"/${P}-doc-make.patch )
 
 	sed \
@@ -161,8 +145,6 @@ python_configure_all() {
 
 python_configure() {
 	mkdir -p "${BUILD_DIR}" || die
-
-	# create setup.cfg (see setup.cfg.template for any changes).
 
 	# common switches.
 	cat > "${BUILD_DIR}"/setup.cfg <<- EOF || die
