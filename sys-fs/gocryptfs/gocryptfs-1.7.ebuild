@@ -23,7 +23,7 @@ SRC_URI="https://${EGO_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm ~x86"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-ignore-dot-files-and-directories.patch"
