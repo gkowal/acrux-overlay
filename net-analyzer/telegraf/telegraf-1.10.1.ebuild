@@ -162,6 +162,7 @@ pkg_setup() {
 }
 
 src_compile() {
+	export GOCACHE="${S}/go-build"
 	pushd "src/${EGO_PN}" || die
 	pwd
 	find -iname telegraf.go
