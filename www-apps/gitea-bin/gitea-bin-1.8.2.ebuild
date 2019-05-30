@@ -14,7 +14,7 @@ SRC_URI="https://dl.gitea.io/gitea/${PV}/${MY_PN}-${PV}-linux-amd64"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="systemd"
 
 DEPEND=""
