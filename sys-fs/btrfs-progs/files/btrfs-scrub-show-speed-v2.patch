@@ -1,5 +1,5 @@
 diff --git a/cmds-scrub.c b/cmds-scrub.c
-index f21d2d89..3422b65a 100644
+index f21d2d89..b0a29db1 100644
 --- a/cmds-scrub.c
 +++ b/cmds-scrub.c
 @@ -134,10 +134,16 @@ static void print_scrub_full(struct btrfs_scrub_progress *sp)
@@ -50,9 +50,12 @@ index f21d2d89..3422b65a 100644
  }
  
  #define _SCRUB_FS_STAT(p, name, fs_stat) do {	\
-@@ -253,11 +267,11 @@ static void _print_scrub_ss(struct scrub_stats *ss)
+@@ -251,13 +265,13 @@ static void _print_scrub_ss(struct scrub_stats *ss)
+ 	gmtime_r(&seconds, &tm);
+ 	strftime(t, sizeof(t), "%M:%S", &tm);
  	if (ss->in_progress)
- 		printf(", running for %02u:%s\n", hours, t);
+-		printf(", running for %02u:%s\n", hours, t);
++		printf(", running for %u:%s\n", hours, t);
  	else if (ss->canceled)
 -		printf(" and was aborted after %02u:%s\n", hours, t);
 +		printf(" and was aborted after %u:%s\n", hours, t);
