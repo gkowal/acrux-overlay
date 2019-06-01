@@ -1,5 +1,5 @@
 diff --git a/cmds-scrub.c b/cmds-scrub.c
-index f21d2d89..b0a29db1 100644
+index f21d2d89..64b4a174 100644
 --- a/cmds-scrub.c
 +++ b/cmds-scrub.c
 @@ -134,10 +134,16 @@ static void print_scrub_full(struct btrfs_scrub_progress *sp)
@@ -14,8 +14,8 @@ index f21d2d89..b0a29db1 100644
 +	u64 bytes_scrubbed = p->data_bytes_scrubbed + p->tree_bytes_scrubbed;
 +	u64 bytes_per_sec  = (s->duration > 0) ? (bytes_scrubbed / s->duration) : 0;
 +	u64 seconds_left   = (bytes_per_sec > 0) ? (total_bytes - bytes_scrubbed) / bytes_per_sec : 0;
-+	unsigned h_left = seconds_left / (60 * 60);
-+	unsigned m_left = (seconds_left - 3600 * h_left) / 60;
++	unsigned h_left = seconds_left / 3600;
++	unsigned m_left = (seconds_left / 60) % 60;
 +	unsigned s_left = seconds_left % 60;
  
  	err_cnt = p->read_errors +
