@@ -62,7 +62,7 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 PATCHES=(
 	"${FILESDIR}/btrfs-progs-scrub-show-the-scrubbing-rate-and-ETA.patch"
-	"${FILESDIR}/btrfs-filesystem-usage-raid56-v6.patch"
+	"${FILESDIR}/btrfs-filesystem-usage-user-sizes-v1.patch"
 	"${FILESDIR}/btrfs-filesystem-usage-device-sizes-v1.patch"
 )
 
