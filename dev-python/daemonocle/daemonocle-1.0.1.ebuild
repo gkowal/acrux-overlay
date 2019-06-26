@@ -9,7 +9,7 @@ inherit distutils-r1
 DESCRIPTION="A Python library for creating super fancy Unix daemons"
 HOMEPAGE="https://github.com/jnrbsn/daemonocle"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 LICENSE="MIT"
 SLOT="0"
