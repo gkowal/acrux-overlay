@@ -19,3 +19,11 @@ DEPEND=">=dev-python/daemonocle-1.0.1
 	>=dev-python/netifaces-0.10.5
 	>=dev-python/requests-2.0.1"
 RDEPEND="${DEPEND}"
+
+python_prepare_all() {
+	# dyndnsc falsely assumes it needs pytest-runner unconditionally and will
+	# try to install it, causing sandbox violations.
+	sed -i -e "/setup_requires=\[\"pytest-runner\"\],/d" setup.py || die
+
+	distutils-r1_python_prepare_all
+}
