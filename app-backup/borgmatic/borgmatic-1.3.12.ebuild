@@ -13,7 +13,7 @@ HOMEPAGE="
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 KEYWORDS="amd64"
 
-LICENSE="GPL-3.0"
+LICENSE="GPL-3"
 SLOT="0"
 
 DEPEND=">=dev-python/pykwalify-1.6.0
