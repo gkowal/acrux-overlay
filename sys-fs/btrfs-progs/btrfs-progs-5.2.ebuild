@@ -62,7 +62,7 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 PATCHES=(
 	"${FILESDIR}/btrfs-scrub-status-fix_eta.patch"
-	"${FILESDIR}/btrfs-filesystem-usage-user-sizes-v3.patch"
+	"${FILESDIR}/btrfs-filesystem-usage-user-sizes.patch"
 )
 
 pkg_setup() {
