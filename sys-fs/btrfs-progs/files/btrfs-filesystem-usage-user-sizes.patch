@@ -1,5 +1,65 @@
+diff --git a/Documentation/btrfs-filesystem.asciidoc b/Documentation/btrfs-filesystem.asciidoc
+index 84efaa1a..636758f1 100644
+--- a/Documentation/btrfs-filesystem.asciidoc
++++ b/Documentation/btrfs-filesystem.asciidoc
+@@ -267,20 +267,28 @@ with information about space usage:
+ +
+ -------------------------
+ $ btrfs filesystem usage /path
+-WARNING: cannot read detailed chunk info, RAID5/6 numbers will be incorrect, run as root
+ Overall:
+-    Device size:                   1.82TiB
+-    Device allocated:              1.17TiB
+-    Device unallocated:          669.99GiB
++    Device size:                  10.92TiB
++    Device allocated:              5.92TiB
++    Device unallocated:            5.00TiB
++    Device data used:              5.91TiB
++    Device metadata used:         11.92GiB
++    Device system used:          672.00KiB
++    Device total used:             5.92TiB
+     Device missing:                  0.00B
+-    Used:                          1.14TiB
+-    Free (estimated):            692.57GiB      (min: 692.57GiB)
+-    Data ratio:                       1.00
+-    Metadata ratio:                   1.00
++    User total size:               5.46TiB
++    User data used:                2.95TiB
++    User metadata used:            7.00GiB
++    User system used:             64.00MiB
++    User total used:               2.96TiB
++    User free (estimated):         2.50TiB      (min: 2.50TiB)
++    Data ratio:                       2.00
++    Metadata ratio:                   2.00
+     Global reserve:              512.00MiB      (used: 0.00B)
+ -------------------------
+ +
+-The root user will also see stats broken down by block group types:
++The root user will also see stats broken down by block group types,
++if flag -d is provided:
+ +
+ -------------------------
+ Data,single: Size:1.15TiB, Used:1.13TiB
+@@ -300,6 +308,8 @@ Unallocated:
+ +
+ -b|--raw::::
+ raw numbers in bytes, without the 'B' suffix
++-d::::
++show usage stats per device
+ -h|--human-readable::::
+ print human friendly numbers, base 1024, this is the default
+ -H::::
+@@ -316,6 +326,8 @@ show sizes in MiB, or MB with --si
+ show sizes in GiB, or GB with --si
+ -t|--tbytes::::
+ show sizes in TiB, or TB with --si
++-P::::
++show user usage stats per profile
+ -T::::
+ show data in tabular format
+ +
 diff --git a/cmds/filesystem-usage.c b/cmds/filesystem-usage.c
-index 21232218..9f339271 100644
+index 21232218..36ad4747 100644
 --- a/cmds/filesystem-usage.c
 +++ b/cmds/filesystem-usage.c
 @@ -31,6 +31,7 @@
@@ -56,18 +116,21 @@ index 21232218..9f339271 100644
  		else if (flags & BTRFS_BLOCK_GROUP_RAID10)
  			ratio = 2;
  		else
-@@ -391,6 +404,10 @@ static int print_filesystem_usage_overall(int fd, struct chunk_info *chunkinfo,
+@@ -391,6 +404,13 @@ static int print_filesystem_usage_overall(int fd, struct chunk_info *chunkinfo,
  		if (ratio > max_data_ratio)
  			max_data_ratio = ratio;
  
 +		/*
 +		 * Count DUP twice for user's used space, since it lays on
 +		 * the same device.
++		 *
++		 * Count total_bytes for METADATA and SYSTEM groups, since
++		 * it cannot be used by user.
 +		 */
  		if (flags & BTRFS_SPACE_INFO_GLOBAL_RSV) {
  			l_global_reserve = sargs->spaces[i].total_bytes;
  			l_global_reserve_used = sargs->spaces[i].used_bytes;
-@@ -403,15 +420,18 @@ static int print_filesystem_usage_overall(int fd, struct chunk_info *chunkinfo,
+@@ -403,15 +423,18 @@ static int print_filesystem_usage_overall(int fd, struct chunk_info *chunkinfo,
  			r_data_used += sargs->spaces[i].used_bytes * ratio;
  			r_data_chunks += sargs->spaces[i].total_bytes * ratio;
  			l_data_chunks += sargs->spaces[i].total_bytes;
@@ -86,7 +149,7 @@ index 21232218..9f339271 100644
  		}
  	}
  
-@@ -462,6 +482,22 @@ static int print_filesystem_usage_overall(int fd, struct chunk_info *chunkinfo,
+@@ -462,6 +485,22 @@ static int print_filesystem_usage_overall(int fd, struct chunk_info *chunkinfo,
  		free_min += r_total_unused / max_data_ratio;
  	}
  
@@ -109,7 +172,7 @@ index 21232218..9f339271 100644
  	if (unit_mode != UNITS_HUMAN)
  		width = 18;
  
-@@ -473,11 +509,58 @@ static int print_filesystem_usage_overall(int fd, struct chunk_info *chunkinfo,
+@@ -473,11 +512,58 @@ static int print_filesystem_usage_overall(int fd, struct chunk_info *chunkinfo,
  		pretty_size_mode(r_total_chunks, unit_mode));
  	printf("    Device unallocated:\t\t%*s\n", width,
  		pretty_size_mode(r_total_unused, unit_mode | UNITS_NEGATIVE));
@@ -171,7 +234,7 @@ index 21232218..9f339271 100644
  		width,
  		pretty_size_mode(free_estimated, unit_mode));
  	printf("min: %s)\n", pretty_size_mode(free_min, unit_mode));
-@@ -973,6 +1056,8 @@ static int cmd_filesystem_usage(const struct cmd_struct *cmd,
+@@ -973,6 +1059,8 @@ static int cmd_filesystem_usage(const struct cmd_struct *cmd,
  	unsigned unit_mode;
  	int i;
  	int more_than_one = 0;
@@ -180,7 +243,7 @@ index 21232218..9f339271 100644
  	int tabular = 0;
  
  	unit_mode = get_unit_mode_from_arg(&argc, argv, 1);
-@@ -981,11 +1066,17 @@ static int cmd_filesystem_usage(const struct cmd_struct *cmd,
+@@ -981,11 +1069,17 @@ static int cmd_filesystem_usage(const struct cmd_struct *cmd,
  	while (1) {
  		int c;
  
@@ -199,7 +262,7 @@ index 21232218..9f339271 100644
  		case 'T':
  			tabular = 1;
  			break;
-@@ -1019,12 +1110,14 @@ static int cmd_filesystem_usage(const struct cmd_struct *cmd,
+@@ -1019,12 +1113,14 @@ static int cmd_filesystem_usage(const struct cmd_struct *cmd,
  			goto cleanup;
  
  		ret = print_filesystem_usage_overall(fd, chunkinfo, chunkcount,
