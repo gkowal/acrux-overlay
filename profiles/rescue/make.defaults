@@ -1,0 +1,1 @@
+USE="X btrfs fat gnuefi ntfs opengl policykit sqlite udisks upower xfs"
