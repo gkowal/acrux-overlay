@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python{2_7,3_5,3_6} )
-inherit cmake-utils desktop gnome2-utils python-single-r1 toolchain-funcs
+inherit cmake-utils desktop gnome2-utils python-single-r1 qmake-utils toolchain-funcs
 
 MAIN_PV=$(ver_cut 0-1)
 MAJOR_PV=$(ver_cut 1-2)
@@ -31,7 +31,7 @@ RDEPEND="
 	dev-libs/expat
 	dev-libs/jsoncpp
 	dev-libs/libxml2:2
-	dev-libs/protobuf
+	dev-libs/protobuf:=
 	dev-libs/pugixml
 	media-libs/freetype
 	media-libs/glew:0
@@ -39,10 +39,9 @@ RDEPEND="
 	media-libs/libtheora
 	media-libs/tiff:0=
 	sci-libs/cgnslib
-	sci-libs/hdf5[mpi=]
+	sci-libs/hdf5:=[mpi=]
 	>=sci-libs/netcdf-4.2[hdf5]
 	>=sci-libs/netcdf-cxx-4.2:3
-	sci-libs/xdmf2
 	sys-libs/zlib
 	virtual/glu
 	virtual/jpeg:0
@@ -84,7 +83,7 @@ RDEPEND="
 		dev-qt/qtopengl:5[-gles2]
 		dev-qt/qtsql:5
 		dev-qt/qttest:5
-		dev-qt/qtwebkit:5
+		dev-qt/qtwebengine:5[widgets]
 		dev-qt/qtx11extras:5
 	)
 	sqlite? ( dev-db/sqlite:3 )
@@ -101,7 +100,10 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-4.0.1-xdmf-cstring.patch
 	"${FILESDIR}"/${PN}-5.3.0-fix_buildsystem.patch
 	"${FILESDIR}"/${PN}-5.5.0-allow_custom_build_type.patch
+	"${FILESDIR}"/${PN}-5.6.1-fix_openmp_4.0.patch
 )
+
+CMAKE_MAKEFILE_GENERATOR="emake" #579474
 
 pkg_setup() {
 	[[ ${MERGE_TYPE} != "binary" ]] && use openmp && tc-check-openmp
@@ -253,6 +255,14 @@ src_configure() {
 		mycmakeargs+=( -DVTK_SMP_IMPLEMENTATION_TYPE=OpenMP )
 	fi
 
+	if use python; then
+		mycmakeargs+=(
+			-DVTK_USE_SYSTEM_TWISTED=ON
+			-DVTK_USE_SYSTEM_AUTOBAHN=ON
+			-DVTK_USE_SYSTEM_ZOPE=ON
+		)
+	fi
+
 	if use qt5; then
 		mycmakeargs+=(
 			-DVTK_USE_QVTK=ON
@@ -300,9 +310,9 @@ src_install() {
 }
 
 pkg_postinst() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
