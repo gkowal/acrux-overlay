@@ -150,7 +150,7 @@ EGO_VENDOR=(
 	"gopkg.in/jcmturner/dnsutils.v1 13eeb8d49ffb74d7a75784c35e4d900607a3943c github.com/jcmturner/dnsutils"
 	"gopkg.in/jcmturner/gokrb5.v7 363118e62befa8a14ff01031c025026077fe5d6d github.com/jcmturner/gokrb5"
 	"gopkg.in/jcmturner/rpc.v1 99a8ce2fbf8b8087b6ed12a37c61b10f04070043 github.com/jcmturner/rpc"
-	"gopkg.in/ldap.v2 v3.1.0 github.com/go-ldap/ldap"
+	"gopkg.in/ldap.v3 v3.1.0 github.com/go-ldap/ldap"
 	"gopkg.in/mgo.v2 9856a29383ce1c59f308dd1cf0363a79b5bef6b5 github.com/go-mgo/mgo"
 	"gopkg.in/olivere/elastic.v5 52741dc2ce53629cbe1e673869040d886cba2cd5 github.com/olivere/elastic"
 	"gopkg.in/tomb.v1 dd632973f1e7218eb1089048e0798ec9ae7dceb8 github.com/go-tomb/tomb"
