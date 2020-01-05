@@ -9,7 +9,7 @@ DESCRIPTION="KeePassXC - KeePass Cross-platform Community Edition"
 HOMEPAGE="https://keepassxc.org"
 
 SRC_URI="https://github.com/keepassxreboot/${PN}/releases/download/${PV}/${P}-src.tar.xz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 
 LICENSE="LGPL-2.1 GPL-2 GPL-3"
 SLOT="0"
