@@ -9,7 +9,7 @@ DESCRIPTION="UPnP Media Server (Based on MediaTomb)"
 HOMEPAGE="https://github.com/gerbera/gerbera"
 
 SRC_URI="https://github.com/gerbera/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 S="${WORKDIR}/${P}"
 
 LICENSE="GPL-2"
