@@ -159,7 +159,7 @@ EGO_VENDOR=(
 inherit golang-build golang-vcs-snapshot systemd user
 
 GITHUB_BRANCH="release-1.13"
-GITHUB_COMMIT="0c175724"
+GITHUB_COMMIT="6dad859d"
 
 DESCRIPTION="The plugin-driven server agent for collecting & reporting metrics."
 HOMEPAGE="https://github.com/influxdata/telegraf"
