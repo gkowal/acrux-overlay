@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -65,7 +65,7 @@ EGO_VENDOR=(
 	"gopkg.in/yaml.v2 v2.2.2 github.com/go-yaml/yaml"
 )
 
-inherit go-module xdg-utils
+inherit go-module systemd xdg-utils
 
 DESCRIPTION="Open Source Continuous File Synchronization"
 HOMEPAGE="https://syncthing.net"
@@ -75,6 +75,15 @@ SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 LICENSE="Apache-2.0 BSD BSD-2 ISC MIT MPL-2.0 Unlicense"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~ppc64 ~x86"
+IUSE="selinux tools"
+
+RDEPEND="acct-group/syncthing
+	acct-user/syncthing
+	tools? ( acct-group/stdiscosrv
+		acct-group/strelaysrv
+		acct-user/stdiscosrv
+		acct-user/strelaysrv )
+	selinux? ( sec-policy/selinux-syncthing )"
 
 DOCS=( README.md AUTHORS CONTRIBUTING.md )
 
@@ -97,7 +106,7 @@ src_prepare() {
 
 src_compile() {
 	go run build.go -version "v${PV}" -no-upgrade install \
-		all || die "build failed"
+		$(usex tools "all" "") || die "build failed"
 }
 
 src_test() {
@@ -105,7 +114,42 @@ src_test() {
 }
 
 src_install() {
-	dobin bin/*
 	doman man/*.[157]
 	einstalldocs
+
+	dobin bin/syncthing
+	if use tools ; then
+		exeinto /usr/libexec/syncthing
+		local exe
+		for exe in bin/* ; do
+			[[ "${exe}" == "bin/syncthing" ]] || doexe "${exe}"
+		done
+	fi
+
+	# openrc and systemd service files
+	systemd_dounit etc/linux-systemd/system/${PN}{@,-resume}.service
+	systemd_douserunit etc/linux-systemd/user/${PN}.service
+	newconfd "${FILESDIR}/${PN}.confd" ${PN}
+	newinitd "${FILESDIR}/${PN}.initd" ${PN}
+
+	keepdir /var/{lib,log}/${PN}
+	fowners ${PN}:${PN} /var/{lib,log}/${PN}
+	insinto /etc/logrotate.d
+	newins "${FILESDIR}/${PN}.logrotate" ${PN}
+
+	if use tools ; then
+		# openrc and systemd service files
+
+		systemd_dounit "${FILESDIR}/stdiscosrv.service"
+		newconfd "${FILESDIR}/stdiscosrv.confd" stdiscosrv
+		newinitd "${FILESDIR}/stdiscosrv.initd" stdiscosrv
+
+		systemd_dounit cmd/strelaysrv/etc/linux-systemd/strelaysrv.service
+		newconfd "${FILESDIR}/strelaysrv.confd" strelaysrv
+		newinitd "${FILESDIR}/strelaysrv.initd" strelaysrv
+
+		insinto /etc/logrotate.d
+		newins "${FILESDIR}/stdiscosrv.logrotate" strelaysrv
+		newins "${FILESDIR}/strelaysrv.logrotate" strelaysrv
+	fi
 }
