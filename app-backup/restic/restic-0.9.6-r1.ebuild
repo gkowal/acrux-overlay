@@ -10,9 +10,9 @@ HOMEPAGE="https://restic.github.io/"
 SRC_URI="https://github.com/restic/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	$(go-module_vendor_uris)"
 
-LICENSE="BSD-2"
+LICENSE="Apache-2.0 BSD BSD-2 LGPL-3-with-linking-exception MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm ~x86"
 IUSE="test"
 
 DOCS=( CHANGELOG.md README.rst )
