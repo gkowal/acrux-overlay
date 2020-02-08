@@ -156,7 +156,7 @@ EGO_VENDOR=(
 	"gopkg.in/yaml.v2 5420a8b6744d3b0345ab293f6fcba19c978f1183 github.com/go-yaml/yaml"
 )
 
-inherit golang-build golang-vcs-snapshot systemd user
+inherit golang-build golang-vcs-snapshot systemd
 
 GITHUB_BRANCH="release-1.13"
 GITHUB_COMMIT="da364558"
@@ -168,7 +168,7 @@ SRC_URI="https://${EGO_PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="systemd"
 
 RESTRICT="strip"
