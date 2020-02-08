@@ -171,10 +171,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="systemd"
 
-pkg_setup() {
-	enewgroup telegraf
-	enewuser telegraf -1 -1 -1 telegraf
-}
+RESTRICT="strip"
+
+BDEPEND="dev-lang/go"
+DEPEND="acct-group/telegraf
+	acct-user/telegraf"
+	RDEPEND="${DEPEND}"
 
 src_compile() {
 	export GOCACHE="${S}/go-build"
