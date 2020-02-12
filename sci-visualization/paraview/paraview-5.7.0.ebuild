@@ -27,19 +27,13 @@ REQUIRED_USE="python? ( mpi ${PYTHON_REQUIRED_USE} )
 RDEPEND="
 	app-arch/lz4
 	dev-libs/expat
-	dev-libs/jsoncpp:=
 	dev-libs/libxml2:2
 	dev-libs/protobuf:=
-	dev-libs/pugixml
 	media-libs/freetype
 	media-libs/glew:0
 	media-libs/libpng:0
-	media-libs/libtheora
- 	media-libs/tiff:0=
-	sci-libs/cgnslib
+	media-libs/tiff:0=
 	sci-libs/hdf5:=[mpi=]
-	>=sci-libs/netcdf-4.2[hdf5]
-	>=sci-libs/netcdf-cxx-4.2:3
 	sys-libs/zlib
 	virtual/glu
 	virtual/jpeg:0
@@ -60,18 +54,8 @@ RDEPEND="
 	python? (
 		${PYTHON_DEPS}
 		$(python_gen_cond_dep '
-			dev-python/constantly[${PYTHON_MULTI_USEDEP}]
-			dev-python/incremental[${PYTHON_MULTI_USEDEP}]
 			dev-python/matplotlib[${PYTHON_MULTI_USEDEP}]
 			dev-python/numpy[${PYTHON_MULTI_USEDEP}]
-			dev-python/pygments[${PYTHON_MULTI_USEDEP}]
-			dev-python/sip[${PYTHON_MULTI_USEDEP}]
-			dev-python/six[${PYTHON_MULTI_USEDEP}]
-			|| ( dev-python/twisted[${PYTHON_MULTI_USEDEP}]
-				dev-python/twisted-core[${PYTHON_MULTI_USEDEP}]
-			)
-			dev-python/zope-interface[${PYTHON_MULTI_USEDEP}]
-			qt5? ( dev-python/PyQt5[opengl,webkit,${PYTHON_MULTI_USEDEP}] )
 		')
 	)
 	qt5? (
