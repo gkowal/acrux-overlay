@@ -9,7 +9,7 @@ SRC_URI="https://github.com/openucx/ucx/releases/download/v${PV}/${P}.tar.gz"
 
 SLOT="0"
 LICENSE="BSD"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="+numa +openmp"
 
 RDEPEND="
