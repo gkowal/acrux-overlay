@@ -16,7 +16,7 @@ HOMEPAGE="https://www.schedmd.com https://github.com/SchedMD/slurm"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="debug hdf5 html ipmi json lua multiple-slurmd +munge mysql netloc numa ofed pam perl slurmdbd static-libs ucx torque X"
+IUSE="debug hdf5 html ipmi json lua multiple-slurmd +munge mysql numa ofed pam perl slurmdbd static-libs ucx torque X"
 
 COMMON_DEPEND="
 	!sys-cluster/torque
@@ -33,7 +33,6 @@ COMMON_DEPEND="
 	!lua? ( !dev-lang/lua )
 	ipmi? ( sys-libs/freeipmi )
 	json? ( dev-libs/json-c:= )
-	amd64? ( netloc? ( sys-apps/netloc ) )
 	hdf5? ( sci-libs/hdf5:= )
 	numa? ( sys-process/numactl )
 	ofed? ( sys-fabric/ofed )
@@ -98,7 +97,6 @@ src_configure() {
 	)
 	use pam && myconf+=( --with-pam_dir=$(getpam_mod_dir) )
 	use mysql || myconf+=( --without-mysql_config )
-	use amd64 && myconf+=( $(use_with netloc) )
 	econf "${myconf[@]}" \
 		$(use_enable debug) \
 		$(use_enable pam) \
