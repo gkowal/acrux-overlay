@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,7 +11,7 @@ SRC_URI="https://github.com/ckb-next/ckb-next/archive/v${PV}.tar.gz -> ${P}.tar.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="systemd"
 
 DEPEND="
@@ -40,6 +40,7 @@ src_install() {
 		systemd_dounit "${ED}"/usr/lib/systemd/system/ckb-next-daemon.service
 	fi
 	newinitd "${FILESDIR}"/ckb-next.initd ckb-next-daemon
+	rm -r "${ED}"/usr/lib
 }
 
 pkg_postinst() {
