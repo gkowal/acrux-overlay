@@ -7,7 +7,7 @@ MY_PV=$(ver_rs 1-3 '-') # stable releases
 MY_P="${PN}-${MY_PV}"
 INHERIT_GIT=""
 SRC_URI="https://github.com/SchedMD/slurm/archive/${MY_P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 
 inherit autotools bash-completion-r1 pam perl-module prefix toolchain-funcs systemd ${INHERIT_GIT}
 
@@ -16,7 +16,7 @@ HOMEPAGE="https://www.schedmd.com https://github.com/SchedMD/slurm"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="debug hdf5 html ipmi json lua multiple-slurmd +munge mysql numa ofed pam perl slurmdbd static-libs ucx torque X"
+IUSE="debug hdf5 html ipmi json +lua multiple-slurmd +munge mysql numa ofed pam perl slurmdbd static-libs ucx torque X"
 
 COMMON_DEPEND="
 	!sys-cluster/torque
