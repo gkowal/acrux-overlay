@@ -9,7 +9,7 @@ inherit distutils-r1
 DESCRIPTION="Dynamic dns (dyndns) update client with support for multiple protocols"
 HOMEPAGE="https://github.com/infothrill/python-dyndnsc"
 SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 
 LICENSE="MIT"
 SLOT="0"
