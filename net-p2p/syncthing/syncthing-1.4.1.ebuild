@@ -48,6 +48,7 @@ EGO_VENDOR=(
 	"github.com/rcrowley/go-metrics cac0b30c2563"
 	"github.com/shirou/gopsutil 47ef3260b6bf"
 	"github.com/sasha-s/go-deadlock v0.2.0"
+	"github.com/spaolacci/murmur3 v1.1.0"
 	"github.com/stretchr/testify v1.3.0"
 	"github.com/syncthing/notify 69c7a957d3e2"
 	"github.com/syndtr/goleveldb c3a204f8e965"
@@ -76,7 +77,7 @@ SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="Apache-2.0 BSD BSD-2 ISC MIT MPL-2.0 Unlicense"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc64 ~x86"
+KEYWORDS="amd64 ~arm ~ppc64 ~x86"
 IUSE="selinux tools"
 
 RDEPEND="acct-group/syncthing
