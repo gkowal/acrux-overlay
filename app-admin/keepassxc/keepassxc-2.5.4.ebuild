@@ -8,19 +8,8 @@ inherit cmake xdg
 DESCRIPTION="KeePassXC - KeePass Cross-platform Community Edition"
 HOMEPAGE="https://keepassxc.org"
 
-if [[ "${PV}" != 9999 ]] ; then
-	if [[ "${PV}" == *_beta* ]] ; then
-		SRC_URI="https://github.com/keepassxreboot/keepassxc/archive/${PV/_/-}.tar.gz -> ${P}.tar.gz"
-		S="${WORKDIR}/${P/_/-}"
-	else
-		#SRC_URI="https://github.com/keepassxreboot/keepassxc/archive/${PV}.tar.gz -> ${P}.tar.gz"
-		SRC_URI="https://github.com/keepassxreboot/keepassxc/releases/download/${PV}/${P}-src.tar.xz"
-		KEYWORDS="~amd64 ~x86"
-	fi
-else
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/keepassxreboot/${PN}"
-fi
+SRC_URI="https://github.com/keepassxreboot/keepassxc/releases/download/${PV}/${P}-src.tar.xz"
+KEYWORDS="amd64 ~x86"
 
 LICENSE="LGPL-2.1 GPL-2 GPL-3"
 SLOT="0"
