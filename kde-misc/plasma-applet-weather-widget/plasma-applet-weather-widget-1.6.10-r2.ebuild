@@ -6,7 +6,7 @@ EAPI=7
 inherit ecm
 
 SRC_URI="https://github.com/kotelnik/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~arm64"
+KEYWORDS="amd64 ~arm64"
 
 DESCRIPTION="Plasma 5 applet for weather forecasts"
 HOMEPAGE="https://store.kde.org/p/998917/
