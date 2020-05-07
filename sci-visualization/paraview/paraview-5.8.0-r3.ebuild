@@ -15,7 +15,7 @@ HOMEPAGE="https://www.paraview.org"
 SRC_URI="https://www.paraview.org/files/v${MAJOR_PV}/${MY_P}.tar.xz"
 
 LICENSE="paraview GPL-2"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 SLOT="0"
 IUSE="boost cg coprocessing development doc examples ffmpeg mpi mysql nvcontrol openmp offscreen plugins python +qt5 +sqlite test tk visit +webengine"
 
@@ -56,7 +56,7 @@ RDEPEND="
 		dev-python/PyQt5
 		dev-qt/qtgui:5[-gles2-only]
 	)
-	ffmpeg? ( virtual/ffmpeg )
+	ffmpeg? ( media-video/ffmpeg )
 	mpi? ( virtual/mpi[cxx,romio] )
 	mysql? ( dev-db/mysql-connector-c )
 	offscreen? ( >=media-libs/mesa-18.3.6[osmesa] )
@@ -68,7 +68,6 @@ RDEPEND="
 			dev-python/incremental[${PYTHON_MULTI_USEDEP}]
 			dev-python/matplotlib[${PYTHON_MULTI_USEDEP}]
 			dev-python/numpy[${PYTHON_MULTI_USEDEP}]
-			dev-python/pygments[${PYTHON_MULTI_USEDEP}]
 			dev-python/sip[${PYTHON_MULTI_USEDEP}]
 			dev-python/six[${PYTHON_MULTI_USEDEP}]
 			dev-python/twisted[${PYTHON_MULTI_USEDEP}]
