@@ -5,6 +5,8 @@ EAPI=7
 
 inherit go-module systemd
 
+GITHUB_BRANCH="1.8"
+GITHUB_COMMIT="781490de"
 EGO_SUM=(
 	"cloud.google.com/go v0.26.0/go.mod"
 	"cloud.google.com/go v0.34.0/go.mod"
@@ -456,9 +458,6 @@ EGO_SUM=(
 	"rsc.io/pdf v0.1.1/go.mod"
 )
 
-GITHUB_BRANCH="1.8"
-GITHUB_COMMIT="781490de"
-
 go-module_set_globals
 
 DESCRIPTION="Scalable datastore for metrics, events, and real-time analytics"
@@ -468,7 +467,7 @@ SRC_URI="https://github.com/influxdata/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.g
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="systemd"
 
 BDEPEND="dev-lang/go"
