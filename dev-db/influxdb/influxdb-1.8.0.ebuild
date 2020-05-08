@@ -476,11 +476,6 @@ DEPEND="acct-group/influxdb
 	>=app-text/asciidoc-8.6.10
 	app-text/xmlto"
 
-pkg_setup() {
-	enewgroup influxdb
-	enewuser influxdb -1 -1 /var/lib/influxdb influxdb
-}
-
 src_compile() {
 	date=`date -u --iso-8601=seconds`
 	env GO111MODULE=on go build -v -work -x -ldflags="-X main.version=${PV} -X main.buildTime=${date} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT}" -o bin/influx ./cmd/influx
