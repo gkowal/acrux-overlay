@@ -480,12 +480,12 @@ src_compile() {
 	DATE=`date -u --iso-8601=seconds`
 	set -- env GO111MODULE=on go build -v -work -x -o bin/influx \
 		-ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${DATE}" \
-		cmd/influx
+		./cmd/influx
 	echo "$@"
 	"$@" || die "compile failed"
 	set -- env GO111MODULE=on go build -v -work -x -o bin/influxd \
 		-ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${DATE}" \
-		cmd/influxd
+		./cmd/influxd
 	echo "$@"
 	"$@" || die "compile failed"
 	cd man
