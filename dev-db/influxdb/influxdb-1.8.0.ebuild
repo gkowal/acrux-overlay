@@ -478,10 +478,14 @@ DEPEND="acct-group/influxdb
 
 src_compile() {
 	date=`date -u --iso-8601=seconds`
-	env GO111MODULE=on go build -v -work -x -ldflags="-X main.version=${PV} -X main.buildTime=${date} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT}" -o bin/influx ./cmd/influx
+	set -- env GO111MODULE=on go build -v -work -x -o bin/influx \
+		-ldflags="-X main.version=${PV} -X main.buildTime=${date} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT}" \
+		./cmd/influx
 	echo "$@"
 	"$@" || die "compile failed"
-	env GO111MODULE=on go build -v -work -x -ldflags="-X main.version=${PV} -X main.buildTime=${date} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT}" -o bin/influxd ./cmd/influxd
+	set -- env GO111MODULE=on go build -v -work -x -o bin/influxd \
+		-ldflags="-X main.version=${PV} -X main.buildTime=${date} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT}" \
+		./cmd/influxd
 	echo "$@"
 	"$@" || die "compile failed"
 	cd man
