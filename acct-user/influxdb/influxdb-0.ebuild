@@ -6,7 +6,7 @@ EAPI=7
 inherit acct-user
 
 DESCRIPTION="User for influxdb"
-ACCT_USER_ID=440
+ACCT_USER_ID=340
 ACCT_USER_GROUPS=( influxdb )
 
 acct-user_add_deps
