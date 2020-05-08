@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit go-module systemd user
+inherit go-module systemd
 
 EGO_SUM=(
 	"cloud.google.com/go v0.26.0/go.mod"
@@ -471,7 +471,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="systemd"
 
-DEPEND=">=app-text/asciidoc-8.6.10
+BDEPEND="dev-lang/go"
+DEPEND="acct-group/influxdb
+	acct-user/influxdb
+	>=app-text/asciidoc-8.6.10
 	app-text/xmlto"
 
 pkg_setup() {
