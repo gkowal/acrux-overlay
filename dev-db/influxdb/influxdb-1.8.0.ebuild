@@ -456,15 +456,15 @@ EGO_SUM=(
 	"rsc.io/pdf v0.1.1/go.mod"
 )
 
+GITHUB_BRANCH="1.8"
+GITHUB_COMMIT="781490de"
+
 go-module_set_globals
 
 DESCRIPTION="Scalable datastore for metrics, events, and real-time analytics"
 HOMEPAGE="https://www.influxdata.com"
 SRC_URI="https://github.com/influxdata/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_SUM_SRC_URI}"
-
-GITHUB_BRANCH="1.8"
-GITHUB_COMMIT="781490de"
 
 LICENSE="MIT"
 SLOT="0"
