@@ -922,7 +922,7 @@ src_compile() {
 }
 
 src_install() {
-	dobin bin/telegraf
+	dobin sbin/telegraf
 
 	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
 	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
