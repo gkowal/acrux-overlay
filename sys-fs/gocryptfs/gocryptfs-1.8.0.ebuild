@@ -64,7 +64,7 @@ SRC_URI="https://github.com/rfjakob/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm ~x86"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-ignore-dot-files-and-directories-v1.8.0.patch"
