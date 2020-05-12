@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit eutils flag-o-matic autotools ltprune vcs-snapshot
+inherit eutils flag-o-matic autotools vcs-snapshot
 
 DESCRIPTION="An Portable Open Source UPnP Development Kit"
 HOMEPAGE="http://pupnp.sourceforge.net/"
@@ -43,5 +43,5 @@ src_configure() {
 src_install() {
 	default
 
-	use static-libs || prune_libtool_files
+	use static-libs || find "${D}" -name '*.la' -type f -delete || die
 }
