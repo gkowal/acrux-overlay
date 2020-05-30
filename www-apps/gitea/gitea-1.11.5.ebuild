@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit fcaps golang-base tmpfiles systemd golang-vcs-snapshot
+inherit fcaps golang-base golang-vcs-snapshot tmpfiles systemd
 
 EGO_PN="code.gitea.io/gitea"
 
@@ -11,11 +11,11 @@ DESCRIPTION="A painless self-hosted Git service"
 HOMEPAGE="https://gitea.io"
 
 SRC_URI="https://github.com/go-gitea/gitea/releases/download/v${PV}/gitea-src-${PV}.tar.gz"
-KEYWORDS="~amd64 ~arm ~arm64"
+KEYWORDS="amd64 ~arm ~arm64"
 
 LICENSE="Apache-2.0 BSD BSD-2 ISC MIT MPL-2.0"
 SLOT="0"
-IUSE="+acct build-client pam sqlite"
+IUSE="+acct build-client pam sqlite systemd"
 
 BDEPEND="dev-lang/go
 	build-client? ( >=net-libs/nodejs-10[npm] )"
