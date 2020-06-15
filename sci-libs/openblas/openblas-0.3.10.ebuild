@@ -10,7 +10,7 @@ SRC_URI="https://github.com/xianyi/OpenBLAS/archive/v${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="dynamic eselect-ldso index-64bit openmp pthread test"
 REQUIRED_USE="?? ( openmp pthread )"
 RESTRICT="!test? ( test )"
