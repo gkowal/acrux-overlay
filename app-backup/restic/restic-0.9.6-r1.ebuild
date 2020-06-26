@@ -47,9 +47,6 @@ src_test() {
 src_install() {
 	dobin restic
 
-	fowners root:restic /usr/bin/restic
-	fperms 4710 /usr/bin/restic
-
 	newbashcomp doc/bash-completion.sh "${PN}"
 
 	insinto /usr/share/zsh/site-functions
@@ -60,6 +57,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	fcaps cap_dac_read_search -m 4710 -M 0710 \
+	fcaps -o 0 -g restic -m 4710 -M 0710 \
+		cap_dac_read_search \
 		"${EROOT}/usr/bin/restic"
 }
