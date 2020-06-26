@@ -60,6 +60,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	fcaps cap_dac_read_search -g restic -m 4710 -M 0710 \
+	fcaps cap_dac_read_search -m 4710 -M 0710 \
 		"${EROOT}/usr/bin/restic"
 }
