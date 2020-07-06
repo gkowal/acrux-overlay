@@ -10,7 +10,7 @@ inherit bash-completion-r1 python-single-r1
 libbtrfs_soname=0
 
 MY_PV="v${PV/_/-}"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
 SRC_URI="https://www.kernel.org/pub/linux/kernel/people/kdave/${PN}/${PN}-${MY_PV}.tar.xz"
 S="${WORKDIR}/${PN}-${MY_PV}"
 
