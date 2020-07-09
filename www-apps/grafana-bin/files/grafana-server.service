@@ -1,8 +1,7 @@
 [Unit]
 Description=Grafana
 Documentation=http://docs.grafana.org
-Wants=network-online.target
-After=network-online.target
+After=network.target
 
 [Service]
 User=grafana
