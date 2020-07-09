@@ -31,7 +31,6 @@ src_install() {
 	newins "${S}"/conf/sample.ini grafana.ini
 	rm "${S}"/conf/sample.ini || die
 
-	# Frontend assets
 	insinto /usr/share/${MY_PN}
 	doins -r public conf
 
