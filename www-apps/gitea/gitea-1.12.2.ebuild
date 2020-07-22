@@ -13,7 +13,7 @@ S="${WORKDIR}"
 
 LICENSE="Apache-2.0 BSD BSD-2 ISC MIT MPL-2.0"
 SLOT="0"
-IUSE="+acct build-client pam sqlite"
+IUSE="+acct build-client pam sqlite systemd"
 
 BDEPEND="build-client? ( >=net-libs/nodejs-10[npm] )"
 COMMON_DEPEND="
