@@ -930,7 +930,7 @@ src_compile() {
 	DATE=`date -u --iso-8601=seconds`
 	set -- env GO111MODULE=on go build -v -x -o bin/telegraf \
 		-ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${DATE}" \
-		cmd/telegraf/telegraf.go
+		./cmd/telegraf
 	echo "$@"
 	"$@" || die
 }
