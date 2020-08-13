@@ -1,4 +1,0 @@
-# Copyright 1999-2019 Gentoo Authors
-# Distributed under the terms of the GNU General Public License v2
-
-USE="a52 aac acpi alsa btrfs cairo dbus dri exfat exif fat gnuefi gpm gtk icu jpeg lcms libnotify networkmanager ntfs opengl pdf png policykit startup-notification svg tiff truetype udev udisks unicode upower usb X xcb x264 xfs xml xv xvid"
