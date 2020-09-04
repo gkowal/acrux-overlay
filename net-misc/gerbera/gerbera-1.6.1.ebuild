@@ -6,7 +6,7 @@ EAPI=7
 inherit cmake eutils linux-info systemd tmpfiles
 
 SRC_URI="https://github.com/gerbera/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 S="${WORKDIR}/${P}"
 
 DESCRIPTION="UPnP Media Server"
