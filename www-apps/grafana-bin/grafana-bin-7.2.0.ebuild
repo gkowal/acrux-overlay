@@ -6,8 +6,7 @@ EAPI=7
 inherit systemd
 
 MY_PN=${PN/-bin/}
-MY_PV=${PV/_beta/-beta}
-S=${WORKDIR}/${MY_PN}-${MY_PV}
+S=${WORKDIR}/${MY_PN}-${PV}
 
 DESCRIPTION="Gorgeous metric viz, dashboards & editors for Graphite, InfluxDB & OpenTSDB"
 HOMEPAGE="https://grafana.org"
@@ -15,14 +14,15 @@ SRC_URI="https://dl.grafana.com/oss/release/grafana-${PV}.linux-amd64.tar.gz -> 
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
+IUSE="systemd"
 
+RDEPEND="media-libs/fontconfig"
 DEPEND="acct-group/grafana
-	acct-user/grafana"
-RDEPEND="${DEPEND}
-	media-libs/fontconfig"
+	acct-user/grafana
+	${RDEPEND}"
 
-QA_PREBUILT="usr/bin/grafana-*"
+QA_PREBUILT="usr/bin/grafana-* usr/sbin/grafana-*"
 QA_PRESTRIPPED=${QA_PREBUILT}
 
 src_install() {
@@ -36,11 +36,13 @@ src_install() {
 	doins -r public conf
 
 	dobin bin/grafana-cli
-	dobin bin/grafana-server
+	dosbin bin/grafana-server
 
-	newconfd "${FILESDIR}"/grafana.confd grafana
-	newinitd "${FILESDIR}"/grafana.initd.3 grafana
-	systemd_newunit "${FILESDIR}"/grafana.service grafana.service
+	newconfd "${FILESDIR}"/grafana-server.confd grafana-server
+	newinitd "${FILESDIR}"/grafana-server.initd grafana-server
+	if use systemd; then
+		systemd_newunit "${FILESDIR}"/grafana-server.service grafana-server.service
+	fi
 
 	keepdir /var/{lib,log}/grafana
 	keepdir /var/lib/grafana/{dashboards,plugins}
