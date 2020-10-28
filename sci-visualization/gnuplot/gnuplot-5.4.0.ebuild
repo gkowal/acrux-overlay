@@ -10,7 +10,7 @@ HOMEPAGE="http://www.gnuplot.info/"
 
 MY_P="${P/_/.}"
 SRC_URI="mirror://sourceforge/gnuplot/${MY_P}.tar.gz"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sparc ~x86 ~ppc-aix"
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sparc ~x86 ~ppc-aix"
 
 LICENSE="gnuplot"
 SLOT="0"
