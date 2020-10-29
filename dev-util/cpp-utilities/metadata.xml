@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<name>Grzegorz Kowal</name>
+		<email>grzegorz@gkowal.info</email>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">Martchus/cpp-utilities</remote-id>
+	</upstream>
+</pkgmetadata>
