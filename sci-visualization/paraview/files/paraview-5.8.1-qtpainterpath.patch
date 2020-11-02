@@ -1,0 +1,22 @@
+diff -uNr ParaView-v5.8.1-orig/VTK/Rendering/Qt/vtkQtLabelRenderStrategy.cxx ParaView-v5.8.1/VTK/Rendering/Qt/vtkQtLabelRenderStrategy.cxx
+--- ParaView-v5.8.1-orig/VTK/Rendering/Qt/vtkQtLabelRenderStrategy.cxx	2020-08-04 17:12:01.000000000 -0300
++++ ParaView-v5.8.1/VTK/Rendering/Qt/vtkQtLabelRenderStrategy.cxx	2020-11-02 13:18:40.389715036 -0300
+@@ -41,6 +41,7 @@
+ #include <QImage>
+ #include <QMap>
+ #include <QPainter>
++#include <QPainterPath>
+ #include <QPair>
+ #include <QPixmap>
+ #include <QTextDocument>
+diff -uNr ParaView-v5.8.1-orig/VTK/Rendering/Qt/vtkQtStringToImage.cxx ParaView-v5.8.1/VTK/Rendering/Qt/vtkQtStringToImage.cxx
+--- ParaView-v5.8.1-orig/VTK/Rendering/Qt/vtkQtStringToImage.cxx	2020-08-04 17:12:01.000000000 -0300
++++ ParaView-v5.8.1/VTK/Rendering/Qt/vtkQtStringToImage.cxx	2020-11-02 13:18:26.535367616 -0300
+@@ -30,6 +30,7 @@
+ #include <QFontMetrics>
+ #include <QImage>
+ #include <QPainter>
++#include <QPainterPath>
+ #include <QPixmap>
+ #include <QString>
+ #include <QTextDocument>
