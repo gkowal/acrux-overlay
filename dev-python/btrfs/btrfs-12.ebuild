@@ -9,7 +9,7 @@ inherit distutils-r1
 DESCRIPTION="Python 3 module to inspect btrfs filesystems"
 HOMEPAGE="https://github.com/knorrie/python-btrfs"
 SRC_URI="https://github.com/knorrie/python-${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 
 S="${WORKDIR}/python-${P}"
 
