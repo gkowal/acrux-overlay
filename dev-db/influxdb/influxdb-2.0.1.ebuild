@@ -911,7 +911,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="systemd"
 
-BDEPEND="dev-lang/go"
+BDEPEND="dev-lang/go
+	>=sys-apps/yarn-1.22.5"
 DEPEND="acct-group/influxdb
 	acct-user/influxdb
 	>=app-text/asciidoc-8.6.10
