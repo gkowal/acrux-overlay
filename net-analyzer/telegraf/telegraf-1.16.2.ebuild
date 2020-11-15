@@ -980,7 +980,7 @@ RESTRICT="strip"
 BDEPEND="dev-lang/go"
 DEPEND="acct-group/telegraf
 	acct-user/telegraf"
-	RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}"
 
 src_compile() {
 	DATE=`date -u --iso-8601=seconds`
