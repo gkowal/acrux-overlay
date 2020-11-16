@@ -906,32 +906,45 @@ HOMEPAGE="https://www.influxdata.com"
 SRC_URI="https://github.com/influxdata/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	${EGO_SUM_SRC_URI}"
 
-LICENSE="MIT"
+LICENSE="MIT BSD Apache-2.0 EPL-1.0 MPL-2.0 BSD-2 ISC"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="systemd"
 
-BDEPEND="dev-lang/go
+BDEPEND="app-text/asciidoc
+	app-text/xmlto
 	>=sys-apps/yarn-1.22.5"
-DEPEND="acct-group/influxdb
-	acct-user/influxdb
-	>=app-text/asciidoc-8.6.10
-	app-text/xmlto"
+RDEPEND="acct-group/influxdb
+	acct-user/influxdb"
+DEPEND="${RDEPEND}"
 
 src_compile() {
-	DATE=`date -u --iso-8601=seconds`
-	set -- env GO111MODULE=on go build -v -work -x -o bin/influx \
-		-ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${DATE}" \
-		./cmd/influx
-	echo "$@"
-	"$@" || die "compile failed"
-	set -- env GO111MODULE=on go build -v -work -x -o bin/influxd \
-		-ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${DATE}" \
-		./cmd/influxd
-	echo "$@"
-	"$@" || die "compile failed"
-	cd man
-	emake build
+	GOPATH="${TEMP}/go" GOBIN="${S}/bin" \
+		go install \
+		-ldflags="-X main.version=${PV} -X main.branch=${GIT_BRANCH} -X main.commit=${GIT_COMMIT}" \
+		./... || die "compile failed"
+	emake -C man build
+#	./env go build -o bin/influxd ./cmd/influxd
+#	emake http ui chronograf query storage
+#	DATE=`date -u --iso-8601=seconds`
+#	set -- env GO111MODULE=on go build -tags 'assets ' \
+#		-ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${DATE}" \
+#		./cmd/influxd
+#	echo "$@"
+#	"$@" || die "compile failed"
+#	DATE=`date -u --iso-8601=seconds`
+#	set -- env GO111MODULE=on go build -v -work -x -o bin/influx \
+#		-ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${DATE}" \
+#		./cmd/influx
+#	echo "$@"
+#	"$@" || die "compile failed"
+#	set -- env GO111MODULE=on go build -v -work -x -o bin/influxd \
+#		-ldflags="-X main.version=${PV} -X main.branch=${GITHUB_BRANCH} -X main.commit=${GITHUB_COMMIT} -X main.buildTime=${DATE}" \
+#		./cmd/influxd
+#	echo "$@"
+#	"$@" || die "compile failed"
+#	cd man
+#	emake
 }
 
 src_install() {
