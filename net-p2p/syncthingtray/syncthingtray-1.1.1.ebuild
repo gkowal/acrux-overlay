@@ -8,7 +8,7 @@ DESCRIPTION="Tray application and Dolphin/Plasma integration for Syncthing"
 HOMEPAGE="https://github.com/Martchus/syncthingtray"
 SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 SLOT="1"
 LICENSE="GPL-2"
 
@@ -21,7 +21,7 @@ RDEPEND="
 	>=dev-qt/qtwebengine-5.6
 	>=dev-qt/qtwidgets-5.6
 	>=dev-util/cpp-utilities-5.10.0
-	dev-util/qtutilities
+	>=dev-util/qtutilities-6.3.0
 "
 DEPEND="${RDEPEND}"
 
