@@ -64,6 +64,10 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	java? ( >=virtual/jdk-1.6 )"
 
+PATCHES=(
+	"${FILESDIR}/${PV}-fix-avx.patch"
+)
+
 MULTILIB_WRAPPED_HEADERS=(
 	/usr/include/mpi.h
 	/usr/include/openmpi/ompi/mpi/java/mpiJava.h
@@ -87,6 +91,9 @@ src_prepare() {
 	# http://www.open-mpi.org/community/lists/users/2008/09/6514.php
 	echo 'oob_tcp_listen_mode = listen_thread' \
 		>> opal/etc/openmpi-mca-params.conf || die
+
+	# Necessery to run after the applied fixing patches
+	cd "${S}" && ./autogen.pl --force
 }
 
 multilib_src_configure() {
