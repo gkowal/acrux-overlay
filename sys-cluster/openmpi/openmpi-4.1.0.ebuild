@@ -30,7 +30,7 @@ HOMEPAGE="https://www.open-mpi.org"
 SRC_URI="https://www.open-mpi.org/software/ompi/v$(ver_cut 1-2)/downloads/${MY_P}.tar.bz2"
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 IUSE="cma cuda cxx fortran heterogeneous ipv6 java romio
 	${IUSE_OPENMPI_FABRICS} ${IUSE_OPENMPI_RM} ${IUSE_OPENMPI_OFED_FEATURES}"
 
@@ -65,7 +65,8 @@ DEPEND="${CDEPEND}
 	java? ( >=virtual/jdk-1.6 )"
 
 PATCHES=(
-	"${FILESDIR}/${PV}-fix-avx.patch"
+	"${FILESDIR}/${PV}-update-avx-support.patch"
+	"${FILESDIR}/${PV}-avx-support-improvements.patch"
 )
 
 MULTILIB_WRAPPED_HEADERS=(
