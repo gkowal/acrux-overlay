@@ -8,7 +8,7 @@ LUA_COMPAT=( lua5-{1..3} )
 MY_PV=$(ver_rs 1-4 '-') # stable releases
 MY_P="${PN}-${MY_PV}"
 SRC_URI="https://github.com/SchedMD/slurm/archive/${MY_P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 
 inherit autotools bash-completion-r1 lua-single pam perl-module prefix toolchain-funcs systemd
 
