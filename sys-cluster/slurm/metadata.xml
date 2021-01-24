@@ -5,10 +5,6 @@
 		<email>alexxy@gentoo.org</email>
 		<name>Alexey Shvetsov</name>
 	</maintainer>
-	<maintainer type="person">
-		<email>zlogene@gentoo.org</email>
-		<name>Mikle Kolyada</name>
-	</maintainer>
 	<maintainer type="project">
 		<email>cluster@gentoo.org</email>
 		<name>Gentoo Cluster Project</name>
@@ -19,6 +15,7 @@
 		<flag name="json">Add support for json-persing via json-c</flag>
 		<flag name="munge">Enable authentication via munge</flag>
 		<flag name="multiple-slurmd">Allow multiple slurmd to run</flag>
+		<flag name="netloc">Add support for netloc (amd64 only)</flag>
 		<flag name="numa">Add NUMA awareness</flag>
 		<flag name="ofed">Add Infiniband support via ofed</flag>
 		<flag name="slurmdbd">Install SQL server for slurmdbd</flag>
