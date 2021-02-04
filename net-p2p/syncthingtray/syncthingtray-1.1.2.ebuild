@@ -20,7 +20,7 @@ RDEPEND="
 	>=dev-qt/qtsvg-5.6
 	>=dev-qt/qtwebengine-5.6
 	>=dev-qt/qtwidgets-5.6
-	>=dev-util/cpp-utilities-5.10.0
+	>=dev-util/cpp-utilities-5.10.1
 	dev-util/qtutilities
 "
 DEPEND="${RDEPEND}"
