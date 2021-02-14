@@ -1,0 +1,11 @@
+diff -uNr clevis-16-orig/src/luks/systemd/meson.build clevis-16/src/luks/systemd/meson.build
+--- clevis-16-orig/src/luks/systemd/meson.build	2021-02-09 14:38:49.000000000 -0300
++++ clevis-16/src/luks/systemd/meson.build	2021-02-13 16:55:23.530617817 -0300
+@@ -4,6 +4,7 @@
+   join_paths(get_option('prefix'), get_option('libdir'), 'systemd', 'systemd-reply-password'),
+   join_paths(get_option('prefix'), 'lib', 'systemd', 'systemd-reply-password'),
+   join_paths('/', 'usr', get_option('libdir'), 'systemd', 'systemd-reply-password'),
++  join_paths('/', 'lib', 'systemd', 'systemd-reply-password'),
+   join_paths('/', 'usr', 'lib', 'systemd', 'systemd-reply-password'),
+   required: false
+ )
