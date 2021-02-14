@@ -9,7 +9,7 @@ DESCRIPTION="Automated Encryption Framework"
 HOMEPAGE="https://github.com/latchset/clevis/"
 
 SRC_URI="https://github.com/latchset/clevis/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64"
 
 LICENSE="Apache-2.0"
 SLOT="0"
