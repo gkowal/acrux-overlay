@@ -11,7 +11,7 @@ SRC_URI="https://github.com/tpm2-software/${PN}/releases/download/${PV}/${P}.tar
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="+fapi libressl"
 
 # Integration test are now run as part of the testing suite, which will fail
