@@ -1,0 +1,12 @@
+diff -uNr v7-7.2-orig/thirdparty/source/nu/include/nu/error_or.hpp v7-7.2/thirdparty/source/nu/include/nu/error_or.hpp
+--- v7-7.2-orig/thirdparty/source/nu/include/nu/error_or.hpp	2020-08-12 06:41:14.000000000 -0300
++++ v7-7.2/thirdparty/source/nu/include/nu/error_or.hpp	2021-02-20 13:06:24.088241349 -0300
+@@ -150,7 +150,7 @@
+ 	///    Swaps the states of ``*this`` and ``other``.
+ 	///
+ 	///    :noexcept: |swap(T,T)-noexcept|
+-	void swap(error_or& other) noexcept(error_or::is_nothrow_swappable<T>())
++	void swap(error_or& other) noexcept(is_nothrow_swappable<T>())
+ 	{
+ 		using std::swap;
+ 
