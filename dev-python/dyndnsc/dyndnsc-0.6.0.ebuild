@@ -17,7 +17,8 @@ SLOT="0"
 DEPEND=">=dev-python/daemonocle-1.0.1
 	>=dev-python/dnspython-1.15.0
 	>=dev-python/netifaces-0.10.5
-	>=dev-python/requests-2.0.1"
+	>=dev-python/requests-2.0.1
+	dev-python/json-logging"
 RDEPEND="${DEPEND}"
 
 python_prepare_all() {
