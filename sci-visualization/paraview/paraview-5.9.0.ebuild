@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{7..8} )
 inherit cmake desktop python-single-r1 qmake-utils toolchain-funcs xdg-utils
 
 MAIN_PV=$(ver_cut 0-1)
@@ -15,9 +15,9 @@ HOMEPAGE="https://www.paraview.org"
 SRC_URI="https://www.paraview.org/files/v${MAJOR_PV}/${MY_P}.tar.xz"
 
 LICENSE="paraview GPL-2"
-KEYWORDS="~amd64 ~x86"
 SLOT="0"
-IUSE="boost cg coprocessing development doc examples ffmpeg mpi mysql nvcontrol openmp offscreen plugins python +qt5 +sqlite test tk visit +webengine"
+KEYWORDS="~amd64 ~x86"
+IUSE="boost cg doc examples ffmpeg mpi mysql nvcontrol openmp offscreen plugins python +qt5 +sqlite test tk visit +webengine"
 
 RESTRICT="mirror test"
 
@@ -29,6 +29,10 @@ REQUIRED_USE="
 	qt5? ( sqlite )
 	?? ( offscreen qt5 )"
 
+# TODO: Verify that these two are not needed any more for the catalyst
+# module:
+#  - dev-python/PyQt5
+#  - dev-qt/qtgui:5[-gles2-only]
 RDEPEND="
 	app-arch/lz4
 	dev-libs/expat
@@ -52,10 +56,6 @@ RDEPEND="
 	x11-libs/libXext
 	x11-libs/libXmu
 	x11-libs/libXt
-	coprocessing? (
-		dev-python/PyQt5
-		dev-qt/qtgui:5[-gles2-only]
-	)
 	ffmpeg? ( media-video/ffmpeg )
 	mpi? ( virtual/mpi[cxx,romio] )
 	mysql? ( dev-db/mysql-connector-c )
@@ -107,8 +107,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-5.5.0-allow_custom_build_type.patch
 )
 
-CMAKE_MAKEFILE_GENERATOR="emake" #579474
-
 pkg_setup() {
 	[[ ${MERGE_TYPE} != "binary" ]] && use openmp && tc-check-openmp
 	use python && python-single-r1_pkg_setup
@@ -116,7 +114,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-
 	# Bug #661812
 	mkdir -p Plugins/StreamLinesRepresentation/doc || die
 
@@ -132,22 +129,11 @@ src_prepare() {
 }
 
 src_configure() {
-	if use qt5; then
-		export QT_SELECT=qt5
-	fi
-
 	local mycmakeargs=(
 		-DCMAKE_INSTALL_LIBDIR="${PVLIBDIR}"
 		-UBUILD_SHARED_LIBS
 		-DPARAVIEW_BUILD_SHARED_LIBS=ON
 		-DCMAKE_VERBOSE_MAKEFILE=ON
-
-		-DVTK_USE_OGGTHEORA_ENCODER=TRUE
-
-		-DVTK_GROUP_ENABLE_Imaging=YES
-		-DVTK_GROUP_ENABLE_Rendering=YES
-		-DVTK_GROUP_ENABLE_StandAlone=YES
-		-DVTK_GROUP_ENABLE_Views=YES
 
 		# boost
 		-DVTK_MODULE_ENABLE_VTK_IOInfovis="$(usex boost YES NO)"
@@ -171,13 +157,14 @@ src_configure() {
 		-DVTK_MODULE_ENABLE_VTK_IOMySQL="$(usex mysql YES NO)"
 
 		# offscreen
-		-DVTK_USE_X="$(usex !offscreen)"
 		-DVTK_OPENGL_HAS_OSMESA="$(usex offscreen)"
 		-DVTK_OPENGL_HAS_OSMESA="$(usex offscreen)"
 
 		# plugins
 		-DPARAVIEW_PLUGINS_DEFAULT="$(usex plugins)"
 		-DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX="$(usex plugins)"
+
+		# VisIt
 		-DPARAVIEW_ENABLE_VISITBRIDGE="$(usex visit)"
 
 		# python
@@ -185,7 +172,6 @@ src_configure() {
 		-DPARAVIEW_USE_PYTHON="$(usex python)"
 
 		# qt5
-		-DPARAVIEW_INSTALL_DEVELOPMENT_FILES="$(usex development)"
 		-DPARAVIEW_USE_QT="$(usex qt5)"
 		-DModule_pqPython="$(usex qt5 "$(usex python)" "off")"
 		-DVTK_USE_NVCONTROL="$(usex nvcontrol)"
@@ -199,6 +185,7 @@ src_configure() {
 
 		# tk
 		-DVTK_USE_TK="$(usex tk)"
+		-DVTK_GROUP_ENABLE_Tk="$(usex tk YES NO)"
 
 		# webengine
 		-DPARAVIEW_USE_QTWEBENGINE="$(usex webengine)"
@@ -214,6 +201,7 @@ src_configure() {
 			-DOPENGL_gl_LIBRARY="${EPREFIX}"/usr/$(get_libdir)/libGL.so
 			-DOPENGL_glu_LIBRARY="${EPREFIX}"/usr/$(get_libdir)/libGLU.so
 			-DQT_MOC_EXECUTABLE="$(qt5_get_bindir)/moc"
+			-Dqt_xmlpatterns_executable="$(qt5_get_bindir)/xmlpatterns"
 		)
 	fi
 
@@ -238,9 +226,6 @@ src_install() {
 	make_desktop_entry paraview "Paraview" paraview
 
 	use python && python_optimize "${D}"/usr/$(get_libdir)/${PN}-${MAJOR_PV}
-
-	mv "${ED}/usr/share/licenses" "${ED}/usr/share/doc/${P}/"
-	mv "${ED}/usr/share/vtkm-1.3" "${ED}/usr/share/doc/${P}/"
 }
 
 pkg_postinst() {
