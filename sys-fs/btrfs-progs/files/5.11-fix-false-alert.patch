@@ -1,0 +1,63 @@
+From 33d84be0303964e7b29fde968c5df2e1b1a349e9 Mon Sep 17 00:00:00 2001
+From: Qu Wenruo <wqu@suse.com>
+Date: Sat, 6 Mar 2021 08:40:19 +0800
+Subject: [PATCH] btrfs-progs: fix false alert on tree block crossing 64K page
+ boundary
+
+[BUG]
+When btrfs-check is executed on even newly created fs, it can report
+tree blocks crossing 64K page boundary like this:
+
+  Opening filesystem to check...
+  Checking filesystem on /dev/test/test
+  UUID: 80d734c8-dcbc-411b-9623-a10bd9e7767f
+  [1/7] checking root items
+  [2/7] checking extents
+  WARNING: tree block [30523392, 30539776) crosses 64K page boudnary, may cause problem for 64K page system
+  [3/7] checking free space cache
+  [4/7] checking fs roots
+  [5/7] checking only csums items (without verifying data)
+  [6/7] checking root refs
+  [7/7] checking quota groups skipped (not enabled on this FS)
+  found 131072 bytes used, no error found
+  total csum bytes: 0
+  total tree bytes: 131072
+  total fs tree bytes: 32768
+  total extent tree bytes: 16384
+  btree space waste bytes: 125199
+  file data blocks allocated: 0
+   referenced 0
+
+[CAUSE]
+Tree block [30523392, 30539776) is at the last 16K slot of page.
+As 30523392 % 65536 = 49152, and 30539776 % 65536 = 0.
+
+The cross boundary check is using exclusive end, which causes false
+alerts.
+
+[FIX]
+Use inclusive end to do the cross 64K boundary check.
+
+Reported-by: Wang Yugui <wangyugui@e16-tech.com>
+Issue: #352
+Issue: #354
+Fixes: fc38ae7f4826 ("btrfs-progs: check: detect and warn about tree blocks crossing 64K page boundary")
+Signed-off-by: Qu Wenruo <wqu@suse.com>
+Signed-off-by: David Sterba <dsterba@suse.com>
+---
+ check/mode-common.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/check/mode-common.h b/check/mode-common.h
+index 8fdeb7f6b..3107b00c4 100644
+--- a/check/mode-common.h
++++ b/check/mode-common.h
+@@ -186,7 +186,7 @@ int get_extent_item_generation(u64 bytenr, u64 *gen_ret);
+ static inline void btrfs_check_subpage_eb_alignment(u64 start, u32 len)
+ {
+ 	if (start / BTRFS_MAX_METADATA_BLOCKSIZE !=
+-	    (start + len) / BTRFS_MAX_METADATA_BLOCKSIZE)
++	    (start + len - 1) / BTRFS_MAX_METADATA_BLOCKSIZE)
+ 		warning(
+ "tree block [%llu, %llu) crosses 64K page boudnary, may cause problem for 64K page system",
+ 			start, start + len);
