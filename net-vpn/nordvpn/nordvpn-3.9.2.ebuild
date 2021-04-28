@@ -11,7 +11,7 @@ SRC_URI="https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/${PN}_${PV}-1_amd
 
 LICENSE="NordVPN-EULA"
 SLOT="0"
-KEYWORDS="-* ~amd64"
+KEYWORDS="-* amd64"
 IUSE="systemd"
 
 RDEPEND="
