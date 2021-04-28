@@ -9,7 +9,7 @@ DESCRIPTION="NordVPN client"
 HOMEPAGE="https://nordvpn.com/"
 SRC_URI="https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/${PN}_${PV}-1_amd64.deb"
 
-LICENSE="GPL-3"
+LICENSE="NordVPN-EULA"
 SLOT="0"
 KEYWORDS="-* ~amd64"
 IUSE="systemd"
