@@ -66,7 +66,6 @@ DEPEND="${RDEPEND}
 PATCHES=(
 	"${FILESDIR}/${PN}"-1.1.0-fix_llvm_install.patch
 	"${FILESDIR}/${PN}"-1.4.0-no_symlink_llvm.patch
-	"${FILESDIR}/${PN}"-1.6.0-fix-system-csl.patch
 )
 
 pkg_setup() {
