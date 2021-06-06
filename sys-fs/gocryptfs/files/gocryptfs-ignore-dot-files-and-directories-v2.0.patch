@@ -1,0 +1,14 @@
+diff -uNr gocryptfs-2.0-orig/internal/fusefrontend/node_dir_ops.go gocryptfs-2.0/internal/fusefrontend/node_dir_ops.go
+--- gocryptfs-2.0-orig/internal/fusefrontend/node_dir_ops.go	2021-06-05 09:47:57.000000000 -0300
++++ gocryptfs-2.0/internal/fusefrontend/node_dir_ops.go	2021-06-06 16:14:58.342614616 -0300
+@@ -188,6 +188,10 @@
+ 	// Filter and decrypt filenames
+ 	for i := range cipherEntries {
+ 		cName := cipherEntries[i].Name
++		if n.IsRoot() && cName[0] == '.' {
++			// silently ignore dot files and directories
++			continue
++		}
+ 		if n.IsRoot() && cName == configfile.ConfDefaultName {
+ 			// silently ignore "gocryptfs.conf" in the top level dir
+ 			continue
