@@ -5,8 +5,8 @@ EAPI=7
 
 inherit go-module systemd
 
-GITHUB_BRANCH="release-1.18"
-GITHUB_COMMIT="6a94f65"
+GITHUB_BRANCH="release-1.19"
+GITHUB_COMMIT="ed412d7"
 EGO_SUM=(
 	"bazil.org/fuse v0.0.0-20160811212531-371fbbdaa898/go.mod"
 	"cloud.google.com/go v0.26.0/go.mod"
@@ -2140,7 +2140,7 @@ SRC_URI="https://github.com/influxdata/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.g
 	${EGO_SUM_SRC_URI}"
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="systemd"
 
 RESTRICT="strip"
