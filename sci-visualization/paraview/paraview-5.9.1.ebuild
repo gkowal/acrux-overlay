@@ -16,7 +16,7 @@ SRC_URI="https://www.paraview.org/files/v${MAJOR_PV}/${MY_P}.tar.xz"
 
 LICENSE="paraview GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="boost cg doc examples ffmpeg mpi mysql nvcontrol openmp offscreen plugins python +qt5 +sqlite test tk visit webengine"
 
 RESTRICT="mirror test"
@@ -69,7 +69,7 @@ RDEPEND="
 			dev-python/matplotlib[${PYTHON_MULTI_USEDEP}]
 			dev-python/numpy[${PYTHON_MULTI_USEDEP}]
 			dev-python/pygments[${PYTHON_MULTI_USEDEP}]
-			dev-python/sip[${PYTHON_MULTI_USEDEP}]
+			<dev-python/sip-5:=[${PYTHON_MULTI_USEDEP}]
 			dev-python/six[${PYTHON_MULTI_USEDEP}]
 			dev-python/twisted[${PYTHON_MULTI_USEDEP}]
 			dev-python/zope-interface[${PYTHON_MULTI_USEDEP}]
