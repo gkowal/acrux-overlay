@@ -1,41 +1,36 @@
 #!/sbin/openrc-run
-# Copyright (c) 2015 Grzegorz Kowal <grzegorz@gkowal.info>
+# Copyright 1999-2021 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
 
-: ${GRAFANA_USER:='grafana'}
-: ${GRAFANA_GROUP:='grafana'}
-: ${GRAFANA_CFGFILE:='/etc/grafana/grafana.ini'}
-: ${GRAFANA_PIDFILE:='/run/grafana/grafana.pid'}
-: ${GRAFANA_HOMEDIR:='/usr/share/grafana'}
+GRAFANA_USER="${GRAFANA_USER:-"grafana"}"
+GRAFANA_GROUP="${GRAFANA_GROUP:-"grafana"}"
+GRAFANA_CONFIGFILE="${GRAFANA_CONFIGFILE:-"/etc/grafana/${RC_SVCNAME}.ini"}"
+GRAFANA_DATADIR="${GRAFANA_DATADIR:-"/var/lib/grafana"}"
+GRAFANA_LOGDIR="${GRAFANA_LOGDIR:-"/var/log/grafana"}"
+GRAFANA_PIDFILE="${GRAFANA_PIDFILE:-"/run/${RC_SVCNAME}.pid"}"
+GRAFANA_SSDARGS=${GRAFANA_SSDARGS:-"--wait 1000"}
+GRAFANA_TERMTIMEOUT=${GRFANA_TERMTIMEOUT:-"TERM/60/KILL/5"}
+
+command="/usr/bin/grafana-server"
+command_args="-homepath=/usr/share/grafana"
+command_args="${command_args} -config=\"${GRAFANA_CONFIGFILE}\""
+command_args="${command_args} cfg:default.paths.data=\"${GRAFANA_DATADIR}\""
+command_args="${command_args} cfg:default.paths.logs=\"${GRAFANA_LOGDIR}\""
+command_background="yes"
+pidfile="${GRAFANA_PIDFILE}"
+retry="${GRAFANA_TERMTIMEOUT}"
+start_stop_daemon_args="--user ${GRAFANA_USER}:${GRAFANA_GROUP} ${GRAFANA_SSDARGS}"
+
+description="Grafana server, feature rich metrics dashboard and graph editor."
+
+required_files="${GRAFANA_CONFIGFILE}"
 
 depend() {
 	need localmount
 }
 
-description="Starts the Grafana server."
-
-start() {
-	ebegin "Starting Grafana"
-
-	checkpath -d -o "${GRAFANA_USER}:${GRAFANA_GROUP}" -m750 "/var/lib/grafana/dashboards"
-	checkpath -d -o "${GRAFANA_USER}:${GRAFANA_GROUP}" -m750 "/var/lib/grafana/plugins"
-	checkpath -d -o "${GRAFANA_USER}:${GRAFANA_GROUP}" -m750 "/var/lib/grafana/sessions"
-
-	start-stop-daemon --start --background --quiet \
-		--chdir "${GRAFANA_HOMEDIR}" \
-		--pidfile "${GRAFANA_PIDFILE}" \
-		--exec /usr/sbin/grafana-server \
-		-- -config "${GRAFANA_CFGFILE}" \
-			-homepath "${GRAFANA_HOMEDIR}" \
-			-pidfile="${GRAFANA_PIDFILE}" \
-			cfg:default.paths.data=/var/lib/grafana \
-			cfg:default.paths.logs=/var/log/grafana
-	eend $?
-}
-
-stop() {
-	ebegin "Stopping Grafana."
-	start-stop-daemon --stop \
-		--pidfile "${GRAFANA_PIDFILE}" \
-		--retry=TERM/20/KILL/5
-	eend $?
+start_pre() {
+	checkpath -d -o "${GRAFANA_USER}:${GRAFANA_GROUP}" -m750 "${GRAFANA_DATADIR}" || return 1
+	checkpath -d -o "${GRAFANA_USER}:${GRAFANA_GROUP}" -m750 "${GRAFANA_DATADIR}/dashboards" || return 1
+	checkpath -d -o "${GRAFANA_USER}:${GRAFANA_GROUP}" -m750 "${GRAFANA_DATADIR}/plugins" || return 1
 }

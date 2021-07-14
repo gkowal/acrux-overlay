@@ -1,16 +1,16 @@
 [Unit]
 Description=Grafana
 Documentation=http://docs.grafana.org
-After=network.target
+Wants=network-online.target
+After=network-online.target
 
 [Service]
 User=grafana
 Group=grafana
 Type=simple
 Restart=on-failure
-WorkingDirectory=/usr/share/grafana
 RuntimeDirectory=grafana
-RuntimeDirectoryMode=0750
+WorkingDirectory=/usr/share/grafana
 ExecStart=/usr/sbin/grafana-server                     \
     --config=/etc/grafana/grafana.ini                  \
     --pidfile=/run/grafana/grafana-server.pid          \
