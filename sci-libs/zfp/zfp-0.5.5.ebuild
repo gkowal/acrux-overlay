@@ -11,7 +11,7 @@ DESCRIPTION="Compressed numerical arrays that support high-speed random access"
 HOMEPAGE="https://computing.llnl.gov/projects/zfp"
 SRC_URI="https://github.com/LLNL/${PN}/releases/download/${PV}/${P}.tar.gz"
 
-LICENSE="BSD-3-Clause"
+LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="+fortran +python"
