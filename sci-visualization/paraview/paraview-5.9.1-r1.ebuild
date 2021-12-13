@@ -105,7 +105,7 @@ S="${WORKDIR}/${MY_P}"
 PATCHES=(
 	"${FILESDIR}"/${PN}-4.0.1-xdmf-cstring.patch
 	"${FILESDIR}"/${PN}-5.5.0-allow_custom_build_type.patch
-	"${FILESDIR}"/${PN}-5.9.0-gcc11-include.patch
+	"${FILESDIR}"/${PN}-5.9.1-gcc11-include.patch
 )
 
 pkg_setup() {
@@ -186,7 +186,6 @@ src_configure() {
 
 		# tk
 		-DVTK_USE_TK="$(usex tk)"
-		-DVTK_GROUP_ENABLE_Tk="$(usex tk YES NO)"
 
 		# webengine
 		-DPARAVIEW_USE_QTWEBENGINE="$(usex webengine)"
