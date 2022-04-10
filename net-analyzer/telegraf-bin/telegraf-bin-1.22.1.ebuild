@@ -5,7 +5,7 @@ EAPI=8
 
 inherit systemd
 
-DESCRIPTION="The open source server agent to help you collect metrics from your stacks, sensors, and systems."
+DESCRIPTION="A server-based agent to collect metrics from stacks, sensors, and systems."
 HOMEPAGE="https://www.influxdata.com/time-series-platform/telegraf/"
 SRC_URI="
 	amd64? ( https://dl.influxdata.com/telegraf/releases/telegraf-${PV}_linux_amd64.tar.gz )
@@ -14,7 +14,7 @@ SRC_URI="
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="systemd"
 
 QA_PREBUILT="usr/sbin/telegraf"
