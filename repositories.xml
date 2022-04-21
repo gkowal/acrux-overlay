@@ -10,5 +10,6 @@
       <name><![CDATA[Grzegorz Kowal]]></name>
     </owner>
     <source type="git">https://github.com/gkowal/acrux-overlay.git</source>
+    <feed>https://github.com/gkowal/acrux-overlay/commits/master.atom</feed>
   </repo>
 </repositories>
