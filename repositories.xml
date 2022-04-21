@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name><![CDATA[acrux-overlay]]></name>
+    <description lang="en"><![CDATA[Acrux Overlay]]></description>
+    <homepage>https://github.com/gkowal/acrux-overlay</homepage>
+    <owner type="person">
+      <email>grzegorz@amuncode.org</email>
+      <name><![CDATA[Grzegorz Kowal]]></name>
+    </owner>
+    <source type="git">https://github.com/gkowal/acrux-overlay.git</source>
+  </repo>
+</repositories>
