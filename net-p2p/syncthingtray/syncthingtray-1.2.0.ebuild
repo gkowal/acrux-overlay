@@ -22,7 +22,7 @@ DEPEND="
 	dev-qt/qtsvg:5
 	dev-qt/qtwebengine:5[widgets]
 	dev-qt/qtwidgets:5
-	>=dev-util/cpp-utilities-5.11.0
+	>=dev-util/cpp-utilities-5.16.0
 	dev-util/qtutilities
 	dev-util/qtforkawesome
 "
