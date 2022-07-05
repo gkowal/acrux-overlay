@@ -1,9 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{8,9} )
+PYTHON_COMPAT=( python3_{8..10} )
 inherit cmake desktop python-single-r1 qmake-utils toolchain-funcs xdg-utils
 
 MAIN_PV=$(ver_cut 0-1)
@@ -16,15 +16,13 @@ SRC_URI="https://www.paraview.org/files/v${MAJOR_PV}/${MY_P}.tar.xz"
 
 LICENSE="paraview GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
-IUSE="boost cg doc examples ffmpeg mpi mysql nvcontrol openmp offscreen plugins python +qt5 +sqlite test tk visit webengine"
+KEYWORDS="~amd64 ~x86"
+IUSE="boost cg doc examples ffmpeg mpi nvcontrol nvindex openmp offscreen plugins python +qt5 +sqlite test tk visit webengine"
 
 RESTRICT="mirror test"
 
-# "vtksqlite, needed by vtkIOSQL" and "vtkIOSQL, needed by vtkIOMySQL"
 REQUIRED_USE="
 	python? ( mpi ${PYTHON_REQUIRED_USE} )
-	mysql? ( sqlite )
 	webengine? ( qt5 )
 	qt5? ( sqlite )
 	?? ( offscreen qt5 )"
@@ -51,14 +49,13 @@ RDEPEND="
 	>=sci-libs/netcdf-cxx-4.2:3
 	sys-libs/zlib
 	virtual/glu
-	virtual/jpeg:0
+	media-libs/libjpeg-turbo:=
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-libs/libXmu
 	x11-libs/libXt
 	ffmpeg? ( media-video/ffmpeg )
 	mpi? ( virtual/mpi[cxx,romio] )
-	mysql? ( dev-db/mysql-connector-c )
 	offscreen? ( >=media-libs/mesa-18.3.6[osmesa] )
 	!offscreen? ( virtual/opengl )
 	python? (
@@ -69,7 +66,7 @@ RDEPEND="
 			dev-python/matplotlib[${PYTHON_USEDEP}]
 			dev-python/numpy[${PYTHON_USEDEP}]
 			dev-python/pygments[${PYTHON_USEDEP}]
-			<dev-python/sip-5:=[${PYTHON_USEDEP}]
+			dev-python/sip:0[${PYTHON_USEDEP}]
 			dev-python/six[${PYTHON_USEDEP}]
 			dev-python/twisted[${PYTHON_USEDEP}]
 			dev-python/zope-interface[${PYTHON_USEDEP}]
@@ -154,16 +151,15 @@ src_configure() {
 		-DXDMF_BUILD_MPI="$(usex mpi)"
 		-DVTK_GROUP_ENABLE_MPI="$(usex mpi YES NO)"
 
-		# mysql
-		-DVTK_MODULE_ENABLE_VTK_IOMySQL="$(usex mysql YES NO)"
-
 		# offscreen
 		-DVTK_OPENGL_HAS_OSMESA="$(usex offscreen)"
 		-DVTK_OPENGL_HAS_OSMESA="$(usex offscreen)"
 
 		# plugins
 		-DPARAVIEW_PLUGINS_DEFAULT="$(usex plugins)"
-		-DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX="$(usex plugins)"
+
+		# NVidia IndeX
+		-DPARAVIEW_PLUGIN_ENABLE_pvNVIDIAIndeX="$(usex nvindex)"
 
 		# VisIt
 		-DPARAVIEW_ENABLE_VISITBRIDGE="$(usex visit)"
