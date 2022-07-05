@@ -16,7 +16,7 @@ SRC_URI="https://www.paraview.org/files/v${MAJOR_PV}/${MY_P}.tar.xz"
 
 LICENSE="paraview GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="boost cg doc examples ffmpeg mpi nvcontrol nvindex openmp offscreen plugins python +qt5 +sqlite test tk visit webengine"
 
 RESTRICT="mirror test"
