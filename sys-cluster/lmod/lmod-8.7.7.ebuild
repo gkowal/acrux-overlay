@@ -11,7 +11,7 @@ HOMEPAGE="https://lmod.readthedocs.io/en/latest https://github.com/TACC/Lmod"
 
 SRC_URI="https://github.com/TACC/Lmod/archive/${PV}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}"/Lmod-${PV}
-KEYWORDS="~amd64 ~arm ~ppc ~sparc ~x86"
+KEYWORDS="amd64 ~arm ~ppc ~sparc ~x86"
 
 LICENSE="MIT"
 SLOT="0"
