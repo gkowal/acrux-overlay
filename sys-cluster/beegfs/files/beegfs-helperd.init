@@ -1,0 +1,30 @@
+#!/sbin/openrc-run
+# Copyright (c) 2018 Grzegorz Kowal <grzegorz@gkowal.info>
+
+: ${BEEGFSHELP_CFGFILE:='/etc/beegfs/beegfs-helperd.conf'}
+: ${BEEGFSHELP_PIDFILE:='/run/beegfs-helperd.pid'}
+: ${BEEGFSHELP_LOGFILE:='/var/log/beegfs/beegfs-helperd.log'}
+
+depend() {
+        need localmount
+}
+
+description="Starts the BeeGFS helper daemon."
+
+start() {
+        ebegin "Starting BeeGFS helper service"
+        start-stop-daemon --start --background --quiet \
+                --exec /usr/sbin/beegfs-helperd \
+                --pidfile "${BEEGFSHELP_PIDFILE}" \
+                --stdout /dev/null --stderr "${BEEGFSHELP_LOGFILE}" \
+                -- cfgFile=${BEEGFSHELP_CFGFILE} pidFile=${BEEGFSHELP_PIDFILE}
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping BeeGFS helper service"
+        start-stop-daemon --stop \
+                --pidfile "${BEEGFSHELP_PIDFILE}" \
+                --retry=TERM/20/KILL/5
+        eend $?
+}

@@ -1,0 +1,30 @@
+#!/sbin/openrc-run
+# Copyright (c) 2018 Grzegorz Kowal <grzegorz@gkowal.info>
+
+: ${BEEGFSMETA_CFGFILE:='/etc/beegfs/beegfs-meta.conf'}
+: ${BEEGFSMETA_PIDFILE:='/run/beegfs-meta.pid'}
+: ${BEEGFSMETA_LOGFILE:='/var/log/beegfs/beegfs-meta.log'}
+
+depend() {
+        need localmount
+}
+
+description="Starts the BeeGFS metadata daemon."
+
+start() {
+        ebegin "Starting BeeGFS metadata service"
+        start-stop-daemon --start --background --quiet \
+                --exec /usr/sbin/beegfs-meta \
+                --pidfile "${BEEGFSMETA_PIDFILE}" \
+                --stdout /dev/null --stderr "${BEEGFSMETA_LOGFILE}" \
+                -- cfgFile=${BEEGFSMETA_CFGFILE} pidFile=${BEEGFSMETA_PIDFILE}
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping BeeGFS metadata service"
+        start-stop-daemon --stop \
+                --pidfile "${BEEGFSMETA_PIDFILE}" \
+                --retry=TERM/20/KILL/5
+        eend $?
+}

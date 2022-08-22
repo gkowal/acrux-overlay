@@ -1,0 +1,14 @@
+# Copyright (c) 2018 Grzegorz Kowal <grzegorz@gkowal.info>
+# Distributed under the terms of the GNU General Public License v2
+
+# Location of configuration file and directory. Modify if you don't like the standard one.
+#
+#BEEGFSDATA_CFGFILE='/etc/beegfs/beegfs-storage.conf'
+
+# File used to store the PID file. Usually you won't need to touch it.
+#
+#BEEGFSDATA_PIDFILE='/run/beegfs-storage.pid'
+
+# Location of the log file.
+#
+#BEEGFSDATA_LOGFILE='/var/log/beegfs/beegfs-storage.log'

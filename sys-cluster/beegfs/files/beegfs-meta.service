@@ -1,0 +1,13 @@
+[Unit]
+Description=Start BeeGFS Metadata Server
+Documentation=https://www.beegfs.io/content/documentation/
+After=network.target beegfs-mgmtd.service beegfs-storage.service
+
+[Service]
+Type=forking
+Environment=BEEGFSMETA_CFGFILE=/etc/beegfs/beegfs-meta.conf
+Environment=BEEGFSMETA_PIDFILE=/run/beegfs-meta.pid
+ExecStart=/usr/sbin/beegfs-meta cfgFile=${BEEGFSMETA_CFGFILE} pidFile=${BEEGFSMETA_PIDFILE}
+
+[Install]
+WantedBy=multi-user.target

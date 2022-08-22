@@ -1,0 +1,30 @@
+#!/sbin/openrc-run
+# Copyright (c) 2018 Grzegorz Kowal <grzegorz@gkowal.info>
+
+: ${BEEGFSDATA_CFGFILE:='/etc/beegfs/beegfs-storage.conf'}
+: ${BEEGFSDATA_PIDFILE:='/run/beegfs-storage.pid'}
+: ${BEEGFSDATA_LOGFILE:='/var/log/beegfs/beegfs-storage.log'}
+
+depend() {
+        need localmount
+}
+
+description="Starts the BeeGFS storage daemon."
+
+start() {
+        ebegin "Starting BeeGFS storage service"
+        start-stop-daemon --start --background --quiet \
+                --exec /usr/sbin/beegfs-storage \
+                --pidfile "${BEEGFSDATA_PIDFILE}" \
+                --stdout /dev/null --stderr "${BEEGFSDATA_LOGFILE}" \
+                -- cfgFile=${BEEGFSDATA_CFGFILE} pidFile=${BEEGFSDATA_PIDFILE}
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping BeeGFS storage service"
+        start-stop-daemon --stop \
+                --pidfile "${BEEGFSDATA_PIDFILE}" \
+                --retry=TERM/20/KILL/5
+        eend $?
+}

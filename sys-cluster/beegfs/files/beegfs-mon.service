@@ -1,0 +1,13 @@
+[Unit]
+Description=Start BeeGFS Mon Server
+Documentation=https://www.beegfs.io/content/documentation/
+After=network.target beegfs-mgmtd.service beegfs-storage.service influxd.service
+
+[Service]
+Type=forking
+Environment=BEEGFSMON_CFGFILE=/etc/beegfs/beegfs-mon.conf
+Environment=BEEGFSMON_PIDFILE=/run/beegfs-mon.pid
+ExecStart=/usr/sbin/beegfs-mon cfgFile=${BEEGFSMON_CFGFILE} pidFile=${BEEGFSMON_PIDFILE}
+
+[Install]
+WantedBy=multi-user.target

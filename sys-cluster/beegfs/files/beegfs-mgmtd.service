@@ -1,0 +1,13 @@
+[Unit]
+Description=Start BeeGFS Management Server
+Documentation=https://www.beegfs.io/content/documentation/
+After=network.target
+
+[Service]
+Type=forking
+Environment=BEEGFSMGMT_CFGFILE=/etc/beegfs/beegfs-mgmtd.conf
+Environment=BEEGFSMGMT_PIDFILE=/run/beegfs-mgmtd.pid
+ExecStart=/usr/sbin/beegfs-mgmtd cfgFile=${BEEGFSMGMT_CFGFILE} pidFile=${BEEGFSMGMT_PIDFILE}
+
+[Install]
+WantedBy=multi-user.target
