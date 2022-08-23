@@ -5,7 +5,7 @@ EAPI=8
 
 LUA_COMPAT=( lua5-{1..4} )
 
-SRC_URI="https://github.com/SchedMD/slurm/archive/${P}.tar.bz2"
+SRC_URI="https://download.schedmd.com/slurm/${P}.tar.bz2"
 KEYWORDS="amd64 ~arm64 ~riscv ~x86"
 
 inherit autotools bash-completion-r1 lua-single pam perl-module prefix toolchain-funcs systemd tmpfiles
