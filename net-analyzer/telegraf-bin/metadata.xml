@@ -6,7 +6,9 @@
 		<name>Grzegorz Kowal</name>
 	</maintainer>
 	<longdescription lang="en">
-		Telegraf is an agent written in Go for collecting, processing,
-		aggregating and writing metrics.
+		Telegraf, a server-based agent, collects and sends metrics and
+		events from databases, systems, and IoT sensors. Written in Go,
+		Telegraf compiles into a single binary with no external
+		dependencies–requiring very minimal memory.
 	</longdescription>
 </pkgmetadata>
