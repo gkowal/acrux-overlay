@@ -11,13 +11,12 @@ HOMEPAGE="https://lmod.readthedocs.io/en/latest https://github.com/TACC/Lmod"
 
 SRC_URI="https://github.com/TACC/Lmod/archive/${PV}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}"/Lmod-${PV}
-KEYWORDS="~amd64 ~arm ~ppc ~sparc ~x86"
+KEYWORDS="amd64 ~arm ~ppc ~sparc ~x86"
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="+auto-swap +cache duplicate-paths test"
+IUSE="+auto-swap +cache duplicate-paths"
 REQUIRED_USE="${LUA_REQUIRED_USE}"
-RESTRICT="!test? ( test )"
 
 RDEPEND="${LUA_DEPS}
 	dev-lang/tcl
@@ -31,12 +30,6 @@ RDEPEND="${LUA_DEPS}
 "
 DEPEND="${RDEPEND}"
 BDEPEND="${RDEPEND}
-	test? (
-		$(lua_gen_cond_dep '
-			dev-util/hermes[${LUA_SINGLE_USEDEP}]
-		')
-		app-shells/tcsh
-	)
 	virtual/pkgconfig
 "
 
@@ -97,12 +90,6 @@ src_configure() {
 src_compile() {
 	CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}" \
 	default
-}
-
-src_test() {
-	local -x PATH="${EPREFIX}/opt/hermes/bin:${PATH}"
-	tm -vvv || die
-	testcleanup || die
 }
 
 src_install() {
