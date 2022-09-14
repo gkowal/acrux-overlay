@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit linux-mod
+inherit linux-mod toolchain-funcs
 
 DESCRIPTION="Kernel module for BeeGFS parallel cluster filesystem."
 HOMEPAGE="https://beegfs.io/"
