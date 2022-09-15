@@ -12,7 +12,7 @@ SRC_URI+=" https://gkowal.info/gentoo/${P}-deps.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="systemd"
 
 RESTRICT="strip"
