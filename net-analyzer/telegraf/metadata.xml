@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>williamh@gentoo.org</email>
+		<name>William Hubbs</name>
+	</maintainer>
+	<longdescription lang="en">
+		Telegraf, a server-based agent, collects and sends metrics and
+		events from databases, systems, and IoT sensors. Written in Go,
+		Telegraf compiles into a single binary with no external
+		dependencies–requiring very minimal memory.
+	</longdescription>
+</pkgmetadata>
