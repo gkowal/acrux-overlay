@@ -20,7 +20,7 @@ SRC_URI="
 
 LICENSE="MIT"
 SLOT="${MY_PV}"
-KEYWORDS="-* ~amd64 ~arm64 ~x86"
+KEYWORDS="-* amd64 ~arm64 ~x86"
 
 RDEPEND="app-arch/p7zip"
 DEPEND="${RDEPEND}"
