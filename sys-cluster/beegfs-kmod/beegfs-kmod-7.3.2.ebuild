@@ -11,7 +11,7 @@ SRC_URI="https://git.beegfs.io/pub/v7/-/archive/${PV}/v7-${PV}.tar.bz2 -> beegfs
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 MY_P="v7-${PV}"
 S="${WORKDIR}/${MY_P}/client_module"
