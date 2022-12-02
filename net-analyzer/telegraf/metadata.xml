@@ -11,4 +11,7 @@
 		Telegraf compiles into a single binary with no external
 		dependencies–requiring very minimal memory.
 	</longdescription>
+	<upstream>
+		<remote-id type="github">influxdata/telegraf</remote-id>
+	</upstream>
 </pkgmetadata>

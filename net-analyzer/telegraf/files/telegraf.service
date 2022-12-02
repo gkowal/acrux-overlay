@@ -1,7 +1,8 @@
 [Unit]
 Description=The plugin-driven server agent for reporting metrics into InfluxDB
 Documentation=https://github.com/influxdata/telegraf
-After=network.target influxdb.service
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Environment=TELEGRAF_CFGFILE=/etc/telegraf/telegraf.conf
