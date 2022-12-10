@@ -9,7 +9,7 @@ DESCRIPTION="Tray application and Dolphin/Plasma integration for Syncthing"
 HOMEPAGE="https://github.com/Martchus/syncthingtray"
 SRC_URI="https://github.com/Martchus/syncthingtray/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 SLOT="1"
 LICENSE="GPL-2"
 IUSE=""
