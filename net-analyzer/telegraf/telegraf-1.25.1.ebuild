@@ -7,7 +7,7 @@ inherit go-module systemd
 
 DESCRIPTION="The plugin-driven server agent for collecting & reporting metrics."
 HOMEPAGE="https://github.com/influxdata/telegraf"
-SRC_URI="https://github.com/influxdata/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://gkowal.info/gentoo/${CATEGORY}/${PN}/${P}.tar.gz"
 SRC_URI+=" https://gkowal.info/gentoo/${CATEGORY}/${PN}/${P}-deps.tar.xz"
 
 LICENSE="MIT"
