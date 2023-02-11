@@ -8,13 +8,13 @@ inherit kernel-2
 detect_version
 detect_arch
 
-KEYWORDS="amd64 ~x86"
+KEYWORDS="amd64 x86"
 UNIPATCH_STRICTORDER="yes"
 UNIPATCH_LIST="${DISTDIR}/${PVR}.tar.gz"
 
 DESCRIPTION="Vanilla sources with additional acrux-patchset."
 HOMEPAGE="https://github.com/gkowal/acrux-patchset"
-SRC_URI="${KERNEL_URI} https://github.com/gkowal/acrux-patchset/archive/${PVR}.tar.gz"
+SRC_URI="${KERNEL_URI} https://github.com/gkowal/acrux-patchset/archive/${PVR}.tar.gz -> acrux-patchset-${PVR}.tar.gz"
 
 pkg_postinst() {
 	kernel-2_pkg_postinst
