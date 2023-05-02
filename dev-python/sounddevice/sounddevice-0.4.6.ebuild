@@ -10,7 +10,7 @@ inherit distutils-r1 pypi
 
 DESCRIPTION="Play and Record Sound with Python"
 HOMEPAGE="https://github.com/spatialaudio/python-sounddevice"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 LICENSE="MIT"
 SLOT="0"
