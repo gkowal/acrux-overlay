@@ -15,7 +15,7 @@ KEYWORDS="amd64 x86"
 LICENSE="GPL-3"
 SLOT="0"
 
-DEPENDS="
+DEPEND="
 	dev-python/h5py
 	dev-python/lz4
 	dev-python/numpy
