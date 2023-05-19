@@ -31,7 +31,7 @@ COMMON_DEPEND="
 	lua? ( ${LUA_DEPS} )
 	ipmi? ( sys-libs/freeipmi )
 	json? ( dev-libs/json-c:= )
-	amd64? ( netloc? ( >=sys-apps/hwloc-2.1.0:=[netloc(-)] ) )
+	amd64? ( netloc? ( >=sys-apps/hwloc-2.1.0 ) )
 	hdf5? ( sci-libs/hdf5:= )
 	numa? ( sys-process/numactl )
 	ofed? ( sys-cluster/rdma-core )
