@@ -22,4 +22,7 @@
 		<flag name="torque">Enable perl scripts that emulates pbs (qstat, qsub etc.)</flag>
 		<flag name="ucx">Enable Unified Communication X library support</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">SchedMD/slurm</remote-id>
+	</upstream>
 </pkgmetadata>
