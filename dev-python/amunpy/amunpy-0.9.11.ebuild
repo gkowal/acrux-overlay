@@ -10,7 +10,7 @@ inherit distutils-r1 pypi
 
 DESCRIPTION="Read snapshots written using the AMUN code"
 HOMEPAGE="https://amuncode.org"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 LICENSE="GPL-3"
 SLOT="0"
