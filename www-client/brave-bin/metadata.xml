@@ -2,9 +2,8 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>jpizarrocallejas@gmail.com</email>
-		<name>Jorge Pizarro Callejas</name>
-		<description>Jorgicio Gentoo Overlay</description>
+		<email>grzegorz@gkowal.info</email>
+		<name>Grzegorz Kowal</name>
 	</maintainer>
 	<upstream>
 		<remote-id type="github">brave/brave-browser</remote-id>
