@@ -6,7 +6,7 @@
     <description lang="en"><![CDATA[Acrux Overlay]]></description>
     <homepage>https://github.com/gkowal/acrux-overlay</homepage>
     <owner type="person">
-      <email>grzegorz@amuncode.org</email>
+      <email>grzegorz@gkowal.info</email>
       <name><![CDATA[Grzegorz Kowal]]></name>
     </owner>
     <source type="git">https://github.com/gkowal/acrux-overlay.git</source>
