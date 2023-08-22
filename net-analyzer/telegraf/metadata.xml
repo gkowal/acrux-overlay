@@ -2,8 +2,8 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>williamh@gentoo.org</email>
-		<name>William Hubbs</name>
+		<email>grzegorz@gkowal.info</email>
+		<name>Grzegorz Kowal</name>
 	</maintainer>
 	<longdescription lang="en">
 		Telegraf, a server-based agent, collects and sends metrics and
