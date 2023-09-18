@@ -11,9 +11,8 @@ SRC_URI="https://gkowal.info/gentoo/${CATEGORY}/beegfs/beegfs-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
-MY_P="v7-${PV}"
 S="${WORKDIR}/client_module"
 
 MODULES_KERNEL_MAX=6.1
