@@ -8,8 +8,8 @@ inherit bash-completion-r1 fcaps go-module
 DESCRIPTION="A backup program that is fast, efficient and secure"
 HOMEPAGE="https://restic.github.io/"
 
-SRC_URI="https://amuncode.org/gentoo/${CATEGORY}/${PN}/${P}.tar.xz"
-SRC_URI+=" https://amuncode.org/gentoo/${CATEGORY}/${PN}/${P}-deps.tar.xz"
+SRC_URI="https://gkowal.info/gentoo/${CATEGORY}/${PN}/${P}.tar.xz"
+SRC_URI+=" https://gkowal.info/gentoo/${CATEGORY}/${PN}/${P}-deps.tar.xz"
 
 LICENSE="Apache-2.0 BSD BSD-2 LGPL-3-with-linking-exception MIT"
 SLOT="0"
