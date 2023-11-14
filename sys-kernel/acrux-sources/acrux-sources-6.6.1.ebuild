@@ -8,7 +8,7 @@ inherit kernel-2
 detect_version
 detect_arch
 
-KEYWORDS="~amd64 x86"
+KEYWORDS="amd64 x86"
 UNIPATCH_STRICTORDER="yes"
 UNIPATCH_LIST="${DISTDIR}/acrux-patchset-${PVR}.tar.gz"
 
