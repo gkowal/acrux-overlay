@@ -30,7 +30,7 @@ RDEPEND="
 	>=dev-util/qtutilities-6.13.0
 	kde? (
 		kde-frameworks/kio:5
-		kde-frameworks/plasma:5
+		kde-plasma/libplasma
 	)
 	qml? ( dev-qt/qtdeclarative:5 )
 	script? ( dev-qt/qtscript:5 )
@@ -39,7 +39,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	kde? (
-		kde-frameworks/extra-cmake-modules:5
+		kde-frameworks/extra-cmake-modules
 	)
 "
 
