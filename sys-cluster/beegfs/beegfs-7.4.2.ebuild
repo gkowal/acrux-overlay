@@ -10,7 +10,7 @@ HOMEPAGE="https://beegfs.io/"
 SRC_URI="https://gkowal.info/gentoo/${CATEGORY}/beegfs/${P}.tar.xz"
 LICENSE="BeeGFS-EULA"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="+client +modules management meta monitoring storage systemd utils"
 S="${WORKDIR}"
 
