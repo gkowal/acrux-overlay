@@ -11,11 +11,11 @@ SRC_URI="https://gkowal.info/gentoo/${CATEGORY}/beegfs/beegfs-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 S="${WORKDIR}/client_module"
 
-MODULES_KERNEL_MAX=6.1
+MODULES_KERNEL_MAX=6.2
 
 src_compile() {
 	local modlist=( beegfs=misc:build )
