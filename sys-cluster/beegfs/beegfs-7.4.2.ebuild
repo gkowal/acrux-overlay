@@ -16,11 +16,11 @@ S="${WORKDIR}"
 
 DEPEND="
 	>=dev-db/sqlite-3.0
+	dev-build/libtool
 	dev-libs/openssl:0
 	dev-util/cppunit
 	sys-apps/attr
 	sys-cluster/rdma-core
-	sys-devel/libtool
 	sys-fabric/opensm
 	sys-fs/xfsprogs
 	sys-libs/zlib
