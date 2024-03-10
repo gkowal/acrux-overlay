@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{9..11} )
+PYTHON_COMPAT=( python3_{9..12} )
 DOCS_BUILDER="doxygen"
 inherit cmake flag-o-matic desktop docs python-single-r1 qmake-utils toolchain-funcs xdg
 
@@ -16,10 +16,9 @@ HOMEPAGE="https://www.paraview.org"
 SRC_URI="https://www.paraview.org/files/v${MAJOR_PV}/${MY_P}.tar.xz"
 S="${WORKDIR}/${MY_P}"
 
-# TODO: check licenses of plugins (USE=plugins)
 LICENSE="BSD MIT PSF-2 VTK"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="boost cg examples ffmpeg mpi nvcontrol nvindex openmp offscreen plugins python +qt5 +sqlite test tk visit +webengine"
 
 RESTRICT="mirror test"
