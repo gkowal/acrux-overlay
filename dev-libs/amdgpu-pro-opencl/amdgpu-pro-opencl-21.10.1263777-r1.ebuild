@@ -11,7 +11,7 @@ SUPER_PN='amdgpu-pro'
 MY_PV=$(ver_rs 2 '-')
 
 DESCRIPTION="Proprietary OpenCL implementation for AMD GPUs"
-HOMEPAGE="https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified-linux-21-10."
+HOMEPAGE="https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified-linux-21-10"
 SRC_URI="${SUPER_PN}-${MY_PV}-ubuntu-20.04.tar.xz"
 
 LICENSE="AMD-GPU-PRO-EULA"
