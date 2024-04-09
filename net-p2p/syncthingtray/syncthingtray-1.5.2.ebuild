@@ -7,11 +7,11 @@ inherit cmake
 
 DESCRIPTION="Tray application for Syncthing"
 HOMEPAGE="https://github.com/Martchus/syncthingtray"
-SRC_URI="https://github.com/Martchus/syncthingtray/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="kde qml script static-libs systemd webengine"
 
 REQUIRED_USE="
@@ -26,11 +26,10 @@ RDEPEND="
 	dev-qt/qtnetwork:5
 	dev-qt/qtsvg:5
 	dev-util/qtforkawesome
-	>=dev-util/cpp-utilities-5.22.0
-	>=dev-util/qtutilities-6.13.0
+	dev-util/qtutilities
 	kde? (
 		kde-frameworks/kio:5
-		kde-plasma/libplasma
+		kde-plasma/libplasma:5
 	)
 	qml? ( dev-qt/qtdeclarative:5 )
 	script? ( dev-qt/qtscript:5 )
