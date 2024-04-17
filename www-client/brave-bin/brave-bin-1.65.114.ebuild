@@ -17,6 +17,8 @@ DESCRIPTION="Brave Web Browser"
 HOMEPAGE="https://brave.com"
 SRC_URI="https://github.com/brave/brave-browser/releases/download/v${PV}/brave-browser-${PV}-linux-amd64.zip -> ${P}.zip"
 
+S=${WORKDIR}
+
 LICENSE="MPL-2.0"
 SLOT="0"
 KEYWORDS="amd64"
@@ -76,8 +78,6 @@ RDEPEND="
 "
 
 QA_PREBUILT="*"
-
-S=${WORKDIR}
 
 src_prepare() {
 	pushd "${S}/locales" > /dev/null || die
