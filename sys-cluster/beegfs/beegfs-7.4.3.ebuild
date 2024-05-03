@@ -9,8 +9,8 @@ DESCRIPTION="BeeGFS (formerly FhGFS) is the leading parallel cluster file system
 HOMEPAGE="https://beegfs.io/"
 SRC_URI="https://github.com/ThinkParQ/beegfs/archive/${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="BeeGFS-EULA"
-SLOT="0"
 S="${WORKDIR}/${P}"
+SLOT="0"
 KEYWORDS="~amd64"
 IUSE="+client +modules management meta monitoring storage systemd utils"
 
