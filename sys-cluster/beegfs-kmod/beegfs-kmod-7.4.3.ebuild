@@ -1,4 +1,4 @@
-# Copyright 2018-2023 Gentoo Authors
+# Copyright 2018-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,10 +7,8 @@ inherit linux-mod-r1
 
 DESCRIPTION="Kernel module for BeeGFS parallel cluster filesystem."
 HOMEPAGE="https://beegfs.io/"
-SRC_URI="https://github.com/ThinkParQ/beegfs/archive/${PV}.tar.gz -> ${P}.tar.gz"
-
+SRC_URI="https://github.com/ThinkParQ/beegfs/archive/${PV}.tar.gz -> beegfs-${PV}.tar.gz"
 S="${WORKDIR}/beegfs-${PV}/client_module"
-
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
