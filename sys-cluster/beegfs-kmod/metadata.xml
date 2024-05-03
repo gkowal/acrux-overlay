@@ -12,5 +12,7 @@
 		your problem, BeeGFS is the solution.
 		This package provides kernel module for BeeGFS.
 	</longdescription>
-	<remote-id type="github">ThinkParQ/beegfs</remote-id>
+	<upstream>
+		<remote-id type="github">ThinkParQ/beegfs</remote-id>
+	</upstream>
 </pkgmetadata>
