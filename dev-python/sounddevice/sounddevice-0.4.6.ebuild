@@ -14,3 +14,8 @@ KEYWORDS="amd64 x86"
 
 LICENSE="MIT"
 SLOT="0"
+
+DEPEND="
+	media-libs/portaudio
+"
+RDEPEND="${DEPEND}"
