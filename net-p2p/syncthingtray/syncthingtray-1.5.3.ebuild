@@ -12,12 +12,7 @@ SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
-IUSE="kde qml script static-libs systemd webengine"
-
-REQUIRED_USE="
-	qml? ( !script )
-	script? ( !qml )
-"
+IUSE="kde qml static-libs systemd webengine"
 
 RDEPEND="
 	dev-libs/openssl:=
@@ -32,7 +27,6 @@ RDEPEND="
 		kde-plasma/libplasma:5
 	)
 	qml? ( dev-qt/qtdeclarative:5 )
-	script? ( dev-qt/qtscript:5 )
 	systemd? ( dev-qt/qtdbus:5 )
 	webengine? ( dev-qt/qtwebengine:5 )
 "
@@ -49,7 +43,7 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE:STRING=Release
 		-DBUILD_SHARED_LIBS:BOOL=$(usex !static-libs)
 		-DWEBVIEW_PROVIDER="$(usex webengine webengine none)"
-		-DJS_PROVIDER="$(usex qml qml $(usex script script none))"
+		-DJS_PROVIDER="$(usex qml qml none)"
 		-DSYSTEMD_SUPPORT=$(usex systemd)
 		-DNO_FILE_ITEM_ACTION_PLUGIN=$(usex !kde)
 		-DNO_PLASMOID=$(usex !kde)
