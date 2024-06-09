@@ -10,7 +10,6 @@
 	</upstream>
 	<use>
 		<flag name="qml">Use QML as Javascript provider</flag>
-		<flag name="script">Use dev-qt/qtscript as Javascript provider</flag>
 		<flag name="webengine">Use dev-qt/qtwebengine as HTML rendering engine</flag>
 	</use>
 </pkgmetadata>
