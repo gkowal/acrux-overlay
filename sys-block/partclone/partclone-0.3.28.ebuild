@@ -11,7 +11,7 @@ SRC_URI="https://github.com/Thomas-Tsai/${PN}/archive/${PV}.tar.gz -> ${P}.tar.g
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="btrfs exfat f2fs +fat hfs jfs ncurses +ntfs reiser4 reiserfs static vmfs +xfs"
 
 RDEPEND="sys-fs/e2fsprogs
@@ -33,7 +33,7 @@ RDEPEND="sys-fs/e2fsprogs
 		  sys-fs/reiser4progs[static-libs]
 		  sys-fs/reiserfsprogs[static-libs]
 		 )"
-DEPEND=""
+DEPEND="${RDEPEND}"
 
 src_prepare() {
 	default
