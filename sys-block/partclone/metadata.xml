@@ -17,7 +17,6 @@
 		<flag name="jfs">Enables support for JFS filesystem</flag>
 		<flag name="ncurses">Enables text user interface</flag>
 		<flag name="ntfs">Enables support for NTFS filesystem</flag>
-		<flag name="reiser4">Enables support for reiser4 filesystem</flag>
 		<flag name="reiserfs">Enables support for reiserfs filesystem</flag>
 		<flag name="xfs">Enables support for XFS filesystem</flag>
 		<flag name="vmfs">Enables support for vmfs filesystem</flag>
