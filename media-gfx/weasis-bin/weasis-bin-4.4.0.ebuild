@@ -11,14 +11,13 @@ SRC_URI="amd64? ( https://github.com/nroduit/Weasis/releases/download/v${PV}/${P
 
 LICENSE="EPL-2.0"
 SLOT="0"
-KEYWORDS="~amd64"
+S="${WORKDIR}"
+KEYWORDS="amd64"
 
 RDEPEND="
 	>=virtual/jre-1.8
 	x11-misc/shared-mime-info
 "
-
-S="${WORKDIR}"
 
 src_install() {
 	insinto /opt
