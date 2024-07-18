@@ -9,8 +9,8 @@ DESCRIPTION="A DICOM viewer available as a desktop application or as a web-based
 HOMEPAGE="https://nroduit.github.io/ https://github.com/nroduit/Weasis"
 SRC_URI="amd64? ( https://github.com/nroduit/Weasis/releases/download/v${PV}/${P/-bin-/_}-1_amd64.deb -> ${P}_amd64.deb )"
 
-LICENSE="EPL-2.0"
 S="${WORKDIR}"
+LICENSE="EPL-2.0"
 SLOT="0"
 KEYWORDS="amd64"
 
