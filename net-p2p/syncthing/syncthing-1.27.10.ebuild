@@ -74,7 +74,7 @@ src_install() {
 		done
 	fi
 
-	systemd_dounit etc/linux-systemd/system/${PN}{@,-resume}.service
+	systemd_dounit etc/linux-systemd/system/${PN}@.service
 	systemd_douserunit etc/linux-systemd/user/${PN}.service
 	newconfd "${FILESDIR}"/${PN}.confd ${PN}
 	newinitd "${FILESDIR}"/${PN}.initd ${PN}
