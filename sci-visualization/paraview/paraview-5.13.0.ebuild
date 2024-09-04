@@ -18,7 +18,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="BSD MIT PSF-2 VTK"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="boost cg examples ffmpeg mpi nvcontrol nvindex openmp offscreen plugins python qt5 +qt6 +sqlite test visit +webengine"
 
 RESTRICT="mirror test"
