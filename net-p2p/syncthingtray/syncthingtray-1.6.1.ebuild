@@ -16,19 +16,19 @@ IUSE="kde qml static-libs systemd webengine"
 
 RDEPEND="
 	dev-libs/openssl:=
-	dev-qt/qtconcurrent
-	dev-qt/qtcore
-	dev-qt/qtnetwork
-	dev-qt/qtsvg
+	dev-qt/qtconcurrent:5
+	dev-qt/qtcore:5
+	dev-qt/qtnetwork:5
+	dev-qt/qtsvg:5
 	dev-util/qtforkawesome
 	dev-util/qtutilities
 	kde? (
-		kde-frameworks/kio
-		kde-plasma/libplasma
+		kde-frameworks/kio:5
+		kde-plasma/libplasma:5
 	)
-	qml? ( dev-qt/qtdeclarative )
-	systemd? ( dev-qt/qtdbus )
-	webengine? ( dev-qt/qtwebengine )
+	qml? ( dev-qt/qtdeclarative:5 )
+	systemd? ( dev-qt/qtdbus:5 )
+	webengine? ( dev-qt/qtwebengine:5 )
 "
 DEPEND="${RDEPEND}
 	kde? (
