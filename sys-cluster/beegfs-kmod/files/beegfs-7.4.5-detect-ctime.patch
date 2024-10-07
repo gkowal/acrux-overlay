@@ -1,0 +1,27 @@
+diff '--color=auto' -uNr beegfs-7.4.5-orig/client_module/build/feature-detect.sh beegfs-7.4.5/client_module/build/feature-detect.sh
+--- beegfs-7.4.5-orig/client_module/build/feature-detect.sh	2024-09-30 06:58:17.000000000 -0300
++++ beegfs-7.4.5/client_module/build/feature-detect.sh	2024-10-07 08:53:41.204918790 -0300
+@@ -155,6 +155,11 @@
+    linux/fs.h
+ 
+ check_struct_field \
++   inode::i_ctime \
++   KERNEL_HAS_INODE_CTIME \
++   linux/fs.h
++
++check_struct_field \
+    dentry::d_subdirs \
+    KERNEL_HAS_DENTRY_SUBDIRS \
+    linux/dcache.h
+diff '--color=auto' -uNr beegfs-7.4.5-orig/client_module/source/filesystem/FhgfsOpsInode.c beegfs-7.4.5/client_module/source/filesystem/FhgfsOpsInode.c
+--- beegfs-7.4.5-orig/client_module/source/filesystem/FhgfsOpsInode.c	2024-09-30 06:58:17.000000000 -0300
++++ beegfs-7.4.5/client_module/source/filesystem/FhgfsOpsInode.c	2024-10-07 08:53:58.067130970 -0300
+@@ -1658,7 +1658,7 @@
+          FhgfsInode* fhgfsInode = BEEGFS_INODE(fileInode);
+ 
+          FhgfsInode_invalidateCache(fhgfsInode);
+-         #if defined(KERNEL_HAS_INODE_ATIME)
++         #if defined(KERNEL_HAS_INODE_CTIME)
+          fileInode->i_ctime = dir->i_ctime;
+          #else
+          inode_set_ctime_to_ts(fileInode, inode_get_ctime(dir));

@@ -15,6 +15,8 @@ KEYWORDS="amd64"
 
 MODULES_KERNEL_MAX=6.8
 
+PATCHES=( "${FILESDIR}"/${PN}-7.4.5-detect-ctime.patch )
+
 src_compile() {
 	local modlist=( beegfs=misc:build )
 	local modargs=( KDIR="${KV_OUT_DIR}" )
