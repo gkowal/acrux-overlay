@@ -12,28 +12,26 @@ SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
-IUSE="kde qml static-libs systemd webengine"
+IUSE="kde static-libs systemd webengine"
 
-RDEPEND="
-	dev-libs/openssl:=
-	dev-qt/qtconcurrent:5
-	dev-qt/qtcore:5
-	dev-qt/qtnetwork:5
-	dev-qt/qtsvg:5
-	dev-util/qtforkawesome
-	dev-util/qtutilities
+DEPEND="
+	>=dev-util/qtforkawesome-0.0.3:=
+	>=dev-util/qtutilities-6.13.0:=
+	dev-qt/qtbase:6=[gui,network,widgets]
+	dev-qt/qtsvg:6=
 	kde? (
-		kde-frameworks/kio
-		kde-plasma/libplasma
+		dev-qt/qtdeclarative:6=
+		kde-frameworks/kio:6=
+		kde-plasma/libplasma:6=
 	)
-	qml? ( dev-qt/qtdeclarative:5 )
-	systemd? ( dev-qt/qtdbus:5 )
-	webengine? ( dev-qt/qtwebengine:5 )
+	systemd? ( dev-qt/qtbase:6=[dbus] )
+	webengine? (
+		dev-qt/qtdeclarative:6=
+		dev-qt/qtwebengine:6=
+	)
 "
-DEPEND="${RDEPEND}
-	kde? (
-		kde-frameworks/extra-cmake-modules
-	)
+RDEPEND="${DEPEND}
+	net-p2p/syncthing
 "
 
 RESTRICT="mirror test" #tests want to access network
@@ -43,7 +41,7 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE:STRING=Release
 		-DBUILD_SHARED_LIBS:BOOL=$(usex !static-libs)
 		-DWEBVIEW_PROVIDER="$(usex webengine webengine none)"
-		-DJS_PROVIDER="$(usex qml qml none)"
+		-DJS_PROVIDER="$(usex webengine qml none)"
 		-DSYSTEMD_SUPPORT=$(usex systemd)
 		-DNO_FILE_ITEM_ACTION_PLUGIN=$(usex !kde)
 		-DNO_PLASMOID=$(usex !kde)
