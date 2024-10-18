@@ -15,13 +15,14 @@ SLOT="5"
 KEYWORDS="amd64 ~x86"
 
 RDEPEND="
-	dev-perl/YAML
-	dev-qt/qtcore
-	dev-qt/qtgui
-	>=dev-util/cpp-utilities-5.20.0
-	>=dev-util/qtutilities-6.10.0
+	dev-qt/qtbase:6=[gui]
+	>=dev-util/cpp-utilities-5.5.0:=
+	>=dev-util/qtutilities-6.3.0:=
 "
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+    dev-lang/perl
+    || ( dev-perl/YAML-LibYAML dev-perl/YAML )
+"
 
 src_configure() {
 	local mycmakeargs=(
