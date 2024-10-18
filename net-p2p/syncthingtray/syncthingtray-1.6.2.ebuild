@@ -24,7 +24,7 @@ RDEPEND="
 	dev-util/qtutilities
 	kde? (
 		kde-frameworks/kio:5
-		kde-plasma/libplasma:5
+		kde-plasma/libplasma
 	)
 	qml? ( dev-qt/qtdeclarative:5 )
 	systemd? ( dev-qt/qtdbus:5 )
