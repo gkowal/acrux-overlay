@@ -29,6 +29,7 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 		-DFORK_AWESOME_FONT_FILE="${WORKDIR}/Fork-Awesome-1.2.0/fonts/forkawesome-webfont.woff2"
 		-DFORK_AWESOME_ICON_DEFINITIONS="${WORKDIR}/Fork-Awesome-1.2.0/src/icons/icons.yml"
+		-DQT_PACKAGE_PREFIX=Qt6
 	)
 
 	cmake_src_configure
