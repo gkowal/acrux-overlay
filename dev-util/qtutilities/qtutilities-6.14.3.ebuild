@@ -26,6 +26,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
 		-DBUILD_SHARED_LIBS:BOOL=$(usex !static-libs)
+		-DQT_PACKAGE_PREFIX=Qt6
 	)
 	cmake_src_configure
 }
