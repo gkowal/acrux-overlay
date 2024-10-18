@@ -45,6 +45,8 @@ src_configure() {
 		-DSYSTEMD_SUPPORT=$(usex systemd)
 		-DNO_FILE_ITEM_ACTION_PLUGIN=$(usex !kde)
 		-DNO_PLASMOID=$(usex !kde)
+		-DQT_PACKAGE_PREFIX=Qt6
+		-DKF_PACKAGE_PREFIX=KF6
 	)
 	cmake_src_configure
 }
