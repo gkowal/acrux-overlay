@@ -62,9 +62,8 @@ RDEPEND="
 	)
 	powerd? ( sys-apps/dbus[abi_x86_32(-)?] )
 	wayland? (
-		>=gui-libs/egl-gbm-1.1.1-r2[abi_x86_32(-)?]
-		>=gui-libs/egl-wayland-1.1.13.1[abi_x86_32(-)?]
-		X? ( gui-libs/egl-x11[abi_x86_32(-)?] )
+		gui-libs/egl-gbm
+		>=gui-libs/egl-wayland-1.1.10
 	)
 "
 DEPEND="
