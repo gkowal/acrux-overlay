@@ -24,7 +24,7 @@ RDEPEND="${DEPEND}"
 
 GITHUB_COMMIT="3c03ddc"
 GITHUB_BRANCH="release-1.30"
-GITHUB_VERSION="v${PV}"
+GITHUB_VERSION="${PV}"
 
 src_compile() {
 	unset LDFLAGS
