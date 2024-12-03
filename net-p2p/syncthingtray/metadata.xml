@@ -9,7 +9,6 @@
 		<remote-id type="github">Martchus/syncthingtray</remote-id>
 	</upstream>
 	<use>
-		<flag name="qml">Use QML as Javascript provider</flag>
 		<flag name="webengine">Use dev-qt/qtwebengine as HTML rendering engine</flag>
 	</use>
 </pkgmetadata>
