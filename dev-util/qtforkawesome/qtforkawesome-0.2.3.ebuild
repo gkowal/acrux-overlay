@@ -12,7 +12,7 @@ SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="GPL-2+"
 SLOT="5"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 
 RDEPEND="
 	dev-qt/qtbase:6=[gui]
@@ -20,8 +20,8 @@ RDEPEND="
 	>=dev-util/qtutilities-6.3.0:=
 "
 DEPEND="${RDEPEND}
-    dev-lang/perl
-    || ( dev-perl/YAML-LibYAML dev-perl/YAML )
+	dev-lang/perl
+	|| ( dev-perl/YAML-LibYAML dev-perl/YAML )
 "
 
 src_configure() {
