@@ -16,7 +16,7 @@ S="${WORKDIR}/linux-cli-community-${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~riscv"
+KEYWORDS="amd64 ~riscv"
 
 RDEPEND="
 	dev-python/docopt[${PYTHON_USEDEP}]
