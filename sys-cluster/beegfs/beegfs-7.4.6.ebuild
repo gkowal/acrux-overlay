@@ -11,7 +11,7 @@ SRC_URI="https://github.com/ThinkParQ/beegfs/archive/${PV}.tar.gz -> ${P}.tar.gz
 S="${WORKDIR}/${P}"
 LICENSE="BeeGFS-EULA"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="+client +modules management meta monitoring storage systemd utils"
 
 DEPEND="
