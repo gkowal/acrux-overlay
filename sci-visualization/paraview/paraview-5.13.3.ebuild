@@ -21,8 +21,8 @@ S="${WORKDIR}/${MY_P}"
 # TODO: check licenses of plugins (USE=plugins)
 LICENSE="BSD MIT PSF-2 VTK"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="boost cg examples ffmpeg mpi nvcontrol nvindex openmp offscreen plugins python +qt6 +sqlite test tk visit +webengine"
+KEYWORDS="amd64 ~x86"
+IUSE="boost cg examples ffmpeg mpi nvcontrol nvindex openmp offscreen plugins python +qt6 +sqlite test visit +webengine"
 
 RESTRICT="mirror test"
 
@@ -83,7 +83,6 @@ RDEPEND="
 		dev-qt/qttools:6[assistant,designer,widgets]
 	)
 	sqlite? ( dev-db/sqlite:3 )
-	tk? ( dev-lang/tk:0= )
 	webengine? ( dev-qt/qtwebengine:6[widgets] )"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
@@ -200,10 +199,6 @@ src_configure() {
 
 		# test
 		-DBUILD_TESTING="$(usex test)"
-
-		# tk
-		-DVTK_USE_TK="$(usex tk)"
-		-DVTK_GROUP_ENABLE_Tk="$(usex tk YES NO)"
 
 		# webengine
 		-DPARAVIEW_USE_QTWEBENGINE="$(usex webengine)"
