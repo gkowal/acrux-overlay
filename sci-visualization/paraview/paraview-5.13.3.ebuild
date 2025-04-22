@@ -27,7 +27,7 @@ IUSE="boost cg examples ffmpeg mpi nvcontrol nvindex openmp offscreen plugins py
 RESTRICT="mirror test"
 
 REQUIRED_USE="
-	python? ( mpi ${PYTHON_REQUIRED_USE} )
+	python? ( ${PYTHON_REQUIRED_USE} )
 	webengine? ( qt6 )
 	qt6? ( sqlite )
 	?? ( offscreen qt6 )"
