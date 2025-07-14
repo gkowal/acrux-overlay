@@ -1,0 +1,14 @@
+diff '--color=auto' -uNr gocryptfs_v2.6.0_src-deps-orig/internal/fusefrontend/file_dir_ops.go gocryptfs_v2.6.0_src-deps/internal/fusefrontend/file_dir_ops.go
+--- gocryptfs_v2.6.0_src-deps-orig/internal/fusefrontend/file_dir_ops.go	2025-07-14 16:38:59.000000000 -0300
++++ gocryptfs_v2.6.0_src-deps/internal/fusefrontend/file_dir_ops.go	2025-07-14 20:12:57.348669875 -0300
+@@ -133,6 +133,10 @@
+ 			// We want these as-is
+ 			return
+ 		}
++		if f.dirHandle.isRootDir && cName[0] == '.' {
++			// silently ignore dot files and directories
++			continue
++		}
+ 		if f.dirHandle.isRootDir && cName == configfile.ConfDefaultName {
+ 			// silently ignore "gocryptfs.conf" in the top level dir
+ 			continue
