@@ -12,7 +12,7 @@ DESCRIPTION="Play and Record Sound with Python"
 HOMEPAGE="https://github.com/spatialaudio/python-sounddevice"
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 DEPEND="
 	media-libs/portaudio
