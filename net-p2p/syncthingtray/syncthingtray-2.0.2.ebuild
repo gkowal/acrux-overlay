@@ -17,7 +17,7 @@ IUSE="kde static-libs systemd webengine"
 DEPEND="
 	>=dev-util/cpp-utilities-5.31.0:=
 	>=dev-util/qtforkawesome-0.0.3:=
-	>=dev-util/qtutilities-6.17.0:=
+	>=dev-util/qtutilities-6.18.0:=
 	dev-qt/qtbase:6=[gui,network,widgets]
 	dev-qt/qtsvg:6=
 	kde? (
