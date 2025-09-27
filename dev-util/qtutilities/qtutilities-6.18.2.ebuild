@@ -16,7 +16,7 @@ IUSE="static-libs"
 
 RDEPEND="
 	dev-qt/qtbase:6=
-	>=dev-util/cpp-utilities-5.5.0:=
+	>=dev-util/cpp-utilities-5.26.0:=
 "
 DEPEND="${RDEPEND}"
 
