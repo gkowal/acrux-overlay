@@ -59,7 +59,6 @@ RDEPEND="
 	dev-libs/libffi
 	dev-libs/libpcre
 	net-libs/gnutls
-	sys-libs/zlib
 	dev-libs/fribidi
 	media-libs/harfbuzz
 	media-libs/fontconfig
@@ -75,6 +74,7 @@ RDEPEND="
 	net-dns/libidn2
 	media-gfx/graphite2
 	app-arch/bzip2
+	virtual/zlib
 "
 
 QA_PREBUILT="*"
