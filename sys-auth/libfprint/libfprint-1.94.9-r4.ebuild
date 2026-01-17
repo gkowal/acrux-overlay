@@ -26,7 +26,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="LGPL-2.1+"
 SLOT="2"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="examples gtk-doc +introspection tod"
 
 RDEPEND="
