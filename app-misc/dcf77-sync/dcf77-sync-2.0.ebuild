@@ -14,7 +14,7 @@ SRC_URI="https://github.com/gkowal/dcf77-sync/archive/refs/tags/v${PV}.tar.gz ->
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	dev-python/numpy[${PYTHON_USEDEP}]
