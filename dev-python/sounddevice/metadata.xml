@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<maintainer type="project">
+	<maintainer type="person">
 		<name>Grzegorz Kowal</name>
 		<email>grzegorz@gkowal.info</email>
 	</maintainer>
 	<upstream>
+		<maintainer>
+			<name>Matthias Geier</name>
+			<email>Matthias.Geier@gmail.com</email>
+		</maintainer>
 		<remote-id type="pypi">sounddevice</remote-id>
 		<remote-id type="github">spatialaudio/python-sounddevice</remote-id>
 	</upstream>
+	<use>
+		<flag name="numpy">Enable <pkg>dev-python/numpy</pkg> support for efficient audio buffer handling</flag>
+	</use>
 </pkgmetadata>
