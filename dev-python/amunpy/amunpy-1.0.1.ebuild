@@ -16,7 +16,7 @@ S="${WORKDIR}/${PN}-v${PV}-245501cb067f157b229b6438e2c8e4ad9bf0c414"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	dev-python/h5py[${PYTHON_USEDEP}]
