@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>Grzegorz Kowal</name>
+		<email>grzegorz@gkowal.info</email>
+	</maintainer>
+	<upstream>
+		<remote-id type="pypi">zarr</remote-id>
+		<remote-id type="github">zarr-developers/zarr-python</remote-id>
+		<bugs-to>https://github.com/zarr-developers/zarr-python/issues</bugs-to>
+		<doc>https://zarr.readthedocs.io/</doc>
+	</upstream>
+</pkgmetadata>
