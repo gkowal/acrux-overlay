@@ -16,7 +16,9 @@ SLOT="0"
 KEYWORDS="amd64"
 
 RDEPEND="
+	>=dev-python/donfig-0.8[${PYTHON_USEDEP}]
 	>=dev-python/fsspec-2022.5.0[${PYTHON_USEDEP}]
+	>=dev-python/google-crc32c-1.5[${PYTHON_USEDEP}]
 	>=dev-python/numcodecs-0.16.5[${PYTHON_USEDEP}]
 	>=dev-python/numpy-1.26[${PYTHON_USEDEP}]
 	>=dev-python/packaging-22.0[${PYTHON_USEDEP}]
