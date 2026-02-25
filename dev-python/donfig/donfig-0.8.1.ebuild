@@ -13,7 +13,7 @@ HOMEPAGE="https://pypi.org/project/donfig/ https://github.com/pytroll/donfig"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	dev-python/pyyaml[${PYTHON_USEDEP}]
