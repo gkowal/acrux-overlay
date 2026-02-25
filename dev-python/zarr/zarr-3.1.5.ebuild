@@ -13,7 +13,7 @@ HOMEPAGE="https://pypi.org/project/zarr/ https://github.com/zarr-developers/zarr
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	>=dev-python/fsspec-2022.5.0[${PYTHON_USEDEP}]
