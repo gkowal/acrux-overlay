@@ -14,7 +14,7 @@ HOMEPAGE="https://pypi.org/project/numcodecs/ https://github.com/zarr-developers
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND=">=dev-python/numpy-1.24[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
