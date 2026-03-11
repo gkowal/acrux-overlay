@@ -11,7 +11,7 @@ SRC_URI="https://github.com/Thomas-Tsai/${PN}/archive/${PV}.tar.gz -> ${P}.tar.g
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="btrfs exfat f2fs +fat hfs jfs ncurses +ntfs reiserfs static vmfs +xfs"
 
 RDEPEND="sys-fs/e2fsprogs
