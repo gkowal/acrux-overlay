@@ -12,7 +12,7 @@ SRC_URI+=" https://gentoo.clarokowal.com/${CATEGORY}/${PN}/${P}-deps.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="systemd"
 
 RESTRICT="strip"
@@ -22,7 +22,7 @@ DEPEND="acct-group/telegraf
 	acct-user/telegraf"
 RDEPEND="${DEPEND}"
 
-GITHUB_COMMIT="552f7e2"
+GITHUB_COMMIT="8dc29d6"
 GITHUB_BRANCH="release-1.38"
 GITHUB_VERSION="v${PV}"
 
