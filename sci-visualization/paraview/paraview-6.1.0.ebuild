@@ -21,7 +21,7 @@ S="${WORKDIR}/${MY_P}"
 # TODO: check licenses of plugins (USE=plugins)
 LICENSE="BSD MIT PSF-2 VTK"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64"
 IUSE="boost cg examples ffmpeg mpi nvcontrol nvindex openmp plugins python +qt6 +sqlite test tk visit +webengine"
 
 RESTRICT="mirror test"
