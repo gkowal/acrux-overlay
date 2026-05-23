@@ -48,10 +48,11 @@ src_install() {
 	insinto "/opt/${PN}"
 	doins -r *
 
-	# Set binary permissions
-	fperms +x "/opt/${PN}/antigravity"
-	fperms +x "/opt/${PN}/chrome-sandbox"
-	fperms +x "/opt/${PN}/chrome_crashpad_handler"
+	# Restore execution permissions for all files that were executable in the source tree
+	while read -r f; do
+		f="${f#./}"
+		fperms +x "/opt/${PN}/${f}"
+	done < <(find . -type f -executable)
 
 	# Create launch wrapper symlink
 	dosym -r "/opt/${PN}/antigravity" "/usr/bin/antigravity"
