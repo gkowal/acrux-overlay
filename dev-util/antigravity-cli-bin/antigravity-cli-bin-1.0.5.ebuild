@@ -12,7 +12,7 @@ S="${WORKDIR}"
 
 LICENSE="Google-Antigravity"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 src_install() {
 	# Install the binary, renaming it to 'agy' as expected by install.sh and the user environment
