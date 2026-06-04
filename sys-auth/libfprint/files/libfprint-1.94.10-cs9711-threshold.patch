@@ -1,6 +1,51 @@
---- a/libfprint/drivers/cs9711/cs9711.c
-+++ b/libfprint/drivers/cs9711/cs9711.c
-@@ -461,8 +461,7 @@
+diff '--color=auto' -uNr libfprint-v1.94.10/libfprint/drivers/cs9711/cs9711.c libfprint-v1.94.10-p1/libfprint/drivers/cs9711/cs9711.c
+--- libfprint-v1.94.10/libfprint/drivers/cs9711/cs9711.c	2026-06-04 10:26:13.299135739 -0300
++++ libfprint-v1.94.10-p1/libfprint/drivers/cs9711/cs9711.c	2026-06-04 10:29:01.019455993 -0300
+@@ -314,6 +314,43 @@
+       img->data[dy * CS9711_WIDTH + dx] = self->image_buffer[y * CS9711_SENSOR_WIDTH + x];
+     }
+ 
++  // Equalize even/odd column gain and offset to remove vertical fixed pattern noise
++  double sum_even = 0, sum_odd = 0;
++  gsize count_even = 0, count_odd = 0;
++  for (gsize y = 0; y < CS9711_HEIGHT; y++) {
++    for (gsize x = 0; x < CS9711_WIDTH; x++) {
++      if (x % 2 == 0) {
++        sum_even += img->data[y * CS9711_WIDTH + x];
++        count_even++;
++      } else {
++        sum_odd += img->data[y * CS9711_WIDTH + x];
++        count_odd++;
++      }
++    }
++  }
++  double mean_even = sum_even / count_even;
++  double mean_odd = sum_odd / count_odd;
++  double diff = mean_even - mean_odd;
++  for (gsize y = 0; y < CS9711_HEIGHT; y++) {
++    for (gsize x = 1; x < CS9711_WIDTH; x += 2) {
++      double val = img->data[y * CS9711_WIDTH + x] + diff;
++      img->data[y * CS9711_WIDTH + x] = (guint8) CLAMP (val, 0.0, 255.0);
++    }
++  }
++
++  // Apply horizontal 1D blur to smooth column-to-column noise
++  guint8 *temp = g_malloc (CS9711_WIDTH * CS9711_HEIGHT);
++  memcpy (temp, img->data, CS9711_WIDTH * CS9711_HEIGHT);
++  for (gsize y = 0; y < CS9711_HEIGHT; y++) {
++    for (gsize x = 1; x < CS9711_WIDTH - 1; x++) {
++      double val = 0.25 * temp[y * CS9711_WIDTH + (x - 1)] +
++                   0.50 * temp[y * CS9711_WIDTH + x] +
++                   0.25 * temp[y * CS9711_WIDTH + (x + 1)];
++      img->data[y * CS9711_WIDTH + x] = (guint8) CLAMP (val, 0.0, 255.0);
++    }
++  }
++  g_free (temp);
++
+   img->flags = FPI_IMAGE_PARTIAL;
+ 
+   fpi_image_device_image_captured (dev, img);
+@@ -461,9 +498,8 @@
    img_class->deactivate = dev_deactivate;
    img_class->change_state = dev_change_state;
  
@@ -11,3 +56,4 @@
 +  img_class->score_threshold = 24;
  
    img_class->img_width = CS9711_WIDTH;
+   img_class->img_height = CS9711_HEIGHT;
