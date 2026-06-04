@@ -1,0 +1,13 @@
+--- a/libfprint/drivers/cs9711/cs9711.c
++++ b/libfprint/drivers/cs9711/cs9711.c
+@@ -461,8 +461,7 @@
+   img_class->deactivate = dev_deactivate;
+   img_class->change_state = dev_change_state;
+ 
+-  //TODO: Makes very marginal improvement, stick with default in case
+-  //      it changes with a better implementation in the future
+-  // img_class->bz3_threshold = 24;
++  // Set SIFT matching threshold for CS9711
++  img_class->score_threshold = 24;
+ 
+   img_class->img_width = CS9711_WIDTH;
