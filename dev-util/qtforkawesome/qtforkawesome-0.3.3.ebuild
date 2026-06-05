@@ -1,4 +1,4 @@
-# Copyright 2022-2025 Gentoo Authors
+# Copyright 2022-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,12 +12,12 @@ SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="GPL-2+"
 SLOT="5"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="amd64"
 
 RDEPEND="
 	dev-qt/qtbase:6=[gui]
 	>=dev-util/cpp-utilities-5.5.0:=
-	>=dev-util/qtutilities-6.3.0:=
+	>=dev-util/qtutilities-6.19.0:=
 "
 DEPEND="${RDEPEND}
 	dev-lang/perl
