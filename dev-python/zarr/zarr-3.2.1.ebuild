@@ -13,7 +13,7 @@ HOMEPAGE="https://pypi.org/project/zarr/ https://github.com/zarr-developers/zarr
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 RDEPEND="
 	>=dev-python/donfig-0.8[${PYTHON_USEDEP}]
