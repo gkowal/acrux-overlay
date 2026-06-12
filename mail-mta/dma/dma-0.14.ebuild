@@ -48,7 +48,7 @@ RDEPEND="
 
 src_compile() {
 	tc-export CC
-	emake
+	emake PREFIX=/usr LIBEXEC=/usr/libexec CONFDIR=/etc/dma
 }
 
 src_install() {
@@ -59,7 +59,7 @@ src_install() {
 	exeinto /usr/libexec
 	doexe dma-mbox-create
 
-	diropts -m 2755 -o root -g mail
+	diropts -m 2775 -o root -g mail
 	keepdir /var/spool/dma
 	keepdir /var/mail
 
