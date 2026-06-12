@@ -46,6 +46,11 @@ RDEPEND="
 	)
 "
 
+src_prepare() {
+	default
+	sed -i -e 's|/etc/aliases|/etc/mail/aliases|g' dma.c dma.conf dma.8 || die
+}
+
 src_compile() {
 	tc-export CC
 	emake PREFIX=/usr LIBEXEC=/usr/libexec CONFDIR=/etc/dma
