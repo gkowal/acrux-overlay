@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>gkowal@users.noreply.github.com</email>
+		<name>Grzegorz Kowal</name>
+	</maintainer>
+	<use>
+		<flag name="mta">Enable system MTA symlinks for sendmail and mailq</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">corecode/dma</remote-id>
+	</upstream>
+</pkgmetadata>

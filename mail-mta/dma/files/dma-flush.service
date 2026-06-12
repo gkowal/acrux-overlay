@@ -1,0 +1,7 @@
+[Unit]
+Description=Flush Dragonfly Mail Agent queue
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/dma -q
