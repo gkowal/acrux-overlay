@@ -14,7 +14,7 @@ UNIPATCH_LIST="${WORKDIR}/acrux-patchset-${PVR}.tar.gz"
 DESCRIPTION="Vanilla sources with additional acrux-patchset."
 HOMEPAGE="https://github.com/gkowal/acrux-patchset"
 SRC_URI="${KERNEL_URI} https://github.com/gkowal/acrux-patchset/archive/${PVR}.tar.gz -> acrux-patchset-${PVR}.tar.gz"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 pkg_postinst() {
 	kernel-2_pkg_postinst
