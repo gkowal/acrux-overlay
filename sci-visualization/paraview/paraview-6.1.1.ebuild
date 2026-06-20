@@ -5,7 +5,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{11..14} )
 DOCS_BUILDER="doxygen"
-inherit cmake flag-o-matic desktop docs python-single-r1 qmake-utils toolchain-funcs xdg
+inherit cmake flag-o-matic docs python-single-r1 qmake-utils toolchain-funcs xdg
 
 MAJOR_PV="$(ver_cut 1-2)"
 MINOR_PV="$(ver_cut 3)"
@@ -21,7 +21,7 @@ S="${WORKDIR}/${MY_P}"
 # TODO: check licenses of plugins (USE=plugins)
 LICENSE="BSD MIT PSF-2 VTK"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE="boost cg examples ffmpeg mpi nvcontrol nvindex openmp plugins python +qt6 +sqlite test tk visit +webengine"
 
 RESTRICT="mirror test"
@@ -218,24 +218,4 @@ src_configure() {
 	fi
 
 	cmake_src_configure
-}
-
-src_install() {
-	cmake_src_install
-
-	# remove wrapper binaries and put the actual executable in place
-	for i in {paraview-config,pvserver,pvdataserver,pvrenderserver,pvbatch,pvpython,paraview}; do
-		if [ -f "${ED}"/usr/lib/"$i" ]; then
-			mv "${ED}"/usr/lib/"$i" "${ED}"/usr/bin/"$i" || die
-		fi
-	done
-
-	# set up the environment
-	echo "LDPATH=${EPREFIX}/usr/${PVLIBDIR}" > "${T}"/40${PN} || die
-	doenvd "${T}"/40${PN}
-
-	newicon "${S}"/Clients/ParaView/pvIcon-96x96.png paraview.png
-	make_desktop_entry paraview "Paraview" paraview
-
-	use python && python_optimize "${ED}/usr/$(get_libdir)/${PN}-${MAJOR_PV}"
 }
