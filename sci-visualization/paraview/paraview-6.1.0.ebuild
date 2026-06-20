@@ -21,7 +21,7 @@ S="${WORKDIR}/${MY_P}"
 # TODO: check licenses of plugins (USE=plugins)
 LICENSE="BSD MIT PSF-2 VTK"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="amd64"
 IUSE="boost cg examples ffmpeg mpi nvcontrol nvindex openmp plugins python +qt6 +sqlite test tk visit +webengine"
 
 RESTRICT="mirror test"
@@ -69,7 +69,6 @@ RDEPEND="
 			dev-python/six[${PYTHON_USEDEP}]
 			dev-python/twisted[${PYTHON_USEDEP}]
 			dev-python/zope-interface[${PYTHON_USEDEP}]
-			mpi? ( dev-python/mpi4py )
 			qt6? ( dev-python/pyqt6[opengl,${PYTHON_USEDEP}] )
 		')
 	)
