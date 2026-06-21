@@ -40,7 +40,7 @@ DEPEND="
 	x11-libs/libxkbcommon
 	x11-libs/libXrandr
 	net-misc/curl
-	app-arch/p7zip
+	app-arch/7zip
 	app-arch/unzip
 	dev-build/make
 	sys-devel/gcc
