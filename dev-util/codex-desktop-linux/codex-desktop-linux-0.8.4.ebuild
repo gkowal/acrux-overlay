@@ -13,9 +13,15 @@ HOMEPAGE="https://github.com/ilysenko/codex-desktop-linux"
 COMMIT="c868dcd19f3a176d833ac9f1d35873f6a21e8921"
 
 # Note: net-libs/nodejs is not available for x32 profile (x86_64 only)
+NODE_RUNTIME_VERSION="v22.22.2"
+NODE_RUNTIME_ARCH="linux-x64"
+NODE_RUNTIME_SHA256="88fd1ce767091fd8d4a99fdb2356e98c819f93f3b1f8663853a2dee9b438068a"
+
 SRC_URI="https://github.com/ilysenko/codex-desktop-linux/archive/${COMMIT}.tar.gz -> ${P}.tar.gz
 	https://persistent.oaistatic.com/codex-app-prod/Codex.dmg
-		-> ${P}-upstream.dmg"
+		-> ${P}-upstream.dmg
+	https://nodejs.org/dist/${NODE_RUNTIME_VERSION}/node-${NODE_RUNTIME_VERSION}-${NODE_RUNTIME_ARCH}.tar.xz
+		-> ${P}-node-runtime.tar.xz"
 
 S="${WORKDIR}/codex-desktop-linux-${COMMIT}"
 
@@ -81,11 +87,23 @@ src_compile() {
 src_install() {
 	local WORK_DIR
 	WORK_DIR="$(mktemp -d)"
+	local NODE_DIR
+	NODE_DIR="${WORK_DIR}/node-runtime"
+
+	# Extract and verify the managed Node.js runtime
+	mkdir -p "${NODE_DIR}"
+	tar -xJf "${DISTDIR}/${P}-node-runtime.tar.xz" -C "${NODE_DIR}" || \
+		die "Failed to extract Node.js runtime"
+	# Verify SHA256
+	printf '%s  %s\n' "${NODE_RUNTIME_SHA256}" \
+		"${DISTDIR}/${P}-node-runtime.tar.xz" | sha256sum -c - || \
+		die "Node.js runtime checksum mismatch"
 
 	# Set environment variables for the build
 	export CODEX_INSTALL_DIR="${WORK_DIR}/codex-app"
 	export CODEX_INSTALL_ROOT="${WORK_DIR}"
 	export SEVEN_ZIP_CMD="7zz"
+	export CODEX_MANAGED_NODE_SOURCE="${NODE_DIR}/node-${NODE_RUNTIME_VERSION}-${NODE_RUNTIME_ARCH}"
 
 	# Run the installer to build the application
 	bash "${S}/install.sh" || die "install.sh failed"
