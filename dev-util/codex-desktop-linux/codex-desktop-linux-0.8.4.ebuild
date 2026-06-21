@@ -25,7 +25,7 @@ KEYWORDS="amd64"
 
 # Build dependencies
 DEPEND="
-	dev-lang/rust
+	|| ( dev-lang/rust dev-lang/rust-bin )
 	sys-apps/util-linux
 	sys-auth/polkit
 	x11-libs/cairo
