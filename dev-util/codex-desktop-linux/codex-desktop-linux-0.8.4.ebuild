@@ -21,7 +21,7 @@ S="${WORKDIR}/codex-desktop-linux-${COMMIT}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 # Build dependencies
 DEPEND="
