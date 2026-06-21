@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>maintainers-needed@gentoo.org</email>
+		<name>Codex Desktop Linux Community</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">ilysenko/codex-desktop-linux</remote-id>
+	</upstream>
+	<longdescription>
+		Community-built Linux package for Codex Desktop, generated from the
+		official macOS DMG. Applies Linux compatibility patches and rebuilds
+		native modules for Linux.
+	</longdescription>
+</pkgmetadata>
