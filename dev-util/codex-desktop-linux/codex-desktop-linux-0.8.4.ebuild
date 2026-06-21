@@ -99,6 +99,10 @@ src_install() {
 		"${DISTDIR}/${P}-node-runtime.tar.xz" | sha256sum -c - || \
 		die "Node.js runtime checksum mismatch"
 
+	# Copy the upstream DMG from Portage distfiles
+	cp "${DISTDIR}/${P}-upstream.dmg" "${S}/Codex.dmg" || \
+		die "Failed to copy upstream DMG"
+
 	# Set environment variables for the build
 	export CODEX_INSTALL_DIR="${WORK_DIR}/codex-app"
 	export CODEX_INSTALL_ROOT="${WORK_DIR}"
@@ -106,7 +110,7 @@ src_install() {
 	export CODEX_MANAGED_NODE_SOURCE="${NODE_DIR}/node-${NODE_RUNTIME_VERSION}-${NODE_RUNTIME_ARCH}"
 
 	# Run the installer to build the application
-	bash "${S}/install.sh" || die "install.sh failed"
+	bash "${S}/install.sh" "${S}/Codex.dmg" || die "install.sh failed"
 
 	# Install the main application to /opt/codex-desktop
 	dodir /opt/codex-desktop
