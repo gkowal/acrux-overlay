@@ -3,10 +3,7 @@
 
 EAPI=8
 
-# This ebuild builds Codex Desktop for Linux from source
-# It fetches the upstream macOS DMG and applies Linux compatibility patches
-
-inherit desktop systemd xdg
+inherit xdg
 
 DESCRIPTION="Codex Desktop for Linux - Community-built Linux package from macOS DMG"
 HOMEPAGE="https://github.com/ilysenko/codex-desktop-linux"
@@ -28,6 +25,7 @@ S="${WORKDIR}/codex-desktop-linux-${COMMIT}"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64"
+RESTRICT="network-sandbox"
 
 # Cross-architecture prebuilt binaries bundled in npm packages (not for host arch)
 QA_PREBUILT="
@@ -129,7 +127,7 @@ src_install() {
 	bash "${S}/install.sh" "${S}/Codex.dmg" || die "install.sh failed"
 
 	# Install the main application to /opt/codex-desktop
-	dodir /opt/codex-desktop
+	mkdir -p "${D}/opt/codex-desktop" || die
 	cp -r "${WORK_DIR}/codex-app/." "${D}/opt/codex-desktop/" || \
 		die "Failed to copy codex-app"
 
@@ -140,45 +138,51 @@ set -euo pipefail
 
 exec /opt/codex-desktop/start.sh "$@"
 EOF
-	dobin "${T}/codex-desktop"
+	mkdir -p "${D}/usr/bin" || die
+	cp "${T}/codex-desktop" "${D}/usr/bin/codex-desktop" || die
+	chmod 755 "${D}/usr/bin/codex-desktop" || die
 
 	# Install the update manager if built
 	if [ -f "${WORK_DIR}/codex-app/update-builder/target/release/codex-update-manager" ]; then
-		insinto /usr/bin
-		newins "${WORK_DIR}/codex-app/update-builder/target/release/codex-update-manager" \
-			codex-update-manager
-		chmod 755 "${D}/usr/bin/codex-update-manager"
+		mkdir -p "${D}/usr/bin" || die
+		cp "${WORK_DIR}/codex-app/update-builder/target/release/codex-update-manager" \
+			"${D}/usr/bin/codex-update-manager" || die
+		chmod 755 "${D}/usr/bin/codex-update-manager" || die
 	fi
 
 	# Install systemd user service
 	if [ -f "${S}/packaging/linux/codex-update-manager.service" ]; then
-		systemd_dounit "${S}/packaging/linux/codex-update-manager.service"
+		mkdir -p "${D}/usr/lib/systemd/user" || die
+		cp "${S}/packaging/linux/codex-update-manager.service" \
+			"${D}/usr/lib/systemd/user/" || die
 	fi
 
 	# Install desktop entry
 	if [ -f "${S}/packaging/linux/codex-desktop.desktop" ]; then
-		domenu "${S}/packaging/linux/codex-desktop.desktop"
-
-		# Update the Exec line to use the correct path
-		sed -i 's|/usr/bin/codex-desktop|/usr/bin/codex-desktop|g' \
-			"${D}/usr/share/applications/codex-desktop.desktop"
+		mkdir -p "${D}/usr/share/applications" || die
+		cp "${S}/packaging/linux/codex-desktop.desktop" \
+			"${D}/usr/share/applications/" || die
 	fi
 
 	# Install icons
 	if [ -f "${S}/assets/codex.png" ]; then
-		newicon "${S}/assets/codex.png" codex-desktop.png
+		mkdir -p "${D}/usr/share/pixmaps" || die
+		cp "${S}/assets/codex.png" "${D}/usr/share/pixmaps/codex-desktop.png" || die
 	fi
 
 	# Install Polkit policy
 	if [ -f "${S}/packaging/linux/com.github.ilysenko.codex-desktop-linux.update.policy" ]; then
-		insinto /usr/share/polkit-1/actions
-		newins "${S}/packaging/linux/com.github.ilysenko.codex-desktop-linux.update.policy" \
-			com.github.ilysenko.codex-desktop-linux.update.policy
+		mkdir -p "${D}/usr/share/polkit-1/actions" || die
+		cp "${S}/packaging/linux/com.github.ilysenko.codex-desktop-linux.update.policy" \
+			"${D}/usr/share/polkit-1/actions/" || die
 	fi
 
 	# Install the desktop entry doctor script
 	if [ -f "${WORK_DIR}/codex-app/.codex-linux/codex-desktop-entry-doctor.sh" ]; then
-		dobin "${WORK_DIR}/codex-app/.codex-linux/codex-desktop-entry-doctor.sh"
+		mkdir -p "${D}/usr/bin" || die
+		cp "${WORK_DIR}/codex-app/.codex-linux/codex-desktop-entry-doctor.sh" \
+			"${D}/usr/bin/codex-desktop-entry-doctor" || die
+		chmod 755 "${D}/usr/bin/codex-desktop-entry-doctor" || die
 	fi
 
 	# Clean up
