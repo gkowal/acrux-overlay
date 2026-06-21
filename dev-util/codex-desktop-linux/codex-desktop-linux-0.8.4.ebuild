@@ -29,6 +29,22 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64"
 
+# Cross-architecture prebuilt binaries bundled in npm packages (not for host arch)
+QA_PREBUILT="
+	opt/codex-desktop/chrome-sandbox
+	opt/codex-desktop/chrome_crashpad_handler
+	opt/codex-desktop/electron
+	opt/codex-desktop/libEGL.so
+	opt/codex-desktop/libGLESv2.so
+	opt/codex-desktop/libffmpeg.so
+	opt/codex-desktop/libvk_swiftshader.so
+	opt/codex-desktop/libvulkan.so.1
+	opt/codex-desktop/resources/node_repl
+	opt/codex-desktop/resources/node-runtime/bin/node
+	opt/codex-desktop/resources/plugins/openai-bundled/plugins/computer-use/bin/codex-computer-use-cosmic
+	opt/codex-desktop/resources/plugins/openai-bundled/plugins/computer-use/bin/codex-computer-use-linux
+"
+
 # Build dependencies
 DEPEND="
 	|| ( dev-lang/rust dev-lang/rust-bin )
@@ -118,13 +134,13 @@ src_install() {
 		die "Failed to copy codex-app"
 
 	# Create the launcher script at /usr/bin/codex-desktop
-	cat > "${D}/usr/bin/codex-desktop" << 'EOF'
+	cat > "${T}/codex-desktop" << 'EOF'
 #!/bin/bash
 set -euo pipefail
 
 exec /opt/codex-desktop/start.sh "$@"
 EOF
-	chmod 755 "${D}/usr/bin/codex-desktop"
+	dobin "${T}/codex-desktop"
 
 	# Install the update manager if built
 	if [ -f "${WORK_DIR}/codex-app/update-builder/target/release/codex-update-manager" ]; then
