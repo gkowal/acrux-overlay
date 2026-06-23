@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>Grzegorz Kowal</name>
+		<email>grzegorz@gkowal.info</email>
+	</maintainer>
+	<use>
+		<flag name="cuda">Enable NVIDIA CUDA backend support</flag>
+		<flag name="vulkan">Enable Vulkan backend support</flag>
+		<flag name="rocm">Enable AMD ROCm backend support (dynamically loaded at runtime)</flag>
+	</use>
+</pkgmetadata>
