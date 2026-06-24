@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{11..15} )
 
 inherit cmake fortran-2 python-single-r1
 
@@ -13,7 +13,7 @@ SRC_URI="https://github.com/LLNL/${PN}/releases/download/${PV}/${P}.tar.gz"
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="+fortran +python"
 
 REQUIRED_USE="
