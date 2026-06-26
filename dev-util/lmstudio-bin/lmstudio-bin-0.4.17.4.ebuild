@@ -17,7 +17,7 @@ S="${WORKDIR}"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="cuda vulkan rocm"
 
 RESTRICT="bindist mirror"
