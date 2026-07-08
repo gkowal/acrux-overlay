@@ -47,6 +47,7 @@ RDEPEND="
 	x11-libs/libxcb
 	x11-libs/libxkbcommon
 	virtual/udev
+	virtual/libcrypt:=
 	vulkan? ( media-libs/vulkan-loader )
 "
 QA_PREBUILT="opt/lmstudio/*"
@@ -79,12 +80,11 @@ src_install() {
 	insinto /opt/lmstudio
 	doins -r squashfs-root/*
 
-	# Fix executable permissions on binaries
-	fperms +x /opt/lmstudio/AppRun
-	fperms +x /opt/lmstudio/lm-studio
-	fperms +x /opt/lmstudio/chrome_crashpad_handler
-	fperms +x /opt/lmstudio/chrome-sandbox
-	fperms +x /opt/lmstudio/resources/app/.webpack/lms
+	# Restore execution permissions on all binaries (doins installs them as 0644)
+	local f
+	while read -r f; do
+		fperms +x "/opt/lmstudio/${f#squashfs-root/}"
+	done < <(find squashfs-root -type f -executable)
 
 	# Create symlink in /usr/bin
 	dosym "../../../opt/lmstudio/lm-studio" "/usr/bin/lm-studio"
