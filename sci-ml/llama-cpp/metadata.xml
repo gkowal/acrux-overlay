@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<name>Grzegorz Kowal</name>
+		<email>grzegorz@gkowal.info</email>
+	</maintainer>
+	<use>
+		<flag name="openblas">Use <pkg>sci-libs/openblas</pkg> for CPU BLAS acceleration</flag>
+		<flag name="vulkan">Enable Vulkan GPU offloading support</flag>
+		<flag name="curl">Enable HTTP/HTTPS support via <pkg>net-misc/curl</pkg> for downloading models</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">ggml-org/llama.cpp</remote-id>
+	</upstream>
+</pkgmetadata>
