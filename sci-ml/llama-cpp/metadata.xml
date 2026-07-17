@@ -8,6 +8,7 @@
 	<use>
 		<flag name="openblas">Use <pkg>sci-libs/openblas</pkg> for CPU BLAS acceleration</flag>
 		<flag name="vulkan">Enable Vulkan GPU offloading support</flag>
+		<flag name="rocm">Enable AMD ROCm backend support</flag>
 		<flag name="curl">Enable HTTP/HTTPS support via <pkg>net-misc/curl</pkg> for downloading models</flag>
 	</use>
 	<upstream>
