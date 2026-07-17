@@ -14,7 +14,7 @@ S="${WORKDIR}/llama.cpp-${MY_PV}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 IUSE="curl openblas +openmp vulkan"
 
