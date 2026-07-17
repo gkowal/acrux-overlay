@@ -16,7 +16,7 @@ S="${WORKDIR}/llama.cpp-${MY_PV}"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 CPU_FLAGS_X86=( avx avx2 f16c avx512f avx512_vnni avx512_bf16 avx512vbmi )
 IUSE="curl openblas +openmp rocm vulkan ${CPU_FLAGS_X86[@]/#/cpu_flags_x86_}"
