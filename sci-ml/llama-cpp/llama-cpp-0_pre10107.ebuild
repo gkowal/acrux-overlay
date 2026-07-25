@@ -19,7 +19,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64"
 
-CPU_FLAGS_X86=( avx avx2 f16c avx512f avx512_vnni avx512_bf16 avx512vbmi fma bmi1 bmi2 movbe )
+CPU_FLAGS_X86=( avx avx2 f16c avx512f avx512_vnni avx512_bf16 avx512vbmi bmi1 bmi2 )
 IUSE="curl openblas +openmp rocm vulkan cuda ${CPU_FLAGS_X86[@]/#/cpu_flags_x86_}"
 
 REQUIRED_USE="
