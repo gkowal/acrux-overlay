@@ -5,7 +5,7 @@ EAPI=8
 
 inherit go-module systemd
 
-DESCRIPTION="The plugin-driven server agent for collecting & reporting metrics."
+DESCRIPTION="The plugin-driven server agent for collecting & reporting metrics"
 HOMEPAGE="https://github.com/influxdata/telegraf"
 SRC_URI="https://gentoo.clarokowal.com/${CATEGORY}/${PN}/${P}.tar.xz"
 SRC_URI+=" https://gentoo.clarokowal.com/${CATEGORY}/${PN}/${P}-deps.tar.xz"
