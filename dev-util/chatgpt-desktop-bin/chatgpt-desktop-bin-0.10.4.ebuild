@@ -25,7 +25,7 @@ S="${WORKDIR}/codex-desktop-linux-${COMMIT}"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64"
-RESTRICT="mirror"
+RESTRICT="network-sandbox mirror"
 
 # Prebuilt binaries bundled in application and npm package prebuilds
 QA_PREBUILT="opt/chatgpt-desktop/* opt/codex-desktop/*"
