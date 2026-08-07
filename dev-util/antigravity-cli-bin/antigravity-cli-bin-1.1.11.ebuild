@@ -5,7 +5,7 @@ EAPI=8
 
 DESCRIPTION="Google Antigravity CLI binary"
 HOMEPAGE="https://antigravity.google"
-BUILD_ID="6423386432339968"
+BUILD_ID="4956531888881664"
 SRC_URI="https://storage.googleapis.com/antigravity-public/antigravity-cli/${PV}-${BUILD_ID}/linux-x64/cli_linux_x64.tar.gz -> ${P}.tar.gz"
 
 S="${WORKDIR}"
