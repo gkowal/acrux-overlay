@@ -52,6 +52,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.94.1-test-timeout.patch"
+	"${WORKDIR}/${P}-cs9711.patch"
 )
 
 # As this version introduces metainfo for appstreamcli checking,
