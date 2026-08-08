@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit flag-o-matic meson toolchain-funcs udev
+inherit meson udev
 
 MY_P="${PN}-v${PV}"
 
@@ -13,6 +13,7 @@ HOMEPAGE="
 	https://gitlab.freedesktop.org/libfprint/libfprint
 "
 SRC_URI="https://gitlab.freedesktop.org/${PN}/${PN}/-/archive/v${PV}/${MY_P}.tar.bz2 -> ${P}.tar.bz2"
+SRC_URI+=" https://gentoo.clarokowal.com/${CATEGORY}/${PN}/${P}-cs9711.patch.bz2"
 
 S="${WORKDIR}/${MY_P}"
 
@@ -51,7 +52,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.94.1-test-timeout.patch"
-	"${FILESDIR}/${PN}-1.94.100-cs9711.patch"
 )
 
 # As this version introduces metainfo for appstreamcli checking,
