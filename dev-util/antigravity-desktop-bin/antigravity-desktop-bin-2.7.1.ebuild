@@ -16,6 +16,8 @@ LICENSE="Google-Antigravity"
 SLOT="0"
 KEYWORDS="amd64"
 
+QA_PRESTRIPPED="opt/${PN}/.*"
+
 # Standard Electron application runtime dependencies
 RDEPEND="
 	dev-libs/expat
