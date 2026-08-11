@@ -19,6 +19,7 @@ RESTRICT="bindist mirror"
 # Prebuilt binaries bundled in official package
 QA_PREBUILT="usr/lib/chatgpt/*"
 QA_PRESTRIPPED="usr/lib/chatgpt/*"
+QA_FLAGS_IGNORED="usr/lib/chatgpt/.*"
 
 RDEPEND="
 	app-accessibility/at-spi2-core
@@ -87,6 +88,12 @@ src_install() {
 		dosym chatgpt.png /usr/share/pixmaps/chatgpt-desktop.png
 		dosym chatgpt.png /usr/share/pixmaps/codex-desktop.png
 	fi
+
+	# Prevent revdep-rebuild from scanning prebuilt bundled binaries
+	mkdir -p "${D}/etc/revdep-rebuild" || die
+	cat > "${D}/etc/revdep-rebuild/99chatgpt-desktop-bin" << 'EOF'
+SEARCH_DIRS_MASK="/usr/lib/chatgpt"
+EOF
 }
 
 pkg_postinst() {
