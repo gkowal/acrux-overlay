@@ -14,12 +14,13 @@ S="${WORKDIR}"
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="amd64"
-RESTRICT="bindist mirror"
+RESTRICT="bindist mirror strip"
 
 # Prebuilt binaries bundled in official package
 QA_PREBUILT="usr/lib/chatgpt/*"
 QA_PRESTRIPPED="usr/lib/chatgpt/*"
 QA_FLAGS_IGNORED="usr/lib/chatgpt/.*"
+QA_SONAME_NO_SYMLINK=".*"
 
 RDEPEND="
 	app-accessibility/at-spi2-core
@@ -59,6 +60,9 @@ src_unpack() {
 }
 
 src_install() {
+	# Exclude prebuilt tree from stripping
+	dostrip -x /usr/lib/chatgpt
+
 	# Install application files
 	mkdir -p "${D}/usr/lib/chatgpt" || die
 	cp -r "${WORKDIR}/usr/lib/chatgpt/." "${D}/usr/lib/chatgpt/" || die "Failed to copy chatgpt files"
