@@ -9,8 +9,7 @@
 		<remote-id type="github">ilysenko/codex-desktop-linux</remote-id>
 	</upstream>
 	<longdescription>
-		Community-built Linux package for ChatGPT Desktop (formerly Codex Desktop),
-		generated from the official macOS DMG. Applies Linux compatibility patches
-		and rebuilds native modules for Linux.
+		ChatGPT Desktop for Linux. Provides official prebuilt Linux binary packages
+		from OpenAI as well as community-built packages generated from macOS DMG.
 	</longdescription>
 </pkgmetadata>
