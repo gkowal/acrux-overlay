@@ -13,7 +13,7 @@ HOMEPAGE="https://github.com/spatialaudio/python-sounddevice"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="+numpy"
 
 RDEPEND="
