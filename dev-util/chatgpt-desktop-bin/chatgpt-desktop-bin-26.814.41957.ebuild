@@ -7,7 +7,7 @@ inherit unpacker xdg
 
 DESCRIPTION="Official ChatGPT Desktop application for Linux by OpenAI"
 HOMEPAGE="https://developers.openai.com/codex/app"
-SRC_URI="https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb -> ${P}.deb"
+SRC_URI="https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_${PV}_amd64.deb -> ${P}.deb"
 
 S="${WORKDIR}"
 
