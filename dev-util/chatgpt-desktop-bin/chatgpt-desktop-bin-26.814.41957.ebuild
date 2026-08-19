@@ -20,6 +20,7 @@ RESTRICT="bindist mirror strip"
 QA_PREBUILT="opt/chatgpt/*"
 QA_PRESTRIPPED="opt/chatgpt/*"
 QA_FLAGS_IGNORED="opt/chatgpt/.*"
+QA_SONAME=".*libQt[56].*\.so.*"
 QA_SONAME_NO_SYMLINK=".*"
 
 RDEPEND="
@@ -66,6 +67,23 @@ src_install() {
 	# Install application files to /opt/chatgpt
 	mkdir -p "${D}/opt/chatgpt" || die
 	cp -r "${WORKDIR}/usr/lib/chatgpt/." "${D}/opt/chatgpt/" || die "Failed to copy chatgpt files"
+
+	# Remove foreign architecture and musl prebuilds from bundled npm packages
+	find "${D}/opt/chatgpt" -type d \( \
+		-name "android-*" -o \
+		-name "darwin-*" -o \
+		-name "win32-*" -o \
+		-name "HID-darwin-*" -o \
+		-name "HID-win32-*" -o \
+		-name "HID-linux-arm*" -o \
+		-name "HID_hidraw-linux-arm*" -o \
+		-name "*-musl*" \
+	\) -exec rm -rf {} + 2>/dev/null || true
+
+	find "${D}/opt/chatgpt" -type f \( \
+		-name "*.musl.node" -o \
+		-name "*armv*.node" \
+	\) -delete 2>/dev/null || true
 
 	# Install launchers and symlinks
 	mkdir -p "${D}/usr/bin" || die
