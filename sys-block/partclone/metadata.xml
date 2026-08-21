@@ -9,17 +9,23 @@
 		<remote-id type="github">Thomas-Tsai/partclone</remote-id>
 	</upstream>
 	<use>
+		<flag name="apfs">Enables support for APFS filesystem</flag>
 		<flag name="btrfs">Enables support for btrfs filesystem</flag>
 		<flag name="exfat">Enables support for exfat filesystem</flag>
 		<flag name="f2fs">Enables support for f2fs filesystem</flag>
 		<flag name="fat">Enables support for FAT filesystem</flag>
+		<flag name="fuse">Enables fuse support (partclone.imgfuse)</flag>
 		<flag name="hfs">Enables support for HFS filesystem</flag>
+		<flag name="isal">Enable Intel ISA-L for optimized CRC32 checksums</flag>
 		<flag name="jfs">Enables support for JFS filesystem</flag>
 		<flag name="ncurses">Enables text user interface</flag>
+		<flag name="nilfs">Enables support for NILFS2 filesystem</flag>
 		<flag name="ntfs">Enables support for NTFS filesystem</flag>
 		<flag name="reiserfs">Enables support for reiserfs filesystem</flag>
-		<flag name="xfs">Enables support for XFS filesystem</flag>
-		<flag name="vmfs">Enables support for vmfs filesystem</flag>
 		<flag name="static">Build statically linked binaries</flag>
+		<flag name="ufs">Enables support for UFS filesystem</flag>
+		<flag name="vmfs">Enables support for vmfs filesystem</flag>
+		<flag name="xfs">Enables support for XFS filesystem</flag>
+		<flag name="xxhash">Enable xxhash for checksum calculation</flag>
 	</use>
 </pkgmetadata>
