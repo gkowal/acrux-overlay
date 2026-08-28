@@ -85,14 +85,18 @@ src_install() {
 		-name "*armv*.node" \
 	\) -delete 2>/dev/null || true
 
+	# Remove fragile prebuilt Qt theme shims that crash on Gentoo Qt 6.11
+	rm -f "${D}/opt/chatgpt/libqt5_shim.so" \
+	      "${D}/opt/chatgpt/libqt6_shim.so" || die
+
 	# Install wrapper script with Wayland auto-detection and custom flags support
 	cat > "${D}/opt/chatgpt/codex-launcher" << 'EOF' || die
 #!/bin/sh
-CHATGPT_FLAGS="--ozone-platform-hint=auto"
+FLAGS="--ozone-platform-hint=auto"
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/chatgpt-flags.conf" ]; then
-	CHATGPT_FLAGS="$CHATGPT_FLAGS $(grep -v '^#' "${XDG_CONFIG_HOME:-$HOME/.config}/chatgpt-flags.conf" 2>/dev/null)"
+	FLAGS="$FLAGS $(grep -v '^#' "${XDG_CONFIG_HOME:-$HOME/.config}/chatgpt-flags.conf" 2>/dev/null)"
 fi
-exec "$(dirname "$(readlink -f "$0")")/ChatGPT" $CHATGPT_FLAGS "$@"
+exec "$(dirname "$(readlink -f "$0")")/ChatGPT" ${FLAGS} "$@"
 EOF
 	fperms +x /opt/chatgpt/codex-launcher
 
