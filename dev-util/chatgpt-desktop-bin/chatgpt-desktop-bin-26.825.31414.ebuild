@@ -85,10 +85,6 @@ src_install() {
 		-name "*armv*.node" \
 	\) -delete 2>/dev/null || true
 
-	# Remove fragile prebuilt Qt theme shims that crash on KDE Plasma 6
-	rm -f "${D}/opt/chatgpt/libqt5_shim.so" \
-	      "${D}/opt/chatgpt/libqt6_shim.so" || die
-
 	# Install launchers and symlinks
 	mkdir -p "${D}/usr/bin" || die
 	dosym ../../opt/chatgpt/codex-launcher /usr/bin/chatgpt
