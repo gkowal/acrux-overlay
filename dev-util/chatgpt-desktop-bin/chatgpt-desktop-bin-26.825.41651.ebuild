@@ -13,7 +13,8 @@ S="${WORKDIR}"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
+IUSE="+wayland"
 RESTRICT="bindist mirror strip"
 
 # Prebuilt binaries bundled in official package
@@ -84,6 +85,22 @@ src_install() {
 		-name "*.musl.node" -o \
 		-name "*armv*.node" \
 	\) -delete 2>/dev/null || true
+
+	# Install wrapper script with optional Wayland flags and custom flags support
+	local wayland_flags=""
+	if use wayland; then
+		wayland_flags="--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations"
+	fi
+
+	cat > "${D}/opt/chatgpt/codex-launcher" <<- EOF || die
+#!/bin/sh
+FLAGS="${wayland_flags}"
+if [ -f "\${XDG_CONFIG_HOME:-\$HOME/.config}/chatgpt-flags.conf" ]; then
+	FLAGS="\$FLAGS \$(grep -v '^#' "\${XDG_CONFIG_HOME:-\$HOME/.config}/chatgpt-flags.conf" 2>/dev/null)"
+fi
+exec "\$(dirname "\$(readlink -f "\$0")")/ChatGPT" \${FLAGS} "\$@"
+EOF
+	fperms +x /opt/chatgpt/codex-launcher
 
 	# Install launchers and symlinks
 	mkdir -p "${D}/usr/bin" || die
