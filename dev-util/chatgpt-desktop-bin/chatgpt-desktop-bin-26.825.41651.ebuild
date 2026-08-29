@@ -13,7 +13,7 @@ S="${WORKDIR}"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 RESTRICT="bindist mirror strip"
 
 # Prebuilt binaries bundled in official package
