@@ -55,6 +55,10 @@ src_install() {
 	insinto /opt/OpenCode
 	doins -r opt/OpenCode/*
 
+	# Remove unused musl prebuilt binaries to prevent unresolved soname QA notices
+	rm -rf "${ED}/opt/OpenCode/resources/app.asar.unpacked/node_modules/@parcel/watcher-linux-x64-musl" || die
+	rm -f "${ED}/opt/OpenCode/resources/app.asar.unpacked/node_modules/@msgpackr-extract/msgpackr-extract-linux-x64/"*.musl.node || die
+
 	# Restore execution permissions for main executable and binary libraries
 	local exec_files=(
 		"ai.opencode.desktop"
