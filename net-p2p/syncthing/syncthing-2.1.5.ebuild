@@ -12,7 +12,7 @@ SRC_URI+=" https://gentoo.clarokowal.com/${CATEGORY}/${PN}/${P}-deps.tar.xz"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 ISC MIT MPL-2.0 Unlicense"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="selinux tools"
 
 RDEPEND="acct-group/syncthing
