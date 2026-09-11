@@ -14,7 +14,7 @@ S="${WORKDIR}"
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="+cli +wayland"
+IUSE="+wayland"
 RESTRICT="bindist mirror strip"
 
 # Prebuilt binaries bundled in official package
@@ -107,23 +107,9 @@ EOF
 	dosym ../../opt/chatgpt/codex-launcher /usr/bin/chatgpt
 	dosym chatgpt /usr/bin/chatgpt-desktop
 	dosym chatgpt /usr/bin/codex-desktop
-
-	# Expose bundled CLI tools if USE="cli"
-	if use cli; then
-		dosym ../../opt/chatgpt/resources/codex /usr/bin/codex
-		dosym codex /usr/bin/codex-cli
-
-		mkdir -p "${D}/opt/chatgpt/bin" || die
-		dosym ../resources/codex /opt/chatgpt/bin/codex
-		dosym ../resources/codex /opt/chatgpt/bin/codex-cli
-		dosym ../codex-launcher /opt/chatgpt/bin/chatgpt
-		dosym ../codex-launcher /opt/chatgpt/bin/chatgpt-desktop
-
-		mkdir -p "${D}/etc/env.d" || die
-		cat > "${D}/etc/env.d/99chatgpt-desktop-bin" <<- 'EOF'
-			PATH="/opt/chatgpt/bin"
-		EOF
-	fi
+	dosym ../../opt/chatgpt/resources/codex /usr/bin/codex
+	dosym codex /usr/bin/codex-cli
+	dosym ../../opt/chatgpt/resources/codex-code-mode-host /usr/bin/codex-code-mode-host
 
 	# Install AppArmor profile
 	if [ -f "${WORKDIR}/etc/apparmor.d/chatgpt" ]; then
