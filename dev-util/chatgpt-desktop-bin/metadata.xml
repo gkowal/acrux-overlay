@@ -12,4 +12,7 @@
 		ChatGPT Desktop for Linux. Provides official prebuilt Linux binary packages
 		from OpenAI as well as community-built packages generated from macOS DMG.
 	</longdescription>
+	<use>
+		<flag name="cli">Expose the bundled OpenAI Codex CLI command-line interface</flag>
+	</use>
 </pkgmetadata>
