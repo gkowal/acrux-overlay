@@ -86,11 +86,14 @@ src_install() {
 	# Create symlink in /usr/bin
 	dosym "../../../opt/lmstudio/lm-studio" "/usr/bin/lm-studio"
 
-	# Install application icon dynamically
-	local icon_file
-	icon_file=$(find usr/share/icons opt/LM-Studio -name "*512*.png" 2>/dev/null | head -n 1)
-	if [[ -f "${icon_file}" ]]; then
-		doicon -s 512 "${icon_file}"
+	# Install application icons
+	if [[ -d usr/share/icons ]]; then
+		insinto /usr/share
+		doins -r usr/share/icons
+	else
+		local icon_file
+		icon_file=$(find opt/LM-Studio -name "*512*.png" 2>/dev/null | head -n 1)
+		[[ -f "${icon_file}" ]] && newicon -s 512 "${icon_file}" lm-studio.png
 	fi
 
 	# Adjust executable path and remove invalid category in desktop entry, then install it
