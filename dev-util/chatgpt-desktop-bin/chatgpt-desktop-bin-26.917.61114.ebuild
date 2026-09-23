@@ -14,15 +14,13 @@ S="${WORKDIR}"
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="amd64"
-IUSE="+wayland"
+IUSE="+qt6 +wayland"
 RESTRICT="bindist mirror strip"
 
 # Prebuilt binaries bundled in official package
 QA_PREBUILT="opt/chatgpt/*"
 QA_PRESTRIPPED="opt/chatgpt/*"
 QA_FLAGS_IGNORED="opt/chatgpt/.*"
-QA_SONAME=".*libQt[56].*\.so.*"
-QA_SONAME_NO_SYMLINK=".*"
 
 RDEPEND="
 	app-accessibility/at-spi2-core
@@ -53,6 +51,7 @@ RDEPEND="
 	x11-libs/libXrandr
 	x11-libs/pango
 	x11-misc/xdg-utils
+	qt6? ( dev-qt/qtbase:6[gui,widgets] )
 "
 DEPEND="${RDEPEND}"
 BDEPEND="app-arch/tar"
@@ -85,6 +84,10 @@ src_install() {
 		-name "*.musl.node" -o \
 		-name "*armv*.node" \
 	\) -delete 2>/dev/null || true
+
+	# Remove dead Qt5 shim to avoid unresolved soname QA notices
+	rm -f "${D}/opt/chatgpt/libqt5_shim.so" || die
+	use qt6 || rm -f "${D}/opt/chatgpt/libqt6_shim.so" || die
 
 	# Install wrapper script with optional Wayland flags and custom flags support
 	local wayland_flags=""
