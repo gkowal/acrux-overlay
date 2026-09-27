@@ -11,7 +11,7 @@ SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="kde static-libs systemd webengine"
 
 DEPEND="
@@ -36,6 +36,10 @@ RDEPEND="${DEPEND}
 "
 
 RESTRICT="mirror test" #tests want to access network
+
+PATCHES=(
+	"${FILESDIR}/${P}-fix-undeclared-quickui.patch"
+)
 
 src_configure() {
 	local mycmakeargs=(
