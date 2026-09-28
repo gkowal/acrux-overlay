@@ -45,6 +45,11 @@ RDEPEND="
 	x11-libs/pango
 "
 
+src_prepare() {
+	default
+	python3 "${FILESDIR}/patch-window-geometry.py" "resources/app.asar" || die "Failed to patch window geometry"
+}
+
 src_install() {
 	# Copy all application files to /opt
 	insinto "/opt/${PN}"
