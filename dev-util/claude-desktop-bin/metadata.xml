@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>grzegorz@gkowal.info</email>
+		<name>Grzegorz Kowal</name>
+	</maintainer>
+	<upstream>
+		<bugs-to>https://support.anthropic.com/</bugs-to>
+		<doc>https://code.claude.com/docs/en/desktop-linux</doc>
+	</upstream>
+	<longdescription>
+		Official Claude AI desktop application by Anthropic PBC. Provides Chat,
+		Claude Code integration, Claude Cowork, and MCP support.
+	</longdescription>
+</pkgmetadata>
