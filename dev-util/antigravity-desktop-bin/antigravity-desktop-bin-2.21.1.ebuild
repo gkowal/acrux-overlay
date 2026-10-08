@@ -14,7 +14,7 @@ S="${WORKDIR}/Antigravity-x64"
 
 LICENSE="Google-Antigravity"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 
 QA_PRESTRIPPED="opt/${PN}/.*"
 
