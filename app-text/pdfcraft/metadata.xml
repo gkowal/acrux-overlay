@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>grzegorz@gkowal.info</email>
+		<name>Grzegorz Kowal</name>
+	</maintainer>
+	<longdescription lang="en">
+		PdfCraft (formerly PrintCraft) is an open-source, clean-room
+		reimplementation of Adobe Acrobat built in pure Rust. It provides a
+		native PDF workbench with features to read, organize, combine, split,
+		and secure PDFs.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">storytold/pdfcraft</remote-id>
+		<bugs-to>https://github.com/storytold/pdfcraft/issues</bugs-to>
+	</upstream>
+</pkgmetadata>
