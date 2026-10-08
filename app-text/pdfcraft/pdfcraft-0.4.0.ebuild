@@ -656,7 +656,7 @@ LICENSE+="
 	Unicode-3.0 ZLIB openssl
 "
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="amd64"
 IUSE="wayland +X"
 REQUIRED_USE="|| ( wayland X )"
 
