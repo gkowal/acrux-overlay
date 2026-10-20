@@ -38,7 +38,7 @@ RDEPEND="
 	>=dev-python/rich-14.3.3[${PYTHON_USEDEP}]
 	>=dev-python/typer-0.24.1[${PYTHON_USEDEP}]
 	>=dev-python/typing-extensions-4.0[${PYTHON_USEDEP}]
-	>=dev-python/websocket-client-1.0[${PYTHON_USEDEP}]
+	>=dev-python/websocket-client-1.6[${PYTHON_USEDEP}]
 "
 BDEPEND="
 	dev-python/hatch-vcs[${PYTHON_USEDEP}]
