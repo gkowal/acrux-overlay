@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>grzegorz@gkowal.info</email>
+		<name>Grzegorz Kowal</name>
+	</maintainer>
+	<longdescription lang="en">
+		GridCraft is an open-source, clean-room spreadsheet workbench
+		built in pure Rust. It allows users to calculate, analyse, and chart
+		data in workbooks with high performance.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">storytold/gridcraft</remote-id>
+		<bugs-to>https://github.com/storytold/gridcraft/issues</bugs-to>
+	</upstream>
+</pkgmetadata>
