@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>grzegorz@gkowal.info</email>
+		<name>Grzegorz Kowal</name>
+	</maintainer>
+	<longdescription lang="en">
+		DeckCraft is an open-source, clean-room presentation workbench
+		built in pure Rust. It provides tools to design, format, and present
+		slide decks with rich animations and multimedia support.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">storytold/deckcraft</remote-id>
+		<bugs-to>https://github.com/storytold/deckcraft/issues</bugs-to>
+	</upstream>
+</pkgmetadata>
