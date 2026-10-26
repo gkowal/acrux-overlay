@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>grzegorz@gkowal.info</email>
+		<name>Grzegorz Kowal</name>
+	</maintainer>
+	<longdescription lang="en">
+		WordCraft is an open-source, clean-room word processor built in
+		pure Rust. It provides a native document workbench with full
+		support for editing, styling, formatting, and saving Word documents.
+	</longdescription>
+	<upstream>
+		<remote-id type="github">storytold/wordcraft</remote-id>
+		<bugs-to>https://github.com/storytold/wordcraft/issues</bugs-to>
+	</upstream>
+</pkgmetadata>
