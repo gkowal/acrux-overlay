@@ -27,5 +27,6 @@
 		<flag name="vmfs">Enables support for vmfs filesystem</flag>
 		<flag name="xfs">Enables support for XFS filesystem</flag>
 		<flag name="xxhash">Enable xxhash for checksum calculation</flag>
+		<flag name="zfs">Enables support for ZFS filesystem</flag>
 	</use>
 </pkgmetadata>
