@@ -118,7 +118,6 @@ EOF
 	# Install CLI symlinks
 	mkdir -p "${ED}/usr/bin" || die
 	dosym ../../opt/claude-desktop/claude-launcher /usr/bin/claude-desktop
-	dosym claude-desktop /usr/bin/claude
 
 	# Cowork compatibility: provide virtiofsd in /usr/libexec where app.asar searches
 	if [[ -x "${ED}/opt/claude-desktop/resources/virtiofsd" ]]; then
