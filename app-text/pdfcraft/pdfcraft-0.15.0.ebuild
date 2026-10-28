@@ -813,21 +813,12 @@ src_prepare() {
 
 	# Upstream defines pinned storytold git patches for egui and winit under [patch.crates-io].
 	# In cargo offline mode, these fail resolution unless mapped to local unpacked directories.
-	python3 <<-EOF || die
-		import re
-		with open("Cargo.toml") as f:
-			c = f.read()
-		eg_rev = "6d518fc799681571963842f95b55a6b68431b15a"
-		def repl(m):
-			crate = c[c.rfind("\n", 0, m.start()) + 1:m.start()].strip()
-			return f"= {{ path = \"../egui-{eg_rev}/crates/{crate}\" }}"
-		c = re.sub(r"= \{ git = \"https://github\.com/storytold/egui(\.git)?\", rev = \"" + eg_rev + r"\" \}", repl, c)
-		wn_rev = "a517b3846ee8457d84ee4975110bfda6797c44dc"
-		wn_pat = r"winit = \{ git = \"https://github\.com/storytold/winit(\.git)?\", rev = \"" + wn_rev + r"\" \}"
-		c = re.sub(wn_pat, f"winit = {{ path = \"../winit-{wn_rev}\" }}", c)
-		with open("Cargo.toml", "w") as f:
-			f.write(c)
-	EOF
+	local eg_rev="6d518fc799681571963842f95b55a6b68431b15a"
+	local wn_rev="a517b3846ee8457d84ee4975110bfda6797c44dc"
+	sed -i -E \
+		-e "s#^([a-zA-Z0-9_-]+) = \{ git = \"https://github\.com/storytold/egui(\.git)?\", rev = \"${eg_rev}\" \}#\1 = { path = \"../egui-${eg_rev}/crates/\1\" }#" \
+		-e "s#^winit = \{ git = \"https://github\.com/storytold/winit(\.git)?\", rev = \"${wn_rev}\" \}#winit = { path = \"../winit-${wn_rev}\" }#" \
+		Cargo.toml || die
 }
 
 src_compile() {
