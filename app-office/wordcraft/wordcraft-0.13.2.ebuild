@@ -82,7 +82,7 @@ CRATES="
 	chardetng@1.0.0
 	chrono@0.4.45
 	cipher@0.5.2
-	clipboard-win@5.4.1
+	clipboard-win@5.4.3
 	cmake@0.1.58
 	cmov@0.5.4
 	cmpv2@0.2.0
@@ -114,7 +114,7 @@ CRATES="
 	crunchy@0.2.4
 	crypto-common@0.1.7
 	crypto-common@0.2.2
-	ctutils@0.4.3
+	ctutils@0.4.7
 	cursor-icon@1.2.0
 	der@0.7.10
 	der_derive@0.7.3
@@ -661,7 +661,7 @@ declare -A GIT_CRATES=(
 	[craft-pdf]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/pdf'
 	[craft-print]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/print'
 	[craft-ui]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/ui'
-	[craft-update]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/update'
+	[craft-update]='https://github.com/storytold/craft-libs;04aa1703b32d299e54f78fcde4182f2b393a9116;craft-libs-%commit%/crates/update'
 	[craft-window]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/window'
 	[craft-winprint-gdi]='https://github.com/storytold/winprint.rs;417ac3c4d14d3da5485a99c7d5ce8f05664ec312;winprint.rs-%commit%/crates/gdi'
 	[ecolor]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/ecolor'
