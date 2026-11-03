@@ -23,6 +23,7 @@ CRATES="
 	anyhow@1.0.104
 	arbitrary@1.5.0
 	arboard@3.7.0
+	arrayref@0.3.9
 	arrayvec@0.7.8
 	as-raw-xcb-connection@1.0.1
 	ash@0.38.0+1.3.281
@@ -47,6 +48,8 @@ CRATES="
 	base64@0.23.1
 	base64ct@1.8.3
 	bit-set@0.10.0
+	bit-set@0.8.0
+	bit-vec@0.8.0
 	bit-vec@0.9.1
 	bitflags@1.3.2
 	bitflags@2.13.2
@@ -127,6 +130,7 @@ CRATES="
 	euclid@0.22.14
 	event-listener-strategy@0.5.4
 	event-listener@5.4.2
+	fancy-regex@0.14.0
 	fastrand@2.5.0
 	fax@0.2.7
 	fdeflate@0.3.7
@@ -304,9 +308,13 @@ CRATES="
 	peniko@0.6.1
 	percent-encoding@2.3.2
 	petgraph@0.8.3
+	phf@0.11.3
 	phf@0.14.0
+	phf_generator@0.11.3
 	phf_generator@0.14.0
+	phf_macros@0.11.3
 	phf_macros@0.14.0
+	phf_shared@0.11.3
 	phf_shared@0.14.0
 	pin-project-internal@1.1.13
 	pin-project-lite@0.2.17
@@ -342,10 +350,16 @@ CRATES="
 	r-efi@5.3.0
 	r-efi@6.0.0
 	rand@0.10.3
+	rand@0.8.8
 	rand_core@0.10.1
 	rand_core@0.6.4
 	rand_pcg@0.10.2
 	range-alloc@0.1.5
+	ratex-font@0.1.14
+	ratex-layout@0.1.14
+	ratex-lexer@0.1.14
+	ratex-parser@0.1.14
+	ratex-types@0.1.14
 	raw-window-handle@0.6.2
 	raw-window-metal@1.1.0
 	rayon-core@1.13.0
@@ -355,6 +369,7 @@ CRATES="
 	redox_syscall@0.5.18
 	redox_syscall@0.9.4
 	regex-automata@0.4.18
+	regex-lite@0.1.9
 	regex-syntax@0.8.11
 	regex@1.13.1
 	renderdoc-sys@1.1.0
@@ -380,6 +395,7 @@ CRATES="
 	schannel@0.1.29
 	scoped-tls@1.0.1
 	scopeguard@1.2.0
+	sctk-adwaita@0.10.1
 	security-framework-sys@2.17.0
 	security-framework@3.7.0
 	self_cell@1.3.0
@@ -425,6 +441,7 @@ CRATES="
 	spki@0.7.3
 	stable_deref_trait@1.2.1
 	static_assertions@1.1.0
+	strict-num@0.1.1
 	strum@0.28.0
 	strum_macros@0.28.0
 	subtle@2.6.1
@@ -447,6 +464,8 @@ CRATES="
 	time-core@0.1.9
 	time-macros@0.2.32
 	time@0.3.55
+	tiny-skia-path@0.11.4
+	tiny-skia@0.11.4
 	tinystr@0.8.4
 	tinyvec@1.13.3
 	tls_codec@0.4.2
@@ -475,6 +494,7 @@ CRATES="
 	unicode-bidi@0.3.18
 	unicode-general-category@1.1.0
 	unicode-ident@1.0.26
+	unicode-normalization@0.1.26
 	unicode-properties@0.1.4
 	unicode-segmentation@1.13.3
 	unicode-width@0.2.2
