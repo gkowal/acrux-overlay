@@ -162,6 +162,7 @@ CRATES="
 	foldhash@0.2.0
 	font-types@0.11.3
 	font-types@0.12.6
+	fontique@0.11.1
 	foreign-types-macros@0.2.4
 	foreign-types-shared@0.3.1
 	foreign-types@0.5.0
@@ -302,6 +303,7 @@ CRATES="
 	objc2-core-graphics@0.3.2
 	objc2-core-image@0.2.2
 	objc2-core-location@0.2.2
+	objc2-core-text@0.3.2
 	objc2-encode@4.1.0
 	objc2-foundation@0.2.2
 	objc2-foundation@0.3.2
@@ -329,6 +331,7 @@ CRATES="
 	parking@2.2.1
 	parking_lot@0.12.5
 	parking_lot_core@0.9.12
+	parlance@0.1.1
 	pdf-writer@0.15.0
 	pem-rfc7468@0.7.0
 	pem@3.0.6
@@ -416,6 +419,7 @@ CRATES="
 	rustls@0.23.46
 	rustversion@1.0.23
 	rusty-fork@0.3.1
+	ruzstd@0.9.1
 	ryu-js@1.0.3
 	ryu@1.0.23
 	same-file@1.0.6
@@ -568,6 +572,7 @@ CRATES="
 	web-time@1.1.0
 	webbrowser@1.2.4
 	webpki-root-certs@1.0.11
+	webpki-roots@1.0.11
 	weezl@0.1.12
 	wgpu-core-deps-apple@30.0.1
 	wgpu-core-deps-emscripten@30.0.1
@@ -625,6 +630,7 @@ CRATES="
 	xml-rs@0.8.29
 	xml@1.4.0
 	xmp-writer@0.3.3
+	yeslogic-fontconfig-sys@6.0.1
 	yoke-derive@0.8.4
 	yoke@0.8.4
 	zbus-lockstep-macros@0.5.2
@@ -656,10 +662,14 @@ CRATES="
 "
 
 declare -A GIT_CRATES=(
+	[craft-atomic]='https://github.com/storytold/craft-libs;762a06a4c6b48b522b7d4de84a87917ef90265e6;craft-libs-%commit%/crates/atomic'
+	[craft-font-catalog]='https://github.com/storytold/craft-libs;762a06a4c6b48b522b7d4de84a87917ef90265e6;craft-libs-%commit%/crates/font-catalog'
+	[craft-font-store]='https://github.com/storytold/craft-libs;762a06a4c6b48b522b7d4de84a87917ef90265e6;craft-libs-%commit%/crates/font-store'
 	[craft-fonts-build]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/fonts-build'
 	[craft-i18n]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/i18n'
 	[craft-pdf]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/pdf'
 	[craft-print]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/print'
+	[craft-proof]='https://github.com/storytold/craft-libs;89fa1559e94378ecef85cd7e4681400f4df053e0;craft-libs-%commit%/crates/proof'
 	[craft-ui]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/ui'
 	[craft-update]='https://github.com/storytold/craft-libs;c5a1cbfb5f9049f9270955caffb5bee5997aebf7;craft-libs-%commit%/crates/update'
 	[craft-window]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/window'
