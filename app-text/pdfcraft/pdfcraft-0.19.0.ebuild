@@ -15,6 +15,7 @@ CRATES="
 	adler2@2.0.1
 	aes@0.9.3
 	ahash@0.8.12
+	aho-corasick@1.1.5
 	aligned-vec@0.6.4
 	alloc-no-stdlib@2.0.4
 	alloc-stdlib@0.2.4
@@ -741,6 +742,7 @@ declare -A GIT_CRATES=(
 	[craft-quit]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/quit'
 	[craft-ui]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/ui'
 	[craft-update]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/update'
+	[craft-web-host]='https://github.com/storytold/craft-libs;2e2312ddaf21bc3d85cd3395d0955c7d239306f6;craft-libs-%commit%/crates/web-host'
 	[craft-winprint-gdi]='https://github.com/storytold/winprint.rs;417ac3c4d14d3da5485a99c7d5ce8f05664ec312;winprint.rs-%commit%/crates/gdi'
 	[winprint]='https://github.com/storytold/winprint.rs;5f80b9baf6b58937c401656634e42d33f00ddf49;winprint.rs-%commit%'
 	[winit]='https://github.com/storytold/winit;a517b3846ee8457d84ee4975110bfda6797c44dc;winit-%commit%'
