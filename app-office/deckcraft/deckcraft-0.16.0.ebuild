@@ -58,7 +58,9 @@ CRATES="
 	byteorder-lite@0.1.0
 	bytes@1.12.1
 	calloop-wayland-source@0.3.0
+	calloop-wayland-source@0.4.1
 	calloop@0.13.0
+	calloop@0.14.5
 	cast@0.3.0
 	cc@1.6.0
 	cesu8@1.1.0
@@ -108,6 +110,8 @@ CRATES="
 	either@1.19.0
 	encoding_rs@0.8.42
 	endi@1.1.1
+	enum-map-derive@1.0.1
+	enum-map@3.1.0
 	enumflags2@0.7.12
 	enumflags2_derive@0.7.12
 	equivalent@1.0.2
@@ -386,6 +390,8 @@ CRATES="
 	slotmap@1.1.1
 	smallvec@1.16.2
 	smithay-client-toolkit@0.19.2
+	smithay-client-toolkit@0.20.0
+	smithay-clipboard@0.7.3
 	smol_str@0.2.2
 	spirv@0.4.0+sdk-1.4.341.0
 	stable_deref_trait@1.2.1
@@ -479,6 +485,8 @@ CRATES="
 	wayland-client@0.31.15
 	wayland-csd-frame@0.3.0
 	wayland-cursor@0.31.14
+	wayland-protocols-experimental@20250721.0.1
+	wayland-protocols-misc@0.3.12
 	wayland-protocols-plasma@0.3.12
 	wayland-protocols-wlr@0.3.12
 	wayland-protocols@0.32.13
@@ -588,6 +596,7 @@ declare -A GIT_CRATES=(
 	[craft-pdf]='https://github.com/storytold/craft-libs;c5a1cbfb5f9049f9270955caffb5bee5997aebf7;craft-libs-%commit%/crates/pdf'
 	[craft-ui]='https://github.com/storytold/craft-libs;c5a1cbfb5f9049f9270955caffb5bee5997aebf7;craft-libs-%commit%/crates/ui'
 	[craft-update]='https://github.com/storytold/craft-libs;c5a1cbfb5f9049f9270955caffb5bee5997aebf7;craft-libs-%commit%/crates/update'
+	[craft-web-host]='https://github.com/storytold/craft-libs;2e2312ddaf21bc3d85cd3395d0955c7d239306f6;craft-libs-%commit%/crates/web-host'
 	[ecolor]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/ecolor'
 	[eframe]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/eframe'
 	[egui]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/egui'
