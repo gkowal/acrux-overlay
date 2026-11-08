@@ -77,8 +77,9 @@ src_install() {
 		fperms 4755 "/opt/OpenCode/chrome-sandbox"
 	fi
 
-	# Create launch wrapper symlink
+	# Create launch wrapper symlinks
 	dosym -r "/opt/OpenCode/ai.opencode" "/usr/bin/opencode-desktop"
+	dosym -r "/opt/OpenCode/resources/opencode-cli" "/usr/bin/opencode"
 
 	# Install desktop icons
 	if [[ -d usr/share/icons ]]; then
