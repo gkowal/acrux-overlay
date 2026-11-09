@@ -669,12 +669,13 @@ declare -A GIT_CRATES=(
 	[craft-font-store]='https://github.com/storytold/craft-libs;762a06a4c6b48b522b7d4de84a87917ef90265e6;craft-libs-%commit%/crates/font-store'
 	[craft-fonts-build]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/fonts-build'
 	[craft-i18n]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/i18n'
-	[craft-pdf]='https://github.com/storytold/craft-libs;c5a1cbfb5f9049f9270955caffb5bee5997aebf7;craft-libs-%commit%/crates/pdf'
+	[craft-pdf]='https://github.com/storytold/craft-libs;1b34eba41e62138fc2438d2734523b302840b45d;craft-libs-%commit%/crates/pdf'
 	[craft-print]='https://github.com/storytold/craft-libs;a3e0b5a9440d18f19422a9dca13516747b7d3181;craft-libs-%commit%/crates/print'
 	[craft-proof]='https://github.com/storytold/craft-libs;01315d9c92b5b0e69082d35ca56099461a1efd45;craft-libs-%commit%/crates/proof'
 	[craft-ui]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/ui'
-	[craft-update]='https://github.com/storytold/craft-libs;c5a1cbfb5f9049f9270955caffb5bee5997aebf7;craft-libs-%commit%/crates/update'
-	[craft-web-host]='https://github.com/storytold/craft-libs;2e2312ddaf21bc3d85cd3395d0955c7d239306f6;craft-libs-%commit%/crates/web-host'
+	[craft-update]='https://github.com/storytold/craft-libs;1b34eba41e62138fc2438d2734523b302840b45d;craft-libs-%commit%/crates/update'
+	[craft-web-api]='https://github.com/storytold/craft-libs;fd5e2feff6ea25bed371a99cc732b3968d621505;craft-libs-%commit%/crates/web-api'
+	[craft-web-host]='https://github.com/storytold/craft-libs;fd5e2feff6ea25bed371a99cc732b3968d621505;craft-libs-%commit%/crates/web-host'
 	[craft-window]='https://github.com/storytold/craft-libs;92d392cff132eaf53e13afff77f38b5c11b73aa0;craft-libs-%commit%/crates/window'
 	[craft-winprint-gdi]='https://github.com/storytold/winprint.rs;417ac3c4d14d3da5485a99c7d5ce8f05664ec312;winprint.rs-%commit%/crates/gdi'
 	[ecolor]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/ecolor'
@@ -691,7 +692,7 @@ declare -A GIT_CRATES=(
 	[emath]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/emath'
 	[epaint]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/epaint'
 	[epaint_default_fonts]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/epaint_default_fonts'
-	[krilla]='https://github.com/storytold/craft-libs;c5a1cbfb5f9049f9270955caffb5bee5997aebf7;craft-libs-%commit%/vendor/krilla'
+	[krilla]='https://github.com/storytold/craft-libs;1b34eba41e62138fc2438d2734523b302840b45d;craft-libs-%commit%/vendor/krilla'
 	[winit]='https://github.com/storytold/winit;a517b3846ee8457d84ee4975110bfda6797c44dc;winit-%commit%'
 	[winprint]='https://github.com/storytold/winprint.rs;5f80b9baf6b58937c401656634e42d33f00ddf49;winprint.rs-%commit%'
 )
@@ -745,7 +746,7 @@ src_unpack() {
 	cargo_src_unpack
 
 	local egui_dir="${WORKDIR}/egui-6d518fc799681571963842f95b55a6b68431b15a"
-	local craft_dir="${WORKDIR}/craft-libs-c5a1cbfb5f9049f9270955caffb5bee5997aebf7"
+	local craft_dir="${WORKDIR}/craft-libs-1b34eba41e62138fc2438d2734523b302840b45d"
 	local winit_dir="${WORKDIR}/winit-a517b3846ee8457d84ee4975110bfda6797c44dc"
 
 	cat >> "${CARGO_HOME}/config.toml" <<- _EOF_ || die
