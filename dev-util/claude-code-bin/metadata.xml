@@ -6,6 +6,7 @@
 		<name>Grzegorz Kowal</name>
 	</maintainer>
 	<upstream>
+		<remote-id type="github">anthropics/claude-code</remote-id>
 		<bugs-to>https://support.anthropic.com/</bugs-to>
 		<doc>https://code.claude.com/docs/en/overview</doc>
 	</upstream>
