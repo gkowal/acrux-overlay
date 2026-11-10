@@ -29,6 +29,7 @@ RDEPEND="
 	>=dev-python/google-auth-oauthlib-1.3.0[${PYTHON_USEDEP}]
 	>=dev-python/html2text-2024.2.26[${PYTHON_USEDEP}]
 	>=dev-python/jupyter-kernel-client-0.9.0[${PYTHON_USEDEP}]
+	>=dev-python/keyring-25.7.0[${PYTHON_USEDEP}]
 	>=dev-python/nbformat-5.10.4[${PYTHON_USEDEP}]
 	>=dev-python/packaging-24.0[${PYTHON_USEDEP}]
 	>=dev-python/prompt-toolkit-3.0.52[${PYTHON_USEDEP}]
