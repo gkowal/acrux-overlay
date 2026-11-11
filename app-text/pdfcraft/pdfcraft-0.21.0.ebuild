@@ -475,7 +475,7 @@ CRATES="
 	rustc-hash@2.1.3
 	rustc_version@0.4.1
 	rustix@0.38.44
-	rustix@1.1.5
+	rustix@1.1.6
 	rustls-cng@0.7.1
 	rustls-native-certs@0.8.5
 	rustls-pki-types@1.15.1
@@ -742,26 +742,26 @@ declare -A GIT_CRATES=(
 	[craft-i18n]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/i18n'
 	[craft-keymap]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/keymap'
 	[craft-menu]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/menu'
-	[craft-print]='https://github.com/storytold/craft-libs;7ee35a9fbd47af572d55fd63dbf0333d1f00da17;craft-libs-%commit%/crates/print'
+	[craft-print]='https://github.com/storytold/craft-libs;60ede99985ef1e5df87a2aca66ed538eb23dec99;craft-libs-%commit%/crates/print'
 	[craft-quit]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/quit'
 	[craft-ui]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/ui'
 	[craft-update]='https://github.com/storytold/craft-libs;1b34eba41e62138fc2438d2734523b302840b45d;craft-libs-%commit%/crates/update'
 	[craft-web-api]='https://github.com/storytold/craft-libs;fd5e2feff6ea25bed371a99cc732b3968d621505;craft-libs-%commit%/crates/web-api'
 	[craft-web-host]='https://github.com/storytold/craft-libs;fd5e2feff6ea25bed371a99cc732b3968d621505;craft-libs-%commit%/crates/web-host'
 	[craft-winprint-gdi]='https://github.com/storytold/winprint.rs;64e7afd4d1483512385012c340ecaaaf0f3beb7f;winprint.rs-%commit%/crates/gdi'
-	[winprint]='https://github.com/storytold/winprint.rs;51934db382f225454cf152a8657eb03789be63c4;winprint.rs-%commit%'
+	[winprint]='https://github.com/storytold/winprint.rs;5f80b9baf6b58937c401656634e42d33f00ddf49;winprint.rs-%commit%'
 	[winit]='https://github.com/storytold/winit;a517b3846ee8457d84ee4975110bfda6797c44dc;winit-%commit%'
-	[ecolor]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/ecolor'
-	[eframe]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/eframe'
-	[egui]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/egui'
-	[egui-wgpu]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/egui-wgpu'
-	[egui-winit]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/egui-winit'
-	[egui_extras]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/egui_extras'
-	[egui_glow]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/egui_glow'
-	[egui_kittest]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/egui_kittest'
-	[emath]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/emath'
-	[epaint]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/epaint'
-	[epaint_default_fonts]='https://github.com/storytold/egui;6d518fc799681571963842f95b55a6b68431b15a;egui-%commit%/crates/epaint_default_fonts'
+	[ecolor]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/ecolor'
+	[eframe]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/eframe'
+	[egui]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/egui'
+	[egui-wgpu]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/egui-wgpu'
+	[egui-winit]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/egui-winit'
+	[egui_extras]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/egui_extras'
+	[egui_glow]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/egui_glow'
+	[egui_kittest]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/egui_kittest'
+	[emath]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/emath'
+	[epaint]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/epaint'
+	[epaint_default_fonts]='https://github.com/storytold/egui;725a39fca940f77149ffbb9c58eef405a16997bc;egui-%commit%/crates/epaint_default_fonts'
 )
 
 RUST_MIN_VER="1.95.0"
@@ -819,7 +819,7 @@ src_prepare() {
 
 	# Upstream defines pinned storytold git patches for egui and winit under [patch.crates-io].
 	# In cargo offline mode, these fail resolution unless mapped to local unpacked directories.
-	local eg_rev="6d518fc799681571963842f95b55a6b68431b15a"
+	local eg_rev="725a39fca940f77149ffbb9c58eef405a16997bc"
 	local wn_rev="a517b3846ee8457d84ee4975110bfda6797c44dc"
 	local eg_re="^([a-zA-Z0-9_-]+) = \{ git = \"https://github\.com/storytold/egui(\.git)?\", rev = \"${eg_rev}\" \}"
 	local wn_re="^winit = \{ git = \"https://github\.com/storytold/winit(\.git)?\", rev = \"${wn_rev}\" \}"
