@@ -11,7 +11,7 @@ SRC_URI="https://github.com/rfjakob/${PN}/releases/download/v${PV}/${PN}_v${PV}_
 S="${WORKDIR}/${PN}_v${PV}_src-deps"
 LICENSE="Apache-2.0 BSD MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+KEYWORDS="amd64 ~arm ~arm64 ~x86"
 
 BDEPEND=">=dev-lang/go-1.26.0"
 RDEPEND="dev-libs/openssl:="
