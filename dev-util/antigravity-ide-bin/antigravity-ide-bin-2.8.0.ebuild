@@ -7,7 +7,7 @@ inherit desktop xdg
 
 DESCRIPTION="Google Antigravity IDE (VS Code-based, binary version)"
 HOMEPAGE="https://antigravity.google"
-BUILD_ID="4507555968450560"
+BUILD_ID="6733682917113856"
 SRC_URI="https://edgedl.me.gvt1.com/edgedl/release2/j0qc3/antigravity/stable/${PV}-${BUILD_ID}/linux-x64/Antigravity%20IDE.tar.gz -> ${P}.tar.gz"
 
 S="${WORKDIR}/Antigravity IDE"
