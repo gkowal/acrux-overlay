@@ -8,14 +8,14 @@ inherit fcaps go-module shell-completion
 DESCRIPTION="A backup program that is fast, efficient and secure"
 HOMEPAGE="https://restic.github.io/"
 
-SRC_URI="https://gentoo.clarokowal.com/${CATEGORY}/${PN}/${P}.tar.xz"
+SRC_URI="https://github.com/restic/restic/releases/download/v${PV}/${P}.tar.gz"
 SRC_URI+=" https://gentoo.clarokowal.com/${CATEGORY}/${PN}/${P}-deps.tar.xz"
 
 LICENSE="Apache-2.0 BSD BSD-2 LGPL-3-with-linking-exception MIT"
 SLOT="0"
 KEYWORDS="amd64"
 
-BDEPEND=">=dev-lang/go-1.25.8"
+BDEPEND=">=dev-lang/go-1.26.10"
 RDEPEND="sys-fs/fuse:0"
 DEPEND="acct-group/restic
 	acct-user/restic
