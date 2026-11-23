@@ -18,7 +18,9 @@ CRATES="
 	aho-corasick@1.1.5
 	aligned-vec@0.6.4
 	alloc-no-stdlib@2.0.4
+	alloc-no-stdlib@3.0.0
 	alloc-stdlib@0.2.4
+	alloc-stdlib@0.3.0
 	allocator-api2@0.2.21
 	android-activity@0.6.1
 	android-properties@0.2.2
@@ -54,6 +56,7 @@ CRATES="
 	bit-set@0.11.1
 	bit-vec@0.10.1
 	bit-vec@0.9.1
+	bit_field@0.10.4
 	bitflags@1.3.2
 	bitflags@2.13.2
 	block-buffer@0.10.4
@@ -74,6 +77,7 @@ CRATES="
 	bp256@0.14.0
 	bp384@0.14.0
 	brotli-decompressor@5.0.3
+	brotli-decompressor@6.3.2
 	brotli@8.0.4
 	bumpalo@3.20.3
 	bytemuck@1.25.2
@@ -90,6 +94,7 @@ CRATES="
 	cfg_aliases@0.2.2
 	cgl@0.3.2
 	chacha20@0.10.2
+	chardetng@1.0.0
 	chrono@0.4.45
 	cipher@0.5.2
 	clipboard-win@5.4.1
@@ -122,11 +127,11 @@ CRATES="
 	crossbeam-epoch@0.9.21
 	crossbeam-utils@0.8.23
 	crunchy@0.2.4
-	crypto-bigint@0.7.6
+	crypto-bigint@0.7.11
 	crypto-common@0.1.7
 	crypto-common@0.2.2
 	crypto-primes@0.7.2
-	ctutils@0.4.5
+	ctutils@0.4.8
 	cursor-icon@1.2.0
 	curve25519-dalek-derive@0.1.1
 	curve25519-dalek@5.0.0
@@ -170,6 +175,7 @@ CRATES="
 	euclid@0.22.14
 	event-listener-strategy@0.5.4
 	event-listener@5.4.2
+	exr@1.74.3
 	fast-float2@0.2.4
 	fastrand@2.5.0
 	fax@0.2.7
@@ -267,6 +273,7 @@ CRATES="
 	icu_segmenter_data@2.3.0
 	idna@1.1.0
 	idna_adapter@1.2.2
+	image-webp@0.2.4
 	image@0.25.10
 	imagesize@0.13.0
 	indexmap@2.14.2
@@ -281,6 +288,7 @@ CRATES="
 	jni-sys@0.4.1
 	jni@0.22.4
 	jobserver@0.1.35
+	jpeg-encoder@0.6.1
 	js-sys@0.3.106
 	keccak@0.2.2
 	keyboard-types@0.8.3
@@ -289,6 +297,7 @@ CRATES="
 	kittest@0.5.0
 	kurbo@0.11.3
 	kurbo@0.13.1
+	lebe@0.5.3
 	libc@0.2.189
 	libloading@0.8.9
 	libm@0.2.16
@@ -301,6 +310,7 @@ CRATES="
 	lock_api@0.4.14
 	log@0.4.34
 	lru-slab@0.1.3
+	md-5@0.10.6
 	md-5@0.11.0
 	memchr@2.8.3
 	memmap2@0.9.11
@@ -311,6 +321,8 @@ CRATES="
 	mio@1.2.4
 	moxcms@0.8.1
 	muda@0.21.2
+	multiversion-macros@0.8.1
+	multiversion@0.8.1
 	multiversion_no_op@1.0.0
 	naga-types@30.0.1
 	naga@30.0.1
@@ -416,6 +428,7 @@ CRATES="
 	profiling@1.0.18
 	proptest@1.12.0
 	pxfm@0.1.30
+	qoi@0.4.1
 	quick-error@1.2.3
 	quick-error@2.0.1
 	quick-xml@0.41.0
@@ -563,6 +576,7 @@ CRATES="
 	tag_ptr@0.1.0
 	tap@1.0.1
 	tar@0.4.46
+	target-features@0.1.6
 	tempfile@3.27.0
 	termcolor@1.4.1
 	thin-vec@0.2.20
@@ -730,24 +744,64 @@ CRATES="
 	zlib-rs@0.6.8
 	zmij@1.0.23
 	zune-core@0.5.3
+	zune-inflate@0.2.54
 	zune-jpeg@0.5.15
+	zune-jpegxl@0.5.2
 	zvariant@5.15.0
 	zvariant_derive@5.15.0
 	zvariant_utils@4.2.0
 "
 
 declare -A GIT_CRATES=(
-	[craft-docpath]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/docpath'
-	[craft-fonts-build]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/fonts-build'
-	[craft-i18n]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/i18n'
-	[craft-keymap]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/keymap'
-	[craft-menu]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/menu'
-	[craft-print]='https://github.com/storytold/craft-libs;60ede99985ef1e5df87a2aca66ed538eb23dec99;craft-libs-%commit%/crates/print'
-	[craft-quit]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/quit'
-	[craft-ui]='https://github.com/storytold/craft-libs;787a7a0f972fd1d7a7618fdbeca3a5267a0407ff;craft-libs-%commit%/crates/ui'
-	[craft-update]='https://github.com/storytold/craft-libs;6e03f65bf45181db77ba6229716e6624db9eb25b;craft-libs-%commit%/crates/update'
-	[craft-web-api]='https://github.com/storytold/craft-libs;fd5e2feff6ea25bed371a99cc732b3968d621505;craft-libs-%commit%/crates/web-api'
-	[craft-web-host]='https://github.com/storytold/craft-libs;fd5e2feff6ea25bed371a99cc732b3968d621505;craft-libs-%commit%/crates/web-host'
+	[craft-cfb]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/cfb'
+	[craft-cms]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/cms'
+	[craft-codepage]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/codepage'
+	[craft-csv]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/csv'
+	[craft-dds]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/dds'
+	[craft-docpath]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/docpath'
+	[craft-docx]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/docx'
+	[craft-drawingml]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/drawingml'
+	[craft-flow]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/flow'
+	[craft-fonts-build]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/fonts-build'
+	[craft-html]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/html'
+	[craft-i18n]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/i18n'
+	[craft-image-codecs]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/image-codecs'
+	[craft-jpeg]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/jpeg'
+	[craft-jsonrpc]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/jsonrpc'
+	[craft-keymap]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/keymap'
+	[craft-markdown]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/markdown'
+	[craft-math]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/math'
+	[craft-mcp-server]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/mcp-server'
+	[craft-menu]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/menu'
+	[craft-metadata]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/metadata'
+	[craft-metafile]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/metafile'
+	[craft-mime]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/mime'
+	[craft-offcrypto]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/offcrypto'
+	[craft-opc]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/opc'
+	[craft-pdf]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/pdf'
+	[craft-pkcs7]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/pkcs7'
+	[craft-pptx]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/pptx'
+	[craft-prc]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/prc'
+	[craft-print]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/print'
+	[craft-quit]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/quit'
+	[craft-rtf]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/rtf'
+	[craft-stream-codecs]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/stream-codecs'
+	[craft-tiff]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/tiff'
+	[craft-ui]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/ui'
+	[craft-update]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/update'
+	[craft-web-api]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/web-api'
+	[craft-web-host]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/web-host'
+	[craft-wordmodel]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/wordmodel'
+	[craft-xfa]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/xfa'
+	[craft-xfdf]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/xfdf'
+	[craft-xml]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/xml'
+	[craft-zip]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/crates/zip'
+	[hayro]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/vendor/hayro'
+	[hayro-cmap]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/vendor/hayro-cmap'
+	[hayro-interpret]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/vendor/hayro-interpret'
+	[hayro-jbig2]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/vendor/hayro-jbig2'
+	[hayro-postscript]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/vendor/hayro-postscript'
+	[hayro-syntax]='https://github.com/storytold/craft-libs;9eb02be84f21898e247daeb2af5827c9fe85a3a0;craft-libs-%commit%/vendor/hayro-syntax'
 	[craft-winprint-gdi]='https://github.com/storytold/winprint.rs;64e7afd4d1483512385012c340ecaaaf0f3beb7f;winprint.rs-%commit%/crates/gdi'
 	[winprint]='https://github.com/storytold/winprint.rs;5f80b9baf6b58937c401656634e42d33f00ddf49;winprint.rs-%commit%'
 	[winit]='https://github.com/storytold/winit;a517b3846ee8457d84ee4975110bfda6797c44dc;winit-%commit%'
@@ -823,10 +877,23 @@ src_prepare() {
 	local wn_rev="a517b3846ee8457d84ee4975110bfda6797c44dc"
 	local eg_re="^([a-zA-Z0-9_-]+) = \{ git = \"https://github\.com/storytold/egui(\.git)?\", rev = \"${eg_rev}\" \}"
 	local wn_re="^winit = \{ git = \"https://github\.com/storytold/winit(\.git)?\", rev = \"${wn_rev}\" \}"
+	local cl_rev="9eb02be84f21898e247daeb2af5827c9fe85a3a0"
+	local wp_rev="5f80b9baf6b58937c401656634e42d33f00ddf49"
+	local wg_rev="64e7afd4d1483512385012c340ecaaaf0f3beb7f"
+	local cl_url="https://github\.com/storytold/craft-libs(\.git)?"
+	local cl_re="^(hayro[a-z0-9-]*) = \{ git = \"${cl_url}\", rev = \"[0-9a-f]+\" \}"
+	local wp_url="https://github\.com/storytold/winprint\.rs"
+	local wp_re="git = \"${wp_url}\", rev = \"[0-9a-f]+\""
+	local wp_dir="../../../winprint.rs"
 	sed -i -E \
 		-e "s#${eg_re}#\1 = { path = \"../egui-${eg_rev}/crates/\1\" }#" \
 		-e "s#${wn_re}#winit = { path = \"../winit-${wn_rev}\" }#" \
+		-e "s#${cl_re}#\1 = { path = \"../craft-libs-${cl_rev}/vendor/\1\" }#" \
 		Cargo.toml || die
+	sed -i -E \
+		-e "/^craft-winprint-gdi/s#${wp_re}#path = \"${wp_dir}-${wg_rev}/crates/gdi\"#" \
+		-e "/^winprint/s#${wp_re}#path = \"${wp_dir}-${wp_rev}\"#" \
+		"../craft-libs-${cl_rev}/crates/print/Cargo.toml" || die
 }
 
 src_compile() {
