@@ -7,7 +7,7 @@ inherit desktop xdg
 
 DESCRIPTION="Google Antigravity Desktop Client (binary version)"
 HOMEPAGE="https://antigravity.google"
-BUILD_ID="5887025308631040"
+BUILD_ID="6394266482769920"
 SRC_URI="https://storage.googleapis.com/antigravity-public/antigravity-hub/${PV}-${BUILD_ID}/linux-x64/Antigravity.tar.gz -> ${P}.tar.gz"
 
 S="${WORKDIR}/Antigravity-x64"
