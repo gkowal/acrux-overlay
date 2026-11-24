@@ -6,7 +6,7 @@ EAPI=9
 inherit go-module shell-completion sysroot
 
 # update on every bump
-GIT_COMMIT=206ebab4fc3fa590b720d2885ac890c195c46650
+GIT_COMMIT=00f5b8fe102e1a07471aadd5a2e44f6ff1befeeb
 
 DESCRIPTION="the official gitlab command line interface"
 HOMEPAGE="https://gitlab.com/gitlab-org/cli"
