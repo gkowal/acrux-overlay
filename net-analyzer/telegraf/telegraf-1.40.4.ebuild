@@ -22,7 +22,7 @@ DEPEND="acct-group/telegraf
 	acct-user/telegraf"
 RDEPEND="${DEPEND}"
 
-GITHUB_COMMIT="41b4538"
+GITHUB_COMMIT="c1b3d7f"
 GITHUB_BRANCH="release-1.40"
 GITHUB_VERSION="v${PV}"
 
