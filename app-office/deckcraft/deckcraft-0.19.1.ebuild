@@ -728,7 +728,10 @@ src_unpack() {
 	local toml crate_name
 	for toml in "${WORKDIR}"/craft-libs-*/Cargo.toml; do
 		for crate_name in "${!craft_revs[@]}"; do
-			sed -i "s|path = \"crates/${crate_name}\"|path = \"${WORKDIR}/craft-libs-${craft_revs[${crate_name}]}/crates/${crate_name}\"|g" "${toml}" || die
+			local rev="${craft_revs[${crate_name}]}"
+			sed -i \
+				"s|path = \"crates/${crate_name}\"|path = \"${WORKDIR}/craft-libs-${rev}/crates/${crate_name}\"|g" \
+				"${toml}" || die
 		done
 	done
 
