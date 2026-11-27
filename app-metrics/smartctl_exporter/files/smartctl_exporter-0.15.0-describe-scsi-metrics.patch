@@ -1,0 +1,21 @@
+--- a/main.go
++++ b/main.go
+@@ -87,6 +87,7 @@
+ 	ch <- metricDeviceSelfTestLogErrorCount
+ 	ch <- metricDeviceERCSeconds
+ 	ch <- metricSCSIGrownDefectList
++	ch <- metricSCSIUsedEnduranceIndicator
+ 	ch <- metricReadErrorsCorrectedByRereadsRewrites
+ 	ch <- metricReadErrorsCorrectedByEccFast
+ 	ch <- metricReadErrorsCorrectedByEccDelayed
+@@ -95,6 +96,10 @@
+ 	ch <- metricWriteErrorsCorrectedByEccFast
+ 	ch <- metricWriteErrorsCorrectedByEccDelayed
+ 	ch <- metricWriteTotalUncorrectedErrors
++	ch <- metricVerifyErrorsCorrectedByRereadsRewrites
++	ch <- metricVerifyErrorsCorrectedByEccFast
++	ch <- metricVerifyErrorsCorrectedByEccDelayed
++	ch <- metricVerifyTotalUncorrectedErrors
+ }
+ 
+ // Collect is called by the Prometheus registry when collecting metrics.

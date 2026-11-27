@@ -17,6 +17,10 @@ KEYWORDS="amd64"
 BDEPEND=">=dev-lang/go-1.26.0"
 RDEPEND="sys-apps/smartmontools"
 
+PATCHES=(
+	"${FILESDIR}/${P}-describe-scsi-metrics.patch"
+)
+
 src_compile() {
 	local go_ldflags=(
 		-X github.com/prometheus/common/version.Version=${PV}
