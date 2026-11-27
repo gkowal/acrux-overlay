@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>grzegorz@gkowal.info</email>
+		<name>Grzegorz Kowal</name>
+	</maintainer>
+	<longdescription lang="en">
+		PhotoCraft is an open-source, native image editor built in pure Rust.
+		It provides layers, masks, adjustment layers, layer styles, type,
+		brushes, PSD/PSB support, and GPU compositing, along with a headless
+		CLI (photocraft-cli).
+	</longdescription>
+	<use>
+		<flag name="heif">Enable HEIC/HEIF image decoding via craft-heif</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">storytold/photocraft</remote-id>
+		<bugs-to>https://github.com/storytold/photocraft/issues</bugs-to>
+	</upstream>
+</pkgmetadata>
